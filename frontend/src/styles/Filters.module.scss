@@ -1,0 +1,51 @@
+* {
+// background-color: rgba($color: lightblue, $alpha: 0.2)
+}
+
+.wrapper {
+    width: 50vw;
+    display: flex;
+    align-items: center;
+}
+
+.list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.item {
+    list-style: none;
+    height: 45px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+
+    p {
+        margin-right: 5px;
+        font-weight: 600;
+        font-size: 1rem;
+        letter-spacing: 2px;
+    }  
+}
+
+.dropdown {
+    list-style: none;
+    border: 1px solid black;
+
+    li {
+        font-size: 1.5rem;
+        border: 1px solid black;
+    }
+
+    position: relative;
+}
+
+.item:hover {
+   cursor: pointer;
+}
+
+.arrow {
+    color: grey;
+}
+
