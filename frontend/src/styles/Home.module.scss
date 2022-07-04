@@ -1,0 +1,36 @@
+.container {
+width: 100vw;
+border: 1px solid lightgrey;
+
+}
+
+.hero {
+    border: 1px solid lightgrey;
+
+    height: 500px;
+
+}
+
+.slider {
+    border: 1px solid lightgrey;
+    height: 300px;
+
+}
+
+.category_wrapper {
+    // border: 1px solid red;
+    height: 300px;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    // border: 1px solid red;
+}
+
+.category {
+    border: solid 1px lightgrey;
+    padding: 5px 10px;
+    margin-right: 25px;
+}

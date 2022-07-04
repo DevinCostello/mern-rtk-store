@@ -11,7 +11,6 @@ function Filters() {
     const color = ["Red", "Green", "Blue"]
     const size = ['Small', "Medium", "Large"]
 
-
     const [isOpen, setIsOpen] = useState(false)
 
     return (
@@ -23,13 +22,13 @@ function Filters() {
 
                 <div className={styles.list}>
                     <ul className={styles.list}>
-                        {filters.map((filter) => 
+                        {filters.map((filter) =>
+                        <>
                             <li className={styles.item}>
                                 <p>{filter.toUpperCase()}</p>
                                 <FaCaretDown className={styles.arrow} size={24} />
                             </li>
-
-                           
+                        </>
                         )}
                     </ul>
                 </div>

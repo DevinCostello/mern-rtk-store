@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import styles from '../styles/Products.module.scss'
 import Filters from '../components/Filters'
 import { FaFilter } from 'react-icons/fa'
-import axios from 'axios'
 import { useQuery } from 'react-query'
 
 export default function Products() {
