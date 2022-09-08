@@ -1,14 +1,24 @@
+* {
+    // background: rgba($color: #c5ece6, $alpha: 0.1)
+    // border: 1px solid goldenrod;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
 .wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-evenly
 }
 
 .grid {
     display: grid;
     grid-gap: 10px;
     grid-template-columns: 1fr 1fr 1fr;
-    width: 60vw;
+    // width: 60vw;
     // margin: 0 auto;
     
 }
@@ -21,14 +31,19 @@
 
 .colors {
     display: flex;
+    align-items: center;
+    margin-bottom: 5px;
 }
 
-.box {
-    width: 10px;
-    height: 10px;
-    border: 1px solid black;
-    margin-right: 5px;
+.sizes { 
+    display: flex;
+
+    button {
+        margin:  0 3px 5px;
+    }
 }
+
+
 
 .filter_btn {
 border: 1px solid black;

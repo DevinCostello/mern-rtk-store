@@ -23,6 +23,10 @@ const cartSchema = mongoose.Schema({
 
     size: {
         type: String
+    },
+
+    product_id: {
+        type: String
     }
    
 }, {

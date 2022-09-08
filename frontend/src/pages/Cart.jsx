@@ -1,24 +1,34 @@
 import React from "react";
 import styles from "../styles/Cart.module.scss";
-import { useQuery } from "react-query";
+import {
+  useGetCartQuery,
+  useUpdateCartItemMutation,
+  useDeleteCartItemMutation
+} from "../features/api/apiSlice";
+import { setId, setCartQuantity } from "../features/cart/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
-  const getCart = async () => {
-    const res = await fetch("http://localhost:5000/api/cart");
-    return res.json();
-  };
+  const { data, isLoading, isSuccess, isError, error } = useGetCartQuery();
+  const [updateCart] = useUpdateCartItemMutation();
+  const [DeleteItem] = useDeleteCartItemMutation();
+  const { CartOptions } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
 
-  const { data, status } = useQuery("cart", getCart);
+  const handleUpdate = (item) => {
+    dispatch(setId(item._id));
+    updateCart(CartOptions);
+  };
 
   return (
     <div className={styles.container}>
-      {status === "loading" ? (
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <>
           <div className={styles.cart}>
             {data.map((item) => (
-              <div className={styles.item}>
+              <div key={item._id} className={styles.item}>
                 <div>
                   <h2>{item.name}</h2>
                   <h3>{item.category}</h3>
@@ -27,9 +37,18 @@ function Cart() {
                 </div>
                 <div className={styles.item_right}>
                   <h3>Price: ${item.price * item.quantity}</h3>
-                  <input type="text" placeholder={item.quantity} />
-                  <button>Update</button>
-                  <button>Remove</button>
+
+                  <input
+                    type="text"
+                    onChange={(e) => {
+                      dispatch(setCartQuantity(e.currentTarget.value))
+                      dispatch(setId(item._id))
+                    }}
+                    placeholder={item.quantity}
+                  />
+
+                  <button onClick={() => handleUpdate(item)}>Update</button>
+                  <button onClick={() => DeleteItem(item)}>Remove</button>
                 </div>
               </div>
             ))}

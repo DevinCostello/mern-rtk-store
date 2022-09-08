@@ -3,15 +3,19 @@
 }
 
 .wrapper {
-    width: 50vw;
     display: flex;
-    align-items: center;
+    // border: 1px solid red;
+    width: 250px;
+
 }
 
 .list {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    // border: 1px solid red;
+
 }
 
 .item {

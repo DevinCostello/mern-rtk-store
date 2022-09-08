@@ -16,7 +16,7 @@ function Home() {
           <h2>Shop by Category</h2>
           <div className={styles.categories}>
             {categories.map((category) => (
-              <div className={styles.category}>
+              <div key={category} className={styles.category}>
                 <h2>{category}</h2>
               </div>
             ))}
