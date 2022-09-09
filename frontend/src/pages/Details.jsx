@@ -18,14 +18,16 @@ const Details = () => {
 
   const cartData = [{ "_id": "6318f041d937734f73ffa076", "name": "Horizontal", "category": "hat", "color": "Orange", "price": 44, "quantity": 3, "size": "Large", "product_id": "62b0a19f62840339ccb8cc12", "createdAt": "2022-09-06T20:02:03.370Z", "updatedAt": "2022-09-06T20:38:58.309Z", "__v": 0 }, { "_id": "6317c4db4290e7cafe10186c", "name": "architecture", "category": "tshirt", "color": "Goldenrod", "price": 45, "quantity": 5, "size": "Medium", "product_id": "62b0a19f62840339ccb8cc1c", "createdAt": "2022-09-06T22:08:27.202Z", "updatedAt": "2022-09-06T22:08:27.202Z", "__v": 0 }, { "_id": "6317c4e04290e7cafe10186f", "name": "explicit", "category": "tshirt", "color": "Red", "price": 57, "quantity": 1, "size": "Medium", "product_id": "62b0a19f62840339ccb8cc14", "createdAt": "2022-09-06T22:08:32.980Z", "updatedAt": "2022-09-06T22:08:32.980Z", "__v": 0 }]
  
-  //filter cart array 
+  //check if cart has an item with same variables (size, color) as current selection
   const filteredCartData = cartData.filter((item) => item.size === CreateOptions.size && item.color === CreateOptions.color && item.product_id === CreateOptions.product_id)
 
+  //set ID for PUT request
   if (filteredCartData.length > 0) {
     dispatch(setId(filteredCartData[0]._id));
   }
 
   //needs to be done differently, causing infinite loop errors
+  //middleware, backend fix??
   if (isSuccess) {
     dispatch(setName(product.name))
     dispatch(setPrice(product.price))
@@ -34,8 +36,6 @@ const Details = () => {
   }
 
   const handleUpdate = () => {
-    dispatch(setCartQuantity(filteredCartData.quantity + CreateOptions.quantity))
-    
     UpdateCartItem(CartOptions);
   };
 
@@ -75,8 +75,12 @@ const Details = () => {
           </div>
 
           <div className={styles.cart}>
-
-            <select onChange={(e) => dispatch(setQuantity(parseInt(e.target.value)))} name="" id="">
+            <p>Choose an Amount</p>
+            <select onChange={(e) => {
+              filteredCartData.length > 0 && CreateOptions.quantity !== null ? dispatch(setCartQuantity(filteredCartData[0].quantity + parseInt(e.target.value))) :
+              dispatch(setQuantity(parseInt(e.target.value)))
+            }}>
+              <option value="">...</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>

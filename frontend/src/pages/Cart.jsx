@@ -41,7 +41,7 @@ function Cart() {
                   <input
                     type="text"
                     onChange={(e) => {
-                      dispatch(setCartQuantity(e.currentTarget.value))
+                      dispatch(setCartQuantity(parseInt(e.currentTarget.value)))
                       dispatch(setId(item._id))
                     }}
                     placeholder={item.quantity}

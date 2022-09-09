@@ -5,7 +5,7 @@ const initialState = {
   //for updating items
   CartOptions: {
     id: null,
-    quantity: 1,
+    quantity: null
   },
 
   
