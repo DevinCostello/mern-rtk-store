@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { setColor, setQuantity, setProductId, setSize, setName, setPrice, setCategory, clearCart } from "../features/product/productSlice";
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
-import { setCartQuantity, setId } from "../features/cart/cartSlice";
+import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
 
 const Details = () => {
   const { id } = useParams();
@@ -14,6 +14,8 @@ const Details = () => {
   const [UpdateCartItem] = useUpdateCartItemMutation();
   const CreateOptions = useSelector((state) => state.product.CreateOptions);
   const CartOptions = useSelector((state) => state.cart.CartOptions)
+  const CartDuplicate =  useSelector((state) => state.cart.Cartd)
+
   const dispatch = useDispatch();
 
   const cartData = [{ "_id": "6318f041d937734f73ffa076", "name": "Horizontal", "category": "hat", "color": "Orange", "price": 44, "quantity": 3, "size": "Large", "product_id": "62b0a19f62840339ccb8cc12", "createdAt": "2022-09-06T20:02:03.370Z", "updatedAt": "2022-09-06T20:38:58.309Z", "__v": 0 }, { "_id": "6317c4db4290e7cafe10186c", "name": "architecture", "category": "tshirt", "color": "Goldenrod", "price": 45, "quantity": 5, "size": "Medium", "product_id": "62b0a19f62840339ccb8cc1c", "createdAt": "2022-09-06T22:08:27.202Z", "updatedAt": "2022-09-06T22:08:27.202Z", "__v": 0 }, { "_id": "6317c4e04290e7cafe10186f", "name": "explicit", "category": "tshirt", "color": "Red", "price": 57, "quantity": 1, "size": "Medium", "product_id": "62b0a19f62840339ccb8cc14", "createdAt": "2022-09-06T22:08:32.980Z", "updatedAt": "2022-09-06T22:08:32.980Z", "__v": 0 }]
@@ -21,9 +23,32 @@ const Details = () => {
   //check if cart has an item with same variables (size, color) as current selection
   const filteredCartData = cartData.filter((item) => item.size === CreateOptions.size && item.color === CreateOptions.color && item.product_id === CreateOptions.product_id)
 
+
+  if(cart) {
+
+    const CheckDuplicate = cart.filter((item) => item.size === CreateOptions.size && item.color === CreateOptions.color && item.product_id === CreateOptions.product_id)
+
+      if(CheckDuplicate.length > 0) {
+        dispatch(setId(CheckDuplicate[0]._id));
+        dispatch(setCartDuplicate(CheckDuplicate[0]))
+      }
+
+      if(CheckDuplicate.length > 0 && CreateOptions.quantity !== null) {
+        dispatch(setCartQuantity(CheckDuplicate[0].quantity + CreateOptions.quantity))
+
+      }
+  }
+
   //set ID for PUT request
-  if (filteredCartData.length > 0) {
-    dispatch(setId(filteredCartData[0]._id));
+
+  // if (filteredCartData.length > 0) {
+  //   dispatch(setId(filteredCartData[0]._id));
+  // }
+
+  //if quantity is set in UI before duplicate is found/ id is set
+
+  if(filteredCartData.length > 0 && CreateOptions.quantity !== null) {
+    dispatch(setCartQuantity(filteredCartData[0].quantity + CreateOptions.quantity))
   }
 
   //needs to be done differently, causing infinite loop errors
@@ -35,11 +60,7 @@ const Details = () => {
     dispatch(setCategory(product.category))
   }
 
-  const handleUpdate = () => {
-    UpdateCartItem(CartOptions);
-  };
-
-
+ 
   return (
     <>
 
@@ -77,7 +98,8 @@ const Details = () => {
           <div className={styles.cart}>
             <p>Choose an Amount</p>
             <select onChange={(e) => {
-              filteredCartData.length > 0 && CreateOptions.quantity !== null ? dispatch(setCartQuantity(filteredCartData[0].quantity + parseInt(e.target.value))) :
+              //if duplicate is found in cart before quantity is set in UI
+              CartDuplicate ? dispatch(setCartQuantity(CartDuplicate.quantity + parseInt(e.target.value))) :
               dispatch(setQuantity(parseInt(e.target.value)))
             }}>
               <option value="">...</option>
@@ -92,7 +114,7 @@ const Details = () => {
 
 
               if (filteredCartData.length > 0) {
-                handleUpdate()
+                UpdateCartItem(CartOptions)
                 dispatch(clearCart())
               } else {
 

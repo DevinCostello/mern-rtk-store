@@ -10,7 +10,7 @@ const initialState = {
         price: null,
         color: null,
         size: null,
-        quantity: 1,
+        quantity: null,
     },
 
 }

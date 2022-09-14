@@ -8,6 +8,7 @@ const initialState = {
     quantity: null
   },
 
+  CartDuplicate: null,
   
 };
 
@@ -23,9 +24,12 @@ const cartSlice = createSlice({
       const quantity = action.payload;
       state.CartOptions.quantity = quantity;
     },
+    setCartDuplicate: (state, action) => {
+      state.CartDuplicate = action.payload
+    }
 
   },
 });
 
-export const { setId, setCartQuantity } = cartSlice.actions;
+export const { setId, setCartQuantity, setCartDuplicate } = cartSlice.actions;
 export default cartSlice.reducer;
