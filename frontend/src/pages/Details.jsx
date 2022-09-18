@@ -10,6 +10,7 @@ const Details = () => {
   const { id } = useParams();
   const { data: product, isLoading, isSuccess, error } = useGetSingleProductQuery(id);
   const { data: cart } = useGetCartQuery();
+
   const [createCartItem, result] = useCreateCartItemMutation();
   const [UpdateCartItem] = useUpdateCartItemMutation();
 
@@ -33,7 +34,6 @@ const Details = () => {
       dispatch(setId(null));
       dispatch(setCartDuplicate(null))
       dispatch(setCartQuantity(null))
-      // dispatch(setQuantity(null))
     }
 
 
@@ -52,12 +52,9 @@ const Details = () => {
     dispatch(setCategory(product.category))
   }
 
-  // useEffect(() => {
+ 
 
-  // },[])
-
-
-//if duplicate is set but quantity is not yet set
+  //if duplicate is set but quantity is not yet set
   const handleUpdate = (e) => {
     //set update quantity to the cart item's quantity plus selected quantity from UI
     dispatch(setCartQuantity(CartDuplicate.quantity + parseInt(e.target.value)))
@@ -118,9 +115,11 @@ const Details = () => {
 
               if (CartDuplicate) {
                 UpdateCartItem(CartOptions)
+                alert("Cart item updated")
                 dispatch(clearCart())
               } else {
                 createCartItem({ ...CreateOptions })
+                alert("New item added to cart")
                 dispatch(clearCart())
               }
             }}>

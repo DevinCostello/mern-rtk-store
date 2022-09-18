@@ -5,25 +5,20 @@ export const apiSlice = createApi({
 
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
 
-  tagTypes: ["Product"],
+  tagTypes: ["Cart"],
 
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => `/products`,
-      providesTags: [{ type: "Product", id: "LIST" }],
     }),
 
     getSingleProduct: builder.query({
       query: (id) => `/products/${id}`
     }),
 
-    getFilteredProducts: builder.mutation({
-      query: () => `/products`,
-      invalidatesTags: [{ type: "Product", id: "LIST" }],
-    }),
-
     getCart: builder.query({
       query: () => "/cart",
+      providesTags: [{type: "Cart", id: "LIST"}]
     }),
 
     createCartItem: builder.mutation({
@@ -34,6 +29,7 @@ export const apiSlice = createApi({
           body: {...item}
         };
       },
+      invalidatesTags: [{type: "Cart", id: "LIST"}]
     }),
 
     updateCartItem: builder.mutation({
@@ -46,6 +42,7 @@ export const apiSlice = createApi({
           }
         };
       },
+      invalidatesTags: [{type: "Cart", id: "LIST"}]
     }),
 
     deleteCartItem: builder.mutation({
@@ -55,6 +52,7 @@ export const apiSlice = createApi({
           method: "DELETE",
         };
       },
+      invalidatesTags: [{type: "Cart", id: "LIST"}]
     }),
   
   }),
