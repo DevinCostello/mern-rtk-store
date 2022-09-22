@@ -21,6 +21,16 @@ const Details = () => {
   const dispatch = useDispatch();
 
 
+  useEffect(() => {
+
+    if (isSuccess) {
+      dispatch(setName(product.name))
+      dispatch(setPrice(product.price))
+      dispatch(setProductId(product._id))
+      dispatch(setCategory(product.category))
+    }
+  
+  }, [])
 
   if (cart) {
 
@@ -36,7 +46,6 @@ const Details = () => {
       dispatch(setCartQuantity(null))
     }
 
-
     //if quantity is already set
     if (CheckDuplicate.length > 0 && CreateOptions.quantity !== null) {
       dispatch(setCartQuantity(CheckDuplicate[0].quantity + CreateOptions.quantity))
@@ -45,13 +54,6 @@ const Details = () => {
 
 
   
-  if (isSuccess) {
-    dispatch(setName(product.name))
-    dispatch(setPrice(product.price))
-    dispatch(setProductId(product._id))
-    dispatch(setCategory(product.category))
-  }
-
  
 
   //if duplicate is set but quantity is not yet set

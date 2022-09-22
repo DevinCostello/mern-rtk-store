@@ -33,12 +33,12 @@ export const apiSlice = createApi({
     }),
 
     updateCartItem: builder.mutation({
-      query: ({...cartOptions}) => {
+      query: ({id, quantity}) => {
         return {
-          url: `/cart/${cartOptions.id}`,
+          url: `/cart/${id}`,
           method: "PUT",
           body: {
-            quantity: cartOptions.quantity
+            quantity: quantity
           }
         };
       },

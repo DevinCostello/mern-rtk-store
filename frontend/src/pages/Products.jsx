@@ -1,5 +1,4 @@
 import styles from '../styles/Products.module.scss'
-import Filters from '../components/Filters'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useGetProductsQuery } from '../features/api/apiSlice'
@@ -11,7 +10,6 @@ export default function Products() {
 
   return (<>
 
-    {/* <Filters /> */}
 
     <div className={styles.wrapper}>
 

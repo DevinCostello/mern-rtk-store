@@ -1,24 +1,24 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "../styles/Cart.module.scss";
 import {
   useGetCartQuery,
   useUpdateCartItemMutation,
   useDeleteCartItemMutation
 } from "../features/api/apiSlice";
-import { setId, setCartQuantity } from "../features/cart/cartSlice";
+import { setCartItems } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
   const { data, isLoading, isSuccess, isError, error } = useGetCartQuery();
-  const [updateCart] = useUpdateCartItemMutation();
+  const [updateCart, { isLoading: isUpdating }] = useUpdateCartItemMutation();
   const [DeleteItem] = useDeleteCartItemMutation();
   const { CartOptions } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const handleUpdate = (item) => {
-    dispatch(setId(item._id));
-    updateCart(CartOptions);
-  };
+useEffect(() => {
+dispatch(setCartItems(data))
+},[])
+
 
   return (
     <div className={styles.container}>
@@ -37,18 +37,11 @@ function Cart() {
                 </div>
                 <div className={styles.item_right}>
                   <h3>Price: ${item.price * item.quantity}</h3>
-
-                  <input
-                    type="text"
-                    onChange={(e) => {
-                      dispatch(setCartQuantity(parseInt(e.currentTarget.value)))
-                      dispatch(setId(item._id))
-                    }}
-                    placeholder={item.quantity}
-                  />
-
-                  <button onClick={() => handleUpdate(item)}>Update</button>
-                  <button onClick={() => DeleteItem(item)}>Remove</button>
+                  <form onSubmit={e => e.preventDefault()}>
+                    <input type="text" placeholder={item.quantity} />
+                    <button type="submit" onClick={ (e) => updateCart({ id: item._id, quantity: e.target.form[0].value})}>Update</button>
+                    <button onClick={() => DeleteItem(item)}>Remove</button>
+                  </form>
                 </div>
               </div>
             ))}
