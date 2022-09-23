@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import styles from "../styles/Details.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -29,8 +29,10 @@ const Details = () => {
       dispatch(setProductId(product._id))
       dispatch(setCategory(product.category))
     }
-  
+
   }, [])
+
+  //This is the cause of the error, even when in a useEffect, commented, etc?
 
   if (cart) {
 
@@ -52,9 +54,6 @@ const Details = () => {
     }
   }
 
-
-  
- 
 
   //if duplicate is set but quantity is not yet set
   const handleUpdate = (e) => {
@@ -100,10 +99,12 @@ const Details = () => {
 
           <div className={styles.cart}>
             <p>Choose an Amount</p>
+        
             <select onChange={(e) => {
-              CartDuplicate ? handleUpdate(e) : dispatch(setQuantity(parseInt(e.target.value)))
-                                                //just set create quantity if no duplicate item exists in cart
-            }}>                                 
+              CartDuplicate ? handleUpdate(e) : 
+                dispatch(setQuantity(parseInt(e.target.value)))
+              //just set create quantity if no duplicate item exists in cart
+            }}>
               <option value="">...</option>
               <option value="1">1</option>
               <option value="2">2</option>

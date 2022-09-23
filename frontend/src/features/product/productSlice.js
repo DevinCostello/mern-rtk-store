@@ -59,7 +59,7 @@ const productSlice = createSlice({
                 product_id: null,
                 color: null,
                 size: null,
-                quantity: 1
+                quantity: null
             }
         }
 

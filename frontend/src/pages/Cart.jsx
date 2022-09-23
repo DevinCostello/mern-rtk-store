@@ -5,19 +5,29 @@ import {
   useUpdateCartItemMutation,
   useDeleteCartItemMutation
 } from "../features/api/apiSlice";
-import { setCartItems } from "../features/cart/cartSlice";
+import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
-  const { data, isLoading, isSuccess, isError, error } = useGetCartQuery();
+  const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
   const [updateCart, { isLoading: isUpdating }] = useUpdateCartItemMutation();
   const [DeleteItem] = useDeleteCartItemMutation();
-  const { CartOptions } = useSelector((state) => state.cart);
+  // const { CartOptions } = useSelector((state) => state.CartOptions);
+  const  CartItems  = useSelector((state) => state.cart.CartItems);
+  const TotalCost = useSelector((state) => state.cart.TotalCost)
   const dispatch = useDispatch();
 
+
+useEffect(() =>{
+
+  if (isSuccess) {
+    dispatch(setCartItems(cart))
+  } 
+}, [isSuccess, cart])
+
 useEffect(() => {
-dispatch(setCartItems(data))
-},[])
+  dispatch(calculateTotals())
+},[isSuccess])
 
 
   return (
@@ -27,7 +37,7 @@ dispatch(setCartItems(data))
       ) : (
         <>
           <div className={styles.cart}>
-            {data.map((item) => (
+            {cart.map((item) => (
               <div key={item._id} className={styles.item}>
                 <div>
                   <h2>{item.name}</h2>
@@ -56,10 +66,10 @@ dispatch(setCartItems(data))
                 <h2>Total:</h2>
               </div>
               <div className={styles.summary_left}>
-                <h3>$</h3>
-                <h3>$</h3>
+                <h3>${TotalCost} </h3>
+                <h3>${(TotalCost * 0.15).toFixed(2)}</h3>
                 <h3>$9.99</h3>
-                <h2>$</h2>
+                <h2>${}</h2>
               </div>
             </div>
           </div>
