@@ -1,4 +1,5 @@
 import styles from '../styles/Products.module.scss'
+import Pagination from '../components/Pagination'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useGetProductsQuery } from '../features/api/apiSlice'
@@ -33,6 +34,8 @@ export default function Products() {
 
           )}
         </div>}
+
+        <Pagination />
     </div>
 
 

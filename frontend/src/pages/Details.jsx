@@ -21,8 +21,6 @@ const Details = () => {
   const dispatch = useDispatch();
 
 
-  useEffect(() => {
-
     if (isSuccess) {
       dispatch(setName(product.name))
       dispatch(setPrice(product.price))
@@ -30,9 +28,8 @@ const Details = () => {
       dispatch(setCategory(product.category))
     }
 
-  }, [])
-
-  //This is the cause of the error, even when in a useEffect, commented, etc?
+ 
+  //This is the cause of the error, even when in a useEffect, commented, etc???
 
   if (cart) {
 

@@ -7,9 +7,16 @@ const initialState = {
     quantity: null
   },
 
+  SummaryData: {
+    ProductCost: null,
+    Tax: null,
+    Delivery: null,
+    TotalCost: null
+  },
+
   CartItems: '',
   CartDuplicate: null,
-  TotalCost: null,
+  
 
 
 };
@@ -38,7 +45,13 @@ const cartSlice = createSlice({
 
       if (state.CartItems !== "") {
         const prices = state.CartItems.map((item) => item.price * item.quantity)
-        state.TotalCost = prices.reduce((a, b) => a + b, 0).toFixed(2)
+        const SumData = state.SummaryData
+
+        SumData.ProductCost = parseInt(prices.reduce((a, b) => a + b, 0).toFixed(2))
+        SumData.Tax = parseInt((SumData.ProductCost * 0.15).toFixed(2))
+        SumData.Delivery = 9.99
+        SumData.TotalCost = SumData.ProductCost + SumData.Tax + SumData.Delivery
+
       }
     }
 

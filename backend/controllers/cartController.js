@@ -43,6 +43,8 @@ const createCartItem =  asyncHandler(async (req, res) => {
         quantity: req.body.quantity,
         product_id: req.body.product_id,
 
+        //would "body: body" do the same thing as declaring each key/value pair?
+
     })
     res.status(200).json(item)
 });
@@ -52,6 +54,7 @@ const createCartItem =  asyncHandler(async (req, res) => {
 // @access
 
 const updateQuantity = asyncHandler(async (req,res) => {
+
     const updatedItem = await Cart.findByIdAndUpdate(req.params._id, req.body, {
         new: true,
     })

@@ -5,7 +5,9 @@ import {
   useUpdateCartItemMutation,
   useDeleteCartItemMutation
 } from "../features/api/apiSlice";
-import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
+import { setCartItems, 
+  calculateTotals 
+} from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
@@ -13,8 +15,8 @@ function Cart() {
   const [updateCart, { isLoading: isUpdating }] = useUpdateCartItemMutation();
   const [DeleteItem] = useDeleteCartItemMutation();
   // const { CartOptions } = useSelector((state) => state.CartOptions);
-  const  CartItems  = useSelector((state) => state.cart.CartItems);
-  const TotalCost = useSelector((state) => state.cart.TotalCost)
+  const CartItems = useSelector((state) => state.cart.CartItems);
+  const SumData = useSelector((state) => state.cart.SummaryData)
   const dispatch = useDispatch();
 
 
@@ -27,7 +29,7 @@ useEffect(() =>{
 
 useEffect(() => {
   dispatch(calculateTotals())
-},[isSuccess])
+},[isSuccess, CartItems])
 
 
   return (
@@ -49,7 +51,7 @@ useEffect(() => {
                   <h3>Price: ${item.price * item.quantity}</h3>
                   <form onSubmit={e => e.preventDefault()}>
                     <input type="text" placeholder={item.quantity} />
-                    <button type="submit" onClick={ (e) => updateCart({ id: item._id, quantity: e.target.form[0].value})}>Update</button>
+                    <button type="submit" onClick={ (e) => updateCart({ id: item._id, quantity: parseInt(e.target.form[0].value)})}>Update</button>
                     <button onClick={() => DeleteItem(item)}>Remove</button>
                   </form>
                 </div>
@@ -66,10 +68,10 @@ useEffect(() => {
                 <h2>Total:</h2>
               </div>
               <div className={styles.summary_left}>
-                <h3>${TotalCost} </h3>
-                <h3>${(TotalCost * 0.15).toFixed(2)}</h3>
-                <h3>$9.99</h3>
-                <h2>${}</h2>
+                <h3>${SumData.ProductCost}</h3>
+                <h3>${SumData.Tax}</h3>
+                <h3>${SumData.Delivery}</h3>
+                <h2>${SumData.TotalCost}</h2>
               </div>
             </div>
           </div>
