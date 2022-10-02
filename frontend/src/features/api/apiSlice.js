@@ -5,11 +5,13 @@ export const apiSlice = createApi({
 
   baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
 
-  tagTypes: ["Cart"],
+  tagTypes: ["Cart", "Product"],
 
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => `/products`,
+      providesTags: [{type: "Product", id: "LIST"}]
+
     }),
 
     getSingleProduct: builder.query({
@@ -20,6 +22,9 @@ export const apiSlice = createApi({
       query: () => "/cart",
       providesTags: [{type: "Cart", id: "LIST"}]
     }),
+    
+   
+    //CRUD Mutations
 
     createCartItem: builder.mutation({
       query: ({...item}) => {

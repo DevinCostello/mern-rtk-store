@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useState} from "react";
 import styles from "../styles/Details.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -28,8 +28,6 @@ const Details = () => {
       dispatch(setCategory(product.category))
     }
 
- 
-  //This is the cause of the error, even when in a useEffect, commented, etc???
 
   if (cart) {
 

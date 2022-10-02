@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from '../styles/Pagination.module.scss'
 
 const Pagination = () => {
@@ -9,11 +10,11 @@ const Pagination = () => {
 
         <div className={styles.wrapper}>
             <div className={styles.page_list}>
-                <button className={styles.pagebtn}> Prev </button>
-                {PageNumbers.map((page) =>
-                    <button key={page} className={styles.pagebtn}>{page}</button>
+                <button onClick={() => console.log('hello')} className={styles.pagebtn}> Prev </button>
+                {PageNumbers.map((number) =>
+                    <button onClick={() => console.log('hello')} key={number} className={styles.pagebtn}>{number}</button>
                 )}
-                <button className={styles.pagebtn}> Next </button>
+                <button onClick={() => console.log('hello')} className={styles.pagebtn}> Next </button>
 
             </div>
         </div>
