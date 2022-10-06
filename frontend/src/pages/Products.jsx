@@ -6,17 +6,19 @@ import { Link, useNavigate,  useParams, useSearchParams } from 'react-router-dom
 import { useGetProductsQuery } from '../features/api/apiSlice'
 
 export default function Products() {
-  const { } = useParams();
-  const navigate = useNavigate();
+
+  // Not sure if needed, other than matching frontend route to backend API route
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get('page')
   const limit = searchParams.get('limit')
-  const { data, isLoading, error } = useGetProductsQuery()
+
+  const queryStr = '?price[lte]=75&price[gte]=25'
+  const { data, isLoading, error } = useGetProductsQuery(queryStr)
 
 
-    useEffect(() => {
-      console.log(searchParams);
-    }, [searchParams])
+    // useEffect(() => {
+    //   console.log(searchParams);
+    // }, [searchParams])
 
   return (<>
 

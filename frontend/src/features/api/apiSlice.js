@@ -9,7 +9,7 @@ export const apiSlice = createApi({
 
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => `/products`,
+      query: (queryStr) => `/products${queryStr}`,
       providesTags: [{type: "Product", id: "LIST"}]
 
     }),
