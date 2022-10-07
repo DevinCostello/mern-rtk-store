@@ -10,8 +10,8 @@ a {
 
 .wrapper {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    // flex-direction: column;
+    align-items: flex-start;
     justify-content: space-evenly
 }
 
@@ -44,34 +44,6 @@ a {
     }
 }
 
-
-
-.filter_btn {
-border: 1px solid black;
-border-radius: 5px;
-padding: 10px;
-
-}
-
-.filter_btn:hover {
-    cursor: pointer;
-    background-color: lightgrey;
-}
-
 .filters {
-    display: none;
-}
 
-.active_filters {
-    display: block
-}
-
-.filter_group {
-
-    display: flex;
-    flex-direction: column;
-
-    .button {
-        margin-bottom: 5px;
-    }
 }
