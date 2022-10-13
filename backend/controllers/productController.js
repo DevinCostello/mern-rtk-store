@@ -8,7 +8,6 @@ const Product = require('../models/productModel');
 const getProducts = asyncHandler(async (req, res) => {
 
     const reqQuery = {...req.query}
-    console.log(reqQuery);
     //convert query into json to add dollar sign
     let queryStr = JSON.stringify(reqQuery)
 
@@ -22,18 +21,25 @@ const getProducts = asyncHandler(async (req, res) => {
     const limit = parseInt(req.query.limit)
     const sort = parseInt(req.query.sort)
 
+    const count = await Product.countDocuments();
+
     //parse back from JSON to use in .find()
-    const products = await Product
-        .find(JSON.parse(queryStr))
+
+        const totalProducts = await Product.find(JSON.parse(queryStr))
+        const products = await Product.find(JSON.parse(queryStr))
         .limit(limit)
         .skip((page - 1) * limit)
-        //not implemented yet
         .sort(sort)
-    res.status(200).json(products)
+        res.status(200).json({products, totalProducts})
+            
+
+
+    })
+
 
     //other paramters to include: color (is a nested array) -> changing data structure will require updating Product Schema
 
-})
+
 
 // @desc Get product by id
 // @route GET /api/product/id
