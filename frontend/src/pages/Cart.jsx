@@ -12,9 +12,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
   const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
-  const [updateCart, { isLoading: isUpdating }] = useUpdateCartItemMutation();
+  const [updateCart, { status, isLoading: isUpdating, error: updateError  }] = useUpdateCartItemMutation();
   const [DeleteItem] = useDeleteCartItemMutation();
-  // const { CartOptions } = useSelector((state) => state.CartOptions);
   const CartItems = useSelector((state) => state.cart.CartItems);
   const SumData = useSelector((state) => state.cart.SummaryData)
   const dispatch = useDispatch();
@@ -53,6 +52,9 @@ useEffect(() => {
                     <input type="text" placeholder={item.quantity} />
                     <button type="submit" onClick={ (e) => updateCart({ id: item._id, quantity: parseInt(e.target.form[0].value)})}>Update</button>
                     <button onClick={() => DeleteItem(item)}>Remove</button>
+
+                    {status === "rejected" && <p className={styles.error}>{updateError.data.message}</p>}
+
                   </form>
                 </div>
               </div>

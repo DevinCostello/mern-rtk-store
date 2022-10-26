@@ -1,8 +1,16 @@
 
+.wrapper {
+margin: 0 0 2rem;
+}
+
 .header {
     display: flex;
     justify-content: space-evenly;
     list-style: none;
+    border-bottom: 1px solid lightgrey;
+    margin: 0 auto;
+    padding: 0.5rem 0 0.5rem;
+
 }
 
 .link {

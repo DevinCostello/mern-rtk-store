@@ -5,7 +5,7 @@ import styles from "../styles/Header.module.scss";
 function Header() {
   return (
     <>
-      <div>
+      <div className={styles.wrapper}>
         <ul className={styles.header}>
           <Link className={styles.link} to="/">
             <li className={styles.item}>

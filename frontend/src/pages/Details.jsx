@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styles from "../styles/Details.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { setColor, setQuantity, setProductId, setSize, setName, setPrice, setCategory, clearCart } from "../features/product/productSlice";
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
 import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
@@ -15,10 +15,11 @@ const Details = () => {
   const [UpdateCartItem] = useUpdateCartItemMutation();
 
   const CreateOptions = useSelector((state) => state.product.CreateOptions);
-  const CartOptions = useSelector((state) => state.cart.CartOptions)
+  const UpdateOptions = useSelector((state) => state.cart.UpdateOptions)
   const CartDuplicate = useSelector((state) => state.cart.CartDuplicate)
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
 
     if (isSuccess) {
@@ -112,13 +113,16 @@ const Details = () => {
 
 
               if (CartDuplicate) {
-                UpdateCartItem(CartOptions)
+                UpdateCartItem(UpdateOptions)
                 alert("Cart item updated")
                 dispatch(clearCart())
+                navigate(0)
+
               } else {
                 createCartItem({ ...CreateOptions })
                 alert("New item added to cart")
                 dispatch(clearCart())
+                navigate(0)
               }
             }}>
               Add To Cart

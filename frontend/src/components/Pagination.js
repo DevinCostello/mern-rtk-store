@@ -1,7 +1,5 @@
-import React, {useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import {setPage} from '../features/filter/filterSlice'
+import { setPage } from '../features/filter/filterSlice'
 import styles from '../styles/Pagination.module.scss'
 
 const Pagination = ({totalProducts}) => {
@@ -14,15 +12,12 @@ const Pagination = ({totalProducts}) => {
         PageNumbers.push(i);
     }   
 
-    useEffect(() => {
-
-    }, [])
-    
     const dispatch = useDispatch()
 
 
     return (<>
 
+    {PageNumbers.length > 1 &&
         <div className={styles.wrapper}>
             <div className={styles.page_list}>
                 <button onClick={() => currentPage === 1 ? dispatch(setPage(1)) : dispatch(setPage(currentPage - 1))} className={styles.pagebtn}> Prev </button>
@@ -32,7 +27,7 @@ const Pagination = ({totalProducts}) => {
                 <button onClick={() => currentPage === totalPages ? dispatch(setPage(totalPages)) : dispatch(setPage(currentPage + 1))} className={styles.pagebtn}> Next </button>
             </div>
         </div>
-
+    }
 
     </>)
 }

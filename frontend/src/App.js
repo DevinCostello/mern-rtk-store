@@ -9,10 +9,10 @@ import Header from "./components/Header";
 
 //Pages
 import Home from "./pages/Home";
+import Login from './pages/Login'
 import Products from "./pages/Products";
 import Details from "./pages/Details";
 import Cart from "./pages/Cart";
-import ProductQuery from "./pages/ProductQuery";
 import SharedProductLayout from "./pages/SharedProductLayout";
 
 
@@ -23,7 +23,8 @@ function App() {
         <Routes>
           <>
             <Route path="/" element={<Home />} />
-
+            <Route path="/login" element={<Login />}/>
+            <Route path="*" element={<div>Error: 404</div>}/>            
 
             <Route path="/products" element={<SharedProductLayout />} >
               <Route index element={<Products />} />

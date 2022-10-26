@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 
-  CartOptions: {
+  UpdateOptions: {
     id: null,
     quantity: null
   },
@@ -27,11 +27,11 @@ const cartSlice = createSlice({
   reducers: {
     setId: (state, action) => {
       const id = action.payload;
-      state.CartOptions.id = id;
+      state.UpdateOptions.id = id;
     },
     setCartQuantity: (state, action) => {
       const quantity = action.payload;
-      state.CartOptions.quantity = quantity;
+      state.UpdateOptions.quantity = quantity;
     },
     setCartDuplicate: (state, action) => {
       state.CartDuplicate = action.payload

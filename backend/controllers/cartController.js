@@ -22,13 +22,13 @@ const getCartItemById = asyncHandler(async (req, res) => {
     res.status(200).json(cartitem)
 });
 
-// @desc Create cart item, (add item to cart)
+// @desc Create cart item
 // @route POST /api/cart/
 // @access Private
 
 const createCartItem =  asyncHandler(async (req, res) => {
     
-    if(req.body.color === null || req.body.size === null || req.body.quantity === null) {
+    if(req.body.color === null || req.body.size === null ) {
         res.status(400)
         throw new Error('Please Select all fields')
     }
@@ -54,6 +54,16 @@ const createCartItem =  asyncHandler(async (req, res) => {
 // @access
 
 const updateQuantity = asyncHandler(async (req,res) => {
+
+    if(Number.isInteger(req.body.quantity) === false || req.body.quantity < 1) {
+        res.status(400)
+        throw new Error ('Please input a valid quantity')
+    }
+
+    if(req.body.quantity === null ) {
+        res.status(400)
+        throw new Error('Update Quantity Not Selected')
+    }
 
     const updatedItem = await Cart.findByIdAndUpdate(req.params._id, req.body, {
         new: true,

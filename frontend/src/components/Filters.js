@@ -27,6 +27,8 @@ const Filters = () => {
     const sizes = ["small", "medium", "large"]
 
 
+    // queryObj['price[lte]'] === price.lte && queryObj['price[gte]'] === price.gte ? styles.filterbtn_active : styles.filterbtn
+
     return (
 
         <>
@@ -44,7 +46,10 @@ const Filters = () => {
                 <div className={styles.filter_group}>
                     <h3>Price</h3>
                     {prices.map((price, index) =>
-                        <button className={styles.filterbtn} key={index} 
+                        <button className={queryObj['price[lte]'] === price.lte 
+                        && queryObj['price[gte]'] === price.gte ? 
+                        styles.filterbtn_active : styles.filterbtn
+                    } key={index} 
                         onClick={() => dispatch(setPrice({ price }))} data-gte={price.gte} data-lte={price.lte}>{price.text}</button>
                     )}
                 </div>
