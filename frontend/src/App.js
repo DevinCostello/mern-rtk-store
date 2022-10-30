@@ -13,6 +13,8 @@ import Login from './pages/Login'
 import Products from "./pages/Products";
 import Details from "./pages/Details";
 import Cart from "./pages/Cart";
+import Register from "./pages/Register";
+
 import SharedProductLayout from "./pages/SharedProductLayout";
 
 
@@ -24,6 +26,7 @@ function App() {
           <>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<div>Error: 404</div>}/>            
 
             <Route path="/products" element={<SharedProductLayout />} >

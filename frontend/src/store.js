@@ -4,6 +4,8 @@ import filterReducer from './features/filter/filterSlice'
 import productReducer from './features/product/productSlice'
 import modalReducer from './features/modal/modalSlice'
 import { apiSlice } from './features/api/apiSlice'
+import userReducer from './features/user/userSlice'
+import authReducer from './features/auth/authSlice'
 
 
 
@@ -11,6 +13,8 @@ import { apiSlice } from './features/api/apiSlice'
 
 reducer: {
     cart: cartReducer,
+    user: userReducer,
+    auth: authReducer,
     product: productReducer,
     modal: modalReducer,
     filter: filterReducer,

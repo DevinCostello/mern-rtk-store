@@ -3,18 +3,18 @@ const Cart = require('../models/cartModel');
 
 // @desc Get cart
 // @route GET /api/cart
-// @access 
+// @access Private  
 
 const getCart = asyncHandler(async (req, res) => {
 
-    const cart = await Cart.find()
+    const cart = await Cart.find({ user: req.user.id })
     res.status(200).json(cart)
 
 });
 
 // @desc Get cart item by id
 // @route GET /api/cart/id
-// @access ??
+// @access Private
 
 const getCartItemById = asyncHandler(async (req, res) => {
     const id = req.params._id
@@ -35,6 +35,7 @@ const createCartItem =  asyncHandler(async (req, res) => {
 
     const item = await Cart.create({
 
+        user: req.body.user,
         name: req.body.name,
         category: req.body.category,
         price: req.body.price,

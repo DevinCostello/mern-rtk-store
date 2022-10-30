@@ -46,7 +46,7 @@ export default function Products() {
                 <div className={styles.grid_item} key={product._id}>
 
                   {/* for testing */}
-                  <h3 style={{ color: 'red' }}>{index}</h3>
+                  {/* <h3 style={{ color: 'red' }}>{index}</h3> */}
 
                   <h2>{product.name}</h2>
                   <h3>{product.category}</h3>
