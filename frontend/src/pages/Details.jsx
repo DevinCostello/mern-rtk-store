@@ -14,6 +14,7 @@ const Details = () => {
   const [createCartItem, result] = useCreateCartItemMutation();
   const [UpdateCartItem] = useUpdateCartItemMutation();
 
+  const user = useSelector((state) => state.auth.user)
   const CreateOptions = useSelector((state) => state.product.CreateOptions);
   const UpdateOptions = useSelector((state) => state.cart.UpdateOptions)
   const CartDuplicate = useSelector((state) => state.cart.CartDuplicate)
@@ -53,8 +54,10 @@ const Details = () => {
 
   //if duplicate is set but quantity is not yet set
   const handleUpdate = (e) => {
+
     //set update quantity to the cart item's quantity plus selected quantity from UI
     dispatch(setCartQuantity(CartDuplicate.quantity + parseInt(e.target.value)))
+
     //set create options quantity also in case duplicate is de-selected
     dispatch(setQuantity(parseInt(e.target.value)))
   }
@@ -116,14 +119,15 @@ const Details = () => {
                 UpdateCartItem(UpdateOptions)
                 alert("Cart item updated")
                 dispatch(clearCart())
-                navigate(0)
+                // navigate(0)
 
               } else {
                 createCartItem({ ...CreateOptions })
                 alert("New item added to cart")
                 dispatch(clearCart())
-                navigate(0)
+                // navigate(0)
               }
+
             }}>
               Add To Cart
             </button>

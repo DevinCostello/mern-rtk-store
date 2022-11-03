@@ -1,15 +1,29 @@
 
+* {
+    // background-color: rgba($color: #c2f1ea, $alpha: 0.1)
+}
+
 .wrapper {
 margin: 0 0 2rem;
 }
 
 .header {
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
     list-style: none;
     border-bottom: 1px solid lightgrey;
     margin: 0 auto;
     padding: 0.5rem 0 0.5rem;
+    // border: 1px solid red;
+
+    button {
+        height: 40px;
+        width: 100px;
+        font-weight: 800;
+        background-color: aqua;
+        border-radius: 25px;
+    }
 
 }
 
@@ -24,3 +38,13 @@ margin: 0 0 2rem;
 .selected {
     background-color: lightgrey;
 }
+
+.loggedin {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 200px;
+    // border: 1px solid red;
+}
+
+

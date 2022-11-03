@@ -1,11 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FaShoppingCart } from 'react-icons/fa'
 import { useSelector } from "react-redux";
 import styles from "../styles/Header.module.scss";
 
 function Header() {
 
-  const LoggedInUser = useSelector(state => state.auth.token)
+  // const cartcount = useSelector(state => state.cart.cartItems.length)
+  //not always set to cart, cant derive cart length unless cart is fetched in this component
+  const navigate = useNavigate()
+  const user = localStorage.getItem('user')
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -21,34 +26,40 @@ function Header() {
             </li>
           </Link>
 
-        {LoggedInUser ? <Link className={styles.link} to="/cart">
+          {user ? 
+          <div className={styles.loggedin}>
+          <Link className={styles.link} to="/cart">
             <li className={styles.item}>
-              <h3>Cart</h3>
-            </li>
-          </Link> :
-          <>
-  <Link className={styles.link} to="/login">
-  <li className={styles.item}>
-    <h3>Login</h3>
-  </li>
-</Link>
-
-<Link className={styles.link} to="/register">
-  <li className={styles.item}>
-    <h3>Register</h3>
-  </li>
-</Link>
-
-<Link className={styles.link} to="/cart">
-            <li className={styles.item}>
-              <h3>Cart</h3>
+              <FaShoppingCart size={32} />
             </li>
           </Link>
-</>
-}
+          
+          <button onClick={() => 
+            {localStorage.removeItem('user')
+            localStorage.removeItem('token')
+            navigate('/')
+            }}>LOG OUT</button>
 
-         
-        
+          </div> :
+
+            <>
+              <Link className={styles.link} to="/login">
+                <li className={styles.item}>
+                  <h3>Login</h3>
+                </li>
+              </Link>
+
+              <Link className={styles.link} to="/register">
+                <li className={styles.item}>
+                  <h3>Register</h3>
+                </li>
+              </Link>
+
+            </>
+          }
+
+
+
         </ul>
       </div>
     </>

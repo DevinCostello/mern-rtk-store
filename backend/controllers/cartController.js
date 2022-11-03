@@ -1,7 +1,7 @@
 const asyncHandler = require('express-async-handler');
 const Cart = require('../models/cartModel');
 
-// @desc Get cart
+// @desc Get cart for specified user
 // @route GET /api/cart
 // @access Private  
 
@@ -14,7 +14,7 @@ const getCart = asyncHandler(async (req, res) => {
 
 // @desc Get cart item by id
 // @route GET /api/cart/id
-// @access Private
+// @access Public
 
 const getCartItemById = asyncHandler(async (req, res) => {
     const id = req.params._id
@@ -52,7 +52,7 @@ const createCartItem =  asyncHandler(async (req, res) => {
 
 // @desc Get cart item by id and update quantity
 // @route PUT /api/cart/id
-// @access
+// @access Private
 
 const updateQuantity = asyncHandler(async (req,res) => {
 

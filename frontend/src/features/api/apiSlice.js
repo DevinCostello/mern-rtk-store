@@ -3,24 +3,24 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const apiSlice = createApi({
   reducerPath: "api",
 
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:5000/api" }),
-  prepareHeaders: (headers) => {
-    // const token = localStorage.getItem('token')
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzNWFjZWUzY2QxZjk5NzBkYmZhNDY3MyIsImlhdCI6MTY2NzE0OTg1NiwiZXhwIjoxNjY5NzQxODU2fQ.di2mBh5ku7NiE320tZwct8UaDWkPNypStK-LobJ7VqQ"
-    headers.set("Accept", "application/json");
-    if(token) {
-      headers.set('Authorization', `Bearer ${token}`)
-    }
-    console.log(headers)
-    return headers;
-  },
+  baseQuery: fetchBaseQuery({ 
+    baseUrl: "http://localhost:5000/api", 
+    prepareHeaders: (headers) => {
+      const token = localStorage.getItem('token')  
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+      return headers;
+    },
+  }),
+  
 
   tagTypes: ["Cart", "Product"],
 
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: (queryStr) => `/products${queryStr}`,
-      providesTags: [{type: "Product", id: "LIST"}]
+      providesTags: [{ type: "Product", id: "LIST" }]
 
     }),
 
@@ -30,51 +30,51 @@ export const apiSlice = createApi({
 
     getCart: builder.query({
       query: () => "/cart",
-      providesTags: [{type: "Cart", id: "LIST"}],
-      mode: 'cors'
+      providesTags: [{ type: "Cart", id: "LIST" }],
     }),
 
     //User Mutations
 
     Login: builder.mutation({
-      query: ({...user}) => {
+      query: ({ ...user }) => {
         return {
           url: '/users/login',
           method: "POST",
-          body: {...user},
-          mode: 'cors'
+          body: { ...user },
         };
+      },
+      invalidatesTags: [{ type: "Cart", id: "LIST" }]
 
-       
-      }
     }),
 
     Register: builder.mutation({
-      query: () => {
+      query: ({...user}) => {
         return {
           url: '/users',
           method: "POST",
-          body: "placeholder"
+          body: {...user},
         };
-      }
+      },
+      invalidatesTags: [{ type: "Cart", id: "LIST" }]
+
     }),
-    
-   
+
+
     //CRUD Mutations
 
     createCartItem: builder.mutation({
-      query: ({...item}) => {
+      query: ({ ...item }) => {
         return {
           url: `/cart`,
           method: "POST",
-          body: {...item}
+          body: { ...item }
         };
       },
-      invalidatesTags: [{type: "Cart", id: "LIST"}]
+      invalidatesTags: [{ type: "Cart", id: "LIST" }]
     }),
 
     updateCartItem: builder.mutation({
-      query: ({id, quantity}) => {
+      query: ({ id, quantity }) => {
         return {
           url: `/cart/${id}`,
           method: "PUT",
@@ -83,7 +83,7 @@ export const apiSlice = createApi({
           }
         };
       },
-      invalidatesTags: [{type: "Cart", id: "LIST"}]
+      invalidatesTags: [{ type: "Cart", id: "LIST" }]
     }),
 
     deleteCartItem: builder.mutation({
@@ -93,10 +93,10 @@ export const apiSlice = createApi({
           method: "DELETE",
         };
       },
-      invalidatesTags: [{type: "Cart", id: "LIST"}]
+      invalidatesTags: [{ type: "Cart", id: "LIST" }]
     }),
-  
+
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery, useCreateCartItemMutation, useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation, useLoginMutation } = apiSlice;
+export const { useGetProductsQuery, useGetSingleProductQuery, useCreateCartItemMutation, useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation, useLoginMutation, useRegisterMutation } = apiSlice;

@@ -25,10 +25,7 @@ const Filters = () => {
     ]
     const categories = ["tshirt", "hoodie", "hat"]
     const sizes = ["small", "medium", "large"]
-
-
-    // queryObj['price[lte]'] === price.lte && queryObj['price[gte]'] === price.gte ? styles.filterbtn_active : styles.filterbtn
-
+    
     return (
 
         <>

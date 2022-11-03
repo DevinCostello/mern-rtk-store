@@ -1,9 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 
+const user = localStorage.getItem('user')
 
 const initialState = {
 
     CreateOptions: {
+        user: user ? user : null,
         name: null,
         category: null,
         product_id: null,
