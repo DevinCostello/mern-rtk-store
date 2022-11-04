@@ -13,11 +13,10 @@ export const apiSlice = createApi({
       return headers;
     },
   }),
-  
-
-  tagTypes: ["Cart", "Product"],
+  tagTypes: ["Cart", "Product", "User"],
 
   endpoints: (builder) => ({
+
     getProducts: builder.query({
       query: (queryStr) => `/products${queryStr}`,
       providesTags: [{ type: "Product", id: "LIST" }]
@@ -31,6 +30,11 @@ export const apiSlice = createApi({
     getCart: builder.query({
       query: () => "/cart",
       providesTags: [{ type: "Cart", id: "LIST" }],
+    }),
+
+    getUser: builder.query({
+      query: () => "/users/me",
+      providesTags: [{ type: "User", id: "LIST" }],
     }),
 
     //User Mutations
@@ -99,4 +103,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery, useCreateCartItemMutation, useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation, useLoginMutation, useRegisterMutation } = apiSlice;
+export const { useGetProductsQuery, useGetSingleProductQuery, useGetUserQuery, useCreateCartItemMutation, useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation, useLoginMutation, useRegisterMutation } = apiSlice;

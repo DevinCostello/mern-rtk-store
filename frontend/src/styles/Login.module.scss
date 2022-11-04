@@ -65,11 +65,16 @@ background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 10
     width: 75%;
     border-radius: 25px;
     padding: 10px 5px;
+    margin-top: 0.5rem;
     font-weight: 800;
-
+    align-self: center;
 
     color: white;
 
     background: rgb(199,21,135);
     background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 100%); 
+}
+
+.error {
+    color:red
 }

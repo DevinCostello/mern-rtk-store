@@ -4,16 +4,16 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { useSelector } from "react-redux";
 import styles from "../styles/Header.module.scss";
 
-function Header() {
+function Header({user}) {
 
-  // const cartcount = useSelector(state => state.cart.cartItems.length)
-  //not always set to cart, cant derive cart length unless cart is fetched in this component
   const navigate = useNavigate()
-  const user = localStorage.getItem('user')
+  const userStorage = localStorage.getItem('user')
+
+  console.log(user);
 
   return (
     <>
-      <div className={styles.wrapper}>
+      <main className={styles.wrapper}>
         <ul className={styles.header}>
           <Link className={styles.link} to="/">
             <li className={styles.item}>
@@ -27,20 +27,22 @@ function Header() {
           </Link>
 
           {user ? 
-          <div className={styles.loggedin}>
+          <section className={styles.loggedin}>
+            <h3>Hello, {user.name}</h3>
           <Link className={styles.link} to="/cart">
             <li className={styles.item}>
               <FaShoppingCart size={32} />
             </li>
           </Link>
           
+
           <button onClick={() => 
             {localStorage.removeItem('user')
             localStorage.removeItem('token')
             navigate('/')
             }}>LOG OUT</button>
 
-          </div> :
+          </section> :
 
             <>
               <Link className={styles.link} to="/login">
@@ -58,10 +60,8 @@ function Header() {
             </>
           }
 
-
-
         </ul>
-      </div>
+      </main>
     </>
   );
 }

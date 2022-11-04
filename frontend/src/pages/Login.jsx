@@ -40,8 +40,8 @@ const Login = () => {
     }
 
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.content}>
+        <main className={styles.wrapper}>
+            <section className={styles.content}>
                 <h1>Login</h1>
                 <form className={styles.form}>
                     <label for="email">Email</label>
@@ -67,11 +67,10 @@ const Login = () => {
                     </div>
                 <button onClick={onSubmit} className={styles.loginbtn}>LOGIN</button>
                 </form>
+                {result.status === "rejected" && <p className={styles.error}>{result.error.data.message}</p>}
+            </section>
 
-                <p>Forgot your password?</p>
-            </div>
-
-        </div>
+        </main>
     )
 }
 

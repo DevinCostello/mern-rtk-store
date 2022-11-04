@@ -5,7 +5,7 @@ import { useRegisterMutation } from '../features/api/apiSlice'
 
 const Register = () => {
 
-  const [Register] = useRegisterMutation()
+  const [Register, result] = useRegisterMutation()
   const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
@@ -82,6 +82,7 @@ const Register = () => {
           <button onClick={onSubmit} className={styles.registerbtn}>REGISTER</button>
         </form>
         <p>Already a member? <Link to="/login">Sign In</Link></p>
+        {result.status === "rejected" && <p className={styles.error}>{result.error.data.message}</p>}
       </div>
 
     </div>

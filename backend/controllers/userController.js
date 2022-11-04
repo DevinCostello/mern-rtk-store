@@ -71,7 +71,7 @@ const loginUser = asyncHandler(async (req, res) => {
             })
         } else {
             res.status(400)
-            throw new Error('Invalid credentials')
+            throw new Error('Incorrect email or password')
         }
     }
 

@@ -1,0 +1,29 @@
+[{
+    "prices": [
+        {
+            "text": "$25 -$50",
+            "gte": 25,
+            "lte": 50
+        },
+        {
+            "text": "$50 - $75",
+            "gte": 50,
+            "lte": 75
+        },
+        {
+            "text": "$75 - $100",
+            "gte": 75,
+            "lte": 100
+        }
+    ],
+    "categories": [
+        "tshirt",
+        "hoodie",
+        "hat"
+    ],
+    "sizes": [
+        "Small",
+        "Medium",
+        "Large"
+    ]
+}]

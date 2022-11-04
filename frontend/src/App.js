@@ -17,11 +17,17 @@ import Register from "./pages/Register";
 
 import SharedProductLayout from "./pages/SharedProductLayout";
 
+import { useGetUserQuery } from './features/api/apiSlice'
+
 
 function App() {
+
+  const {data: user, isLoading, isSuccess, error} = useGetUserQuery()
+
+
   return (
       <Router>
-      <Header />
+      <Header user={user} />
         <Routes>
           <>
             <Route path="/" element={<Home />} />

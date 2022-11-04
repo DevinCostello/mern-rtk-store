@@ -23,21 +23,28 @@ const productSlice = createSlice({
 
     reducers: {
 
-        setName: (state, action) => {
-            state.CreateOptions.name = action.payload
-        },
+            setFixedVariables: (state,{ payload }) => {
+                state.CreateOptions.name = payload.name
+                state.CreateOptions.price = payload.price
+                state.CreateOptions.category = payload.category
+                state.CreateOptions.product_id = payload.product_id
+            },
 
-        setPrice: (state, action) => {
-            state.CreateOptions.price = action.payload
-        },
+            setName: (state, action) => {
+                state.CreateOptions.name = action.payload
+            },
 
-        setProductId: (state, action) => {
-            state.CreateOptions.product_id = action.payload
-        },
+            setPrice: (state, action) => {
+                state.CreateOptions.price = action.payload
+            },
 
-        setCategory: (state, action) => {
-            state.CreateOptions.category = action.payload
-        },
+            setProductId: (state, action) => {
+                state.CreateOptions.product_id = action.payload
+            },
+
+            setCategory: (state, action) => {
+                state.CreateOptions.category = action.payload
+            },
 
         setColor: (state, action) => {
             state.CreateOptions.color = action.payload
@@ -55,6 +62,7 @@ const productSlice = createSlice({
 
             state.CreateOptions = {
 
+                user: user ? user : null,
                 name: null,
                 category: null,
                 price: null,
@@ -68,5 +76,5 @@ const productSlice = createSlice({
     }
 })
 
-export const { setColor, setQuantity, setProductId, setSize, setName, setPrice, setCategory, clearCart } = productSlice.actions
+export const {setFixedVariables, setColor, setQuantity, setProductId, setSize, setName, setPrice, setCategory, clearCart } = productSlice.actions
 export default productSlice.reducer

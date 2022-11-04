@@ -2,11 +2,14 @@ import React, {useState} from "react";
 import styles from "../styles/Details.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import { setColor, setQuantity, setProductId, setSize, setName, setPrice, setCategory, clearCart } from "../features/product/productSlice";
+import {setFixedVariables, setColor, setQuantity, setSize, clearCart } from "../features/product/productSlice";
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
 import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
 
 const Details = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const { data: product, isLoading, isSuccess, error } = useGetSingleProductQuery(id);
   const { data: cart } = useGetCartQuery();
@@ -14,20 +17,14 @@ const Details = () => {
   const [createCartItem, result] = useCreateCartItemMutation();
   const [UpdateCartItem] = useUpdateCartItemMutation();
 
-  const user = useSelector((state) => state.auth.user)
   const CreateOptions = useSelector((state) => state.product.CreateOptions);
   const UpdateOptions = useSelector((state) => state.cart.UpdateOptions)
   const CartDuplicate = useSelector((state) => state.cart.CartDuplicate)
 
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
+  
 
     if (isSuccess) {
-      dispatch(setName(product.name))
-      dispatch(setPrice(product.price))
-      dispatch(setProductId(product._id))
-      dispatch(setCategory(product.category))
+      dispatch(setFixedVariables({name: product.name, price: product.price, product_id: product.product_id, category: product.category}))
     }
 
 
@@ -68,16 +65,17 @@ const Details = () => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <div className={styles.wrapper}>
-          <div>
+        <main className={styles.wrapper}>
+
+          <section className={styles.details}>
             <h1>{product.name}</h1>
 
             <h2>${product.price}.99</h2>
 
             <h3>{product.category}</h3>
-          </div>
+          </section>
 
-          <div className={styles.colors}>
+          <section className={styles.colors}>
             Colors:
             {product.color.map((color, index) => (
               <button onClick={() => dispatch(setColor(color))}
@@ -85,18 +83,18 @@ const Details = () => {
                 key={index}
                 style={{ backgroundColor: `${color}` }}></button>
             ))}
-          </div>
+          </section>
 
-          <div className={styles.sizes}>
+          <section className={styles.sizes}>
             Sizes:
             {["Small", "Medium", "Large"].map((size) => (
               <button className={CreateOptions.size === size ? styles.size_selected : styles.size} key={size} onClick={() => dispatch(setSize(size))}>
                 {size}
               </button>
             ))}
-          </div>
+          </section>
 
-          <div className={styles.cart}>
+          <section className={styles.cart}>
             <p>Choose an Amount</p>
         
             <select onChange={(e) => {
@@ -119,13 +117,13 @@ const Details = () => {
                 UpdateCartItem(UpdateOptions)
                 alert("Cart item updated")
                 dispatch(clearCart())
-                // navigate(0)
+                navigate(0)
 
               } else {
                 createCartItem({ ...CreateOptions })
                 alert("New item added to cart")
                 dispatch(clearCart())
-                // navigate(0)
+                navigate(0)
               }
 
             }}>
@@ -133,8 +131,9 @@ const Details = () => {
             </button>
 
             {result.status === "rejected" && <p className={styles.error}>{result.error.data.message}</p>}
-          </div>
-        </div>
+          </section>
+          
+        </main>
       )}
     </>
   );

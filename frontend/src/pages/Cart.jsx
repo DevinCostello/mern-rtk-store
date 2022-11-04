@@ -1,14 +1,9 @@
 import React, {useEffect} from "react";
 import styles from "../styles/Cart.module.scss";
-import {
-  useGetCartQuery,
-  useUpdateCartItemMutation,
-  useDeleteCartItemMutation
-} from "../features/api/apiSlice";
-import { setCartItems, 
-  calculateTotals 
-} from "../features/cart/cartSlice";
+import { useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation } from "../features/api/apiSlice";
+import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
+import CartItem from "../components/CartItem";
 
 function Cart() {
   const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
@@ -39,27 +34,13 @@ useEffect(() => {
         <>
           <div className={styles.cart}>
             {cart.map((item) => (
-              <div key={item._id} className={styles.item}>
-                <div>
-                  <h2>{item.name}</h2>
-                  <h3>{item.category}</h3>
-                  <h4>Color: {item.color}</h4>
-                  <h4>Size: {item.size}</h4>
-                </div>
-                <div className={styles.item_right}>
-                  <h3>Price: ${item.price * item.quantity}</h3>
-                  <form onSubmit={e => e.preventDefault()}>
-                    <input type="text" placeholder={item.quantity} />
-                    <button type="submit" onClick={ (e) => updateCart({ id: item._id, quantity: parseInt(e.target.form[0].value)})}>Update</button>
-                    <button onClick={() => DeleteItem(item)}>Remove</button>
-
-                    {status === "rejected" && <p className={styles.error}>{updateError.data.message}</p>}
-
-                  </form>
-                </div>
-              </div>
+             <CartItem item={item} error={updateError} />
             ))}
           </div>
+
+
+
+
           <div className={styles.summary_wrapper}>
             <h1>Summary</h1>
             <div className={styles.summary}>

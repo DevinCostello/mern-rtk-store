@@ -1,8 +1,9 @@
 import styles from "../styles/Filters.module.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategory, setSize, setPrice } from "../features/filter/filterSlice"
-
+import filterdata from "../filters.json"
 const Filters = () => {
+
 
     const dispatch = useDispatch()
     const queryObj = useSelector((state) => state.filter)

@@ -41,13 +41,10 @@ export default function Products() {
       {isLoading ? <p>Loading...</p> :
         <div className={styles.grid_container}>
           <div className={styles.grid}>
-            {data.products.map((product, index) =>
+            {data.products.map((product) =>
+
               <Link key={product._id} to={`${product._id}`}>
                 <div className={styles.grid_item} key={product._id}>
-
-                  {/* for testing */}
-                  {/* <h3 style={{ color: 'red' }}>{index}</h3> */}
-
                   <h2>{product.name}</h2>
                   <h3>{product.category}</h3>
                   <h4>Price: ${product.price}.99</h4>
@@ -59,6 +56,7 @@ export default function Products() {
                   </div>
                 </div>
               </Link>
+
             )}
           </div>
 

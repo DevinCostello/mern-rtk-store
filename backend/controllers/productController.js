@@ -7,14 +7,14 @@ const Product = require('../models/productModel');
 
 const getProducts = asyncHandler(async (req, res) => {
 
-    const reqQuery = {...req.query}
+    const reqQuery = { ...req.query }
     //convert query into json to add dollar sign
     let queryStr = JSON.stringify(reqQuery)
 
     queryStr = queryStr.replace(
         /\b(gt|gte|lt|lte|in)\b/g,
         (match) => `$${match}`
-      );
+    );
 
     //pagination, need parseInt?
     const page = parseInt(req.query.page)
@@ -25,20 +25,13 @@ const getProducts = asyncHandler(async (req, res) => {
 
     //parse back from JSON to use in .find()
 
-        const totalProducts = await Product.find(JSON.parse(queryStr))
-        const products = await Product.find(JSON.parse(queryStr))
+    const totalProducts = await Product.find(JSON.parse(queryStr))
+    const products = await Product.find(JSON.parse(queryStr))
         .limit(limit)
         .skip((page - 1) * limit)
         .sort(sort)
-        res.status(200).json({products, totalProducts})
-            
-
-
-    })
-
-
-    //other paramters to include: color (is a nested array) -> changing data structure will require updating Product Schema
-
+    res.status(200).json({ products, totalProducts })
+})
 
 
 // @desc Get product by id
