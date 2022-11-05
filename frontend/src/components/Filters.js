@@ -1,7 +1,6 @@
 import styles from "../styles/Filters.module.scss"
 import { useDispatch, useSelector } from 'react-redux'
 import { setCategory, setSize, setPrice } from "../features/filter/filterSlice"
-import filterdata from "../filters.json"
 const Filters = () => {
 
 
@@ -30,27 +29,23 @@ const Filters = () => {
     return (
 
         <>
-            <div className={styles.wrapper}>
+            <main className={styles.wrapper}>
 
-                <div className={styles.filter_group}>
+                <section className={styles.filter_group}>
                     <h3>Category</h3>
                     {categories.map((category) =>
                         <button key={category} className={queryObj.category === category ? styles.filterbtn_active : styles.filterbtn}
                             onClick={() => dispatch(setCategory(category))}>{category}</button>
                     )}
-                </div>
+                </section>
 
-
-                <div className={styles.filter_group}>
+                <section className={styles.filter_group}>
                     <h3>Price</h3>
                     {prices.map((price, index) =>
-                        <button className={queryObj['price[lte]'] === price.lte 
-                        && queryObj['price[gte]'] === price.gte ? 
-                        styles.filterbtn_active : styles.filterbtn
-                    } key={index} 
+                        <button className={queryObj['price[lte]'] === price.lte && queryObj['price[gte]'] === price.gte ? styles.filterbtn_active : styles.filterbtn} key={index} 
                         onClick={() => dispatch(setPrice({ price }))} data-gte={price.gte} data-lte={price.lte}>{price.text}</button>
                     )}
-                </div>
+                </section>
 
                 <div className={styles.filter_group}>
                     <h3>Size</h3>
@@ -59,12 +54,11 @@ const Filters = () => {
                             <div key={size}>
                                 <input type="checkbox" id={size} onClick={() => dispatch(setSize(size))} />
                                 <label for={size}>{size}</label>
-                            </div>
-                        )}
+                            </div>)}
                     </section>
                 </div>
 
-            </div>
+            </main>
         </>
     )
 }

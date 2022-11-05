@@ -33,8 +33,8 @@ useEffect(() => {
       ) : (
         <>
           <div className={styles.cart}>
-            {cart.map((item) => (
-             <CartItem item={item} error={updateError} />
+            {cart.map((item, index) => (
+             <CartItem key={index} item={item} error={updateError} />
             ))}
           </div>
 

@@ -5,11 +5,9 @@ import { useSelector } from "react-redux";
 import styles from "../styles/Header.module.scss";
 
 function Header({user}) {
-
   const navigate = useNavigate()
   const userStorage = localStorage.getItem('user')
 
-  console.log(user);
 
   return (
     <>

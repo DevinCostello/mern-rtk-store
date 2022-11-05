@@ -2,19 +2,18 @@ import styles from '../styles/Products.module.scss'
 import Pagination from '../components/Pagination'
 import Filters from '../components/Filters';
 
-import { useSelector, useDispatch } from 'react-redux'
-import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import { setCount } from '../features/filter/filterSlice'
+import { useSelector } from 'react-redux'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useGetProductsQuery } from '../features/api/apiSlice'
 
 export default function Products() {
 
   // Not sure if needed, other than matching frontend route to API route
   const [searchParams, setSearchParams] = useSearchParams();
+
   const page = searchParams.get('page')
   const limit = searchParams.get('limit')
 
-  const dispatch = useDispatch()
 
   const queryObj = useSelector((state) => state.filter)
 
