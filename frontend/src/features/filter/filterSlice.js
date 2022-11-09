@@ -3,7 +3,18 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
 
 category: null,
-//UPDATE TO NESTED OBJECTS WHEN MIGRATED TO 'QS'
+
+// size: {
+//     small: false,
+//     medium: false,
+//     large: false
+// }
+
+// price: {
+//     gte: null,
+//     lte: null
+// }
+
 "size.small": null,
 "size.medium": null,
 "size.large": null,

@@ -14,7 +14,23 @@ export default function Products() {
   const page = searchParams.get('page')
   const limit = searchParams.get('limit')
 
-
+  
+   const mockFilters =  {
+      category: null,
+      size: {
+        small: false,
+        medium: false,
+        large: false
+      },
+      price: {
+        lte: null,
+        gte: null
+      },
+      limit: 12,
+      page: 1,
+      sort: null
+    }
+  
   const queryObj = useSelector((state) => state.filter)
 
   //convert in array                                  CONVERTING REDUX STORE OBJECT INTO A USEABLE QUERY STRING
@@ -27,7 +43,6 @@ export default function Products() {
   const queryStr = Object.keys(queryFinal).map(key => key + '=' + queryFinal[key]).join('&');
 
   const { data, isLoading, isSuccess, error } = useGetProductsQuery('?' + queryStr)
-
 
 
   return (<>

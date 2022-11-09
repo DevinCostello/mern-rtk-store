@@ -37,6 +37,10 @@ export const apiSlice = createApi({
       providesTags: [{ type: "User", id: "LIST" }],
     }),
 
+    getFilters: builder.query({
+      query: () => "/filters",
+    }),
+
     //User Mutations
 
     Login: builder.mutation({
@@ -103,4 +107,4 @@ export const apiSlice = createApi({
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery, useGetUserQuery, useCreateCartItemMutation, useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation, useLoginMutation, useRegisterMutation } = apiSlice;
+export const { useGetProductsQuery, useGetSingleProductQuery, useGetFiltersQuery, useGetUserQuery, useCreateCartItemMutation, useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation, useLoginMutation, useRegisterMutation } = apiSlice;

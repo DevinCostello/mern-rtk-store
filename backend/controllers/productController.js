@@ -10,9 +10,11 @@ const Product = require('../models/productModel');
 const getProducts = asyncHandler(async (req, res) => {
 
     const reqQuery = { ...req.query }
+    console.log(reqQuery);
+    
     //convert query into json to add dollar sign
     let queryStr = JSON.stringify(reqQuery)
-
+    console.log(queryStr);
     queryStr = queryStr.replace(
         /\b(gt|gte|lt|lte|in)\b/g,
         (match) => `$${match}`
@@ -22,8 +24,6 @@ const getProducts = asyncHandler(async (req, res) => {
     const page = parseInt(req.query.page)
     const limit = parseInt(req.query.limit)
     const sort = parseInt(req.query.sort)
-
-    const count = await Product.countDocuments();
 
     //parse back from JSON to use in .find()
 

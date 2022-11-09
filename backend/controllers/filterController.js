@@ -9,3 +9,5 @@ const getFilters = asyncHandler(async (req, res) => {
 const filters = await Filter.find()
 res.status(200).json(filters)
 })
+
+module.exports = { getFilters }
