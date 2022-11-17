@@ -1,9 +1,11 @@
 import React, {useEffect} from "react";
 import styles from "../styles/Cart.module.scss";
+import CartItem from "../components/CartItem";
+import {FaShoppingCart} from 'react-icons/fa'
+
 import { useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation } from "../features/api/apiSlice";
 import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
-import CartItem from "../components/CartItem";
 
 function Cart() {
   const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
@@ -14,6 +16,8 @@ function Cart() {
   const dispatch = useDispatch();
 
 
+
+  //combine
 useEffect(() =>{
 
   if (isSuccess) {
@@ -27,7 +31,7 @@ useEffect(() => {
 
 
   return (
-    <div className={styles.container}>
+    <main className={styles.container}>
       {isLoading ? (
         <p>Loading...</p>
       ) : (
@@ -40,27 +44,34 @@ useEffect(() => {
 
 
 
-
-          <div className={styles.summary_wrapper}>
+            {cart.length === 0 ? 
+            <span className={styles.empty_cart}> 
+            <FaShoppingCart size={144} />
+            <h1>Cart is Empty!</h1>
+            </span> :
+          <main className={styles.summary_wrapper}>
             <h1>Summary</h1>
-            <div className={styles.summary}>
-              <div className={styles.summary_right}>
+            <section className={styles.summary}>
+              <aside className={styles.summary_right}>
                 <h3>Item(s):</h3>
                 <h3>Tax:</h3>
                 <h3>Delivery:</h3>
                 <h2>Total:</h2>
-              </div>
-              <div className={styles.summary_left}>
+              </aside>
+
+              <aside className={styles.summary_left}>
                 <h3>${SumData.ProductCost}</h3>
                 <h3>${SumData.Tax}</h3>
                 <h3>${SumData.Delivery}</h3>
                 <h2>${SumData.TotalCost}</h2>
-              </div>
-            </div>
-          </div>
+              </aside>
+
+            </section>
+          </main>
+          }
         </>
       )}
-    </div>
+    </main>
   );
 }
 

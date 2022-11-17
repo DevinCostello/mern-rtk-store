@@ -4,10 +4,11 @@ import { FaShoppingCart } from 'react-icons/fa'
 import { useSelector } from "react-redux";
 import styles from "../styles/Header.module.scss";
 
-function Header({user}) {
-  const navigate = useNavigate()
-  const userStorage = localStorage.getItem('user')
+function Header({ user }) {
 
+  const navigate = useNavigate()
+
+  // const user = useSelector((state) => state.user.user)
 
   return (
     <>

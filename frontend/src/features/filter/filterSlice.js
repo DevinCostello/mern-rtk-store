@@ -41,10 +41,11 @@ const filterSlice = createSlice({
             }
             state.page = 1
         },
+
         setPrice: (state, { payload }) => {
-        if(state['price[gte]'] !== payload.price.gte && state['price[lte]']  !== payload.price.lte) {
-            state['price[gte]'] = payload.price.gte
-            state['price[lte]'] = payload.price.lte
+        if(state['price[gte]'] !== payload.filter.gte && state['price[lte]']  !== payload.filter.lte) {
+            state['price[gte]'] = payload.filter.gte
+            state['price[lte]'] = payload.filter.lte
         } else {
             state['price[gte]'] = null
             state['price[lte]'] = null
@@ -54,6 +55,7 @@ const filterSlice = createSlice({
             
 
         },
+
         setSize: (state, action) => {
             const size = action.payload
             if(state[`size.${size}`] === true) { state[`size.${size}`] = false  } 

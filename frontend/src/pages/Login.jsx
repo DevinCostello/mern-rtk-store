@@ -2,8 +2,6 @@ import { useState } from 'react'
 import styles from '../styles/Login.module.scss'
 import { useNavigate } from 'react-router-dom'
 import { FaUser, FaLock } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
-import { setEmail, setPassword } from '../features/user/userSlice'
 import { useLoginMutation } from '../features/api/apiSlice'
 
 
@@ -31,7 +29,7 @@ const Login = () => {
             const result = await Login({ ...formData })
             if (result.data) {
                 localStorage.setItem('token', result.data.token)                
-                localStorage.setItem('user', result.data._id)
+                localStorage.setItem('user', JSON.stringify(result.data))
                 navigate('/')
             }
         } catch (err) {

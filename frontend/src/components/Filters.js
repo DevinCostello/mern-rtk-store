@@ -14,10 +14,11 @@ const Filters = () => {
         <>
             <main className={styles.wrapper}>
 
-                {data && data.map((filter, index) => <>
-                    <h3>{filter.name}</h3>
-                    <FilterGroup key={index} data={filter} />   
-                    </>
+                {data && data.map((filter, index) => 
+                    <div key={index}>
+                        <h3>{filter.name}</h3>
+                        <FilterGroup key={index} data={filter} />   
+                    </div>
                 )}
 
             </main>

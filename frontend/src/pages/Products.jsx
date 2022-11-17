@@ -3,46 +3,43 @@ import Pagination from '../components/Pagination'
 import Filters from '../components/Filters';
 
 import { useSelector } from 'react-redux'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useGetProductsQuery } from '../features/api/apiSlice'
 
 export default function Products() {
 
-  // Not sure if needed, other than matching frontend route to API route
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const page = searchParams.get('page')
-  const limit = searchParams.get('limit')
-
-  
-   const mockFilters =  {
-      category: null,
-      size: {
-        small: false,
-        medium: false,
-        large: false
-      },
-      price: {
-        lte: null,
-        gte: null
-      },
-      limit: 12,
-      page: 1,
-      sort: null
-    }
-  
   const queryObj = useSelector((state) => state.filter)
 
-  //convert in array                                  CONVERTING REDUX STORE OBJECT INTO A USEABLE QUERY STRING
-  const queryEntries = Object.entries(queryObj)
-  //filter null values
-  const queryFilter = queryEntries.filter((val) => val[1] !== null)
-  //convert back into object
-  const queryFinal = Object.fromEntries(queryFilter)
-  //convert object into query string
-  const queryStr = Object.keys(queryFinal).map(key => key + '=' + queryFinal[key]).join('&');
 
-  const { data, isLoading, isSuccess, error } = useGetProductsQuery('?' + queryStr)
+  const mockFilters =  {
+    category: null,
+    size: {
+      small: false,
+      medium: false,
+      large: false
+    },
+    price: {
+      lte: null,
+      gte: null
+    },
+    limit: 12,
+    page: 1,
+    sort: null
+  }
+
+  let params = new URLSearchParams(queryObj);
+  let keysForDel = [];
+  params.forEach((value, key) => {
+    if (value === "null" || value === '' || value === "undefined") {
+      keysForDel.push(key);
+    }
+  });
+  
+  keysForDel.forEach(key => {
+    params.delete(key);
+  });
+
+  const { data, isLoading, isSuccess, error } = useGetProductsQuery( '?' + params.toString())
 
 
   return (<>
@@ -53,30 +50,35 @@ export default function Products() {
       <Filters />
 
       {isLoading ? <p>Loading...</p> :
-        <div className={styles.grid_container}>
-          <div className={styles.grid}>
+        <main className={styles.grid_container}>
+          <section className={styles.grid}>
             {data.products.map((product) =>
 
               <Link key={product._id} to={`${product._id}`}>
-                <div className={styles.grid_item} key={product._id}>
+
+                <section className={styles.grid_item} key={product._id}>
+                  {/* <img src="https://via.placeholder.com/200" alt="" /> */}
                   <h2>{product.name}</h2>
-                  <h3>{product.category}</h3>
-                  <h4>Price: ${product.price}.99</h4>
-                  <div className={styles.colors}>
-                    Colors: {product.color.map((color, index) =>
-                      <button className={styles.box} key={index}
-                        style={{ backgroundColor: `${color}` }}></button>
-                    )}
-                  </div>
-                </div>
-              </Link>
+                  <span className={styles.product_info}>
+                    <h3>{product.category}</h3>
+                    <h3>Price: ${product.price}.99</h3>
+                  <span className={styles.colors}>
+                      Colors: {product.color.map((color, index) =>
+                        <div className={styles.box} key={index}
+                          style={{ backgroundColor: `${color}` }}></div>
+                      )}
+                    </span>
+                  </span>
+                </section>
+                
+              </Link> 
 
             )}
-          </div>
+          </section>
 
           <Pagination totalProducts={data.totalProducts.length} />
 
-        </div>
+        </main>
       }
 
 

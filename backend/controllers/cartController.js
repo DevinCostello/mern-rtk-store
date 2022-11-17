@@ -30,7 +30,12 @@ const createCartItem =  asyncHandler(async (req, res) => {
     
     if(req.body.color === null || req.body.size === null ) {
         res.status(400)
-        throw new Error('Please Select all fields')
+        throw new Error('Please select all fields')
+    }
+
+    if(Number.isInteger(req.body.quantity) === false || req.body.quantity < 1 || req.body.quantity === null) {
+        res.status(400)
+        throw new Error ('Please input a valid quantity')
     }
 
     const item = await Cart.create({

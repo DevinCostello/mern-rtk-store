@@ -13,9 +13,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     padding: 10px 15px;
-    border: 1px solid lightgrey;
     margin-bottom: 10px;
+
+    border: 1px solid red;
     
     button {
         margin-bottom: 0.5rem;

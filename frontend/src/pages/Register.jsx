@@ -27,8 +27,9 @@ const Register = () => {
     try {
       const result = await Register({ ...formData })
       if (result.data) {
+        console.log(result.data)
         localStorage.setItem('token', result.data.token)
-        localStorage.setItem('user', result.data.user)
+        localStorage.setItem('user', JSON.stringify(result.data))
         navigate('/')
       }
     } catch (err) {

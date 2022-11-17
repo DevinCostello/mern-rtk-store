@@ -20,7 +20,7 @@ export const apiSlice = createApi({
     getProducts: builder.query({
       query: (queryStr) => `/products${queryStr}`,
       providesTags: [{ type: "Product", id: "LIST" }]
-
+      
     }),
 
     getSingleProduct: builder.query({
@@ -66,6 +66,20 @@ export const apiSlice = createApi({
       invalidatesTags: [{ type: "Cart", id: "LIST" }]
 
     }),
+
+    // Logout: builder.mutation({
+    //   query: ({ ...user }) => {
+    //     return {
+    //       url: '/users/login',
+    //       method: "POST",
+    //       body: { ...user },
+    //     };
+    //   },
+    //   invalidatesTags: ["Cart","User"]
+
+    // }),
+
+   
 
 
     //CRUD Mutations

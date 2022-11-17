@@ -1,7 +1,8 @@
+import { useState } from 'react'
 import styles from "../styles/Details.module.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
-import {setFixedVariables, setColor, setQuantity, setSize, clearCart } from "../features/product/productSlice";
+import { setFixedVariables, setColor, setQuantity, setSize, clearCart } from "../features/product/productSlice";
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
 import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
 
@@ -15,60 +16,61 @@ const Details = () => {
 
   const [createCartItem, result] = useCreateCartItemMutation();
   const [UpdateCartItem] = useUpdateCartItemMutation();
+  const [input, setInput] = useState(0)
 
-//state object for creating a new item to cart
+  //state object for creating a new item to cart
   const CreateOptions = useSelector((state) => state.product.CreateOptions);
-//state object for updating an existing cart item's quantity from the details page
+  const CreateQuantity = useSelector((state) => state.product.CreateOptions.quantity);
+  //state object for updating an existing cart item's quantity from the details page
   const UpdateOptions = useSelector((state) => state.cart.UpdateOptions)
   const CartDuplicate = useSelector((state) => state.cart.CartDuplicate)
 
   if (isSuccess) {
-    dispatch(setFixedVariables({name: product.name, price: product.price, product_id: product.product_id, category: product.category}))
+    dispatch(setFixedVariables({ name: product.name, price: product.price, product_id: product.product_id, category: product.category }))
   }
 
 
   //Duplicate item is selected logic
   if (isCartSuccusss) {
 
-    const CheckDuplicate = cart.filter((item) => item.size === CreateOptions.size && item.color === CreateOptions.color && item.product_id === CreateOptions.product_id)
+    //filter cart array for items that match the current size + color selections 
+    const CheckDuplicate = cart.filter((item) => item.size === CreateOptions.size 
+    && item.color === CreateOptions.color 
+    && item.product_id === CreateOptions.product_id)
 
-
+    //set id for PUT request if duplicate item is found in cart
     if (CheckDuplicate.length > 0) {
       dispatch(setId(CheckDuplicate[0]._id));
       dispatch(setCartDuplicate(CheckDuplicate[0]))
     } else {
-      //reset vars if no duplicate
+      //reset variables to null if duplicate is de-selected             **CAN BE COMBINED INTO 1 REDUCER**
       dispatch(setId(null));
       dispatch(setCartDuplicate(null))
       dispatch(setCartQuantity(null))
     }
 
-    //if quantity is already set
+    //if quantity in UI was set BEFORE duplicate was set with matching selections of size + color, 
+    //set quantity for PUT request to duplicate quantity + current selection
     if (CheckDuplicate.length > 0 && CreateOptions.quantity !== null) {
       dispatch(setCartQuantity(CheckDuplicate[0].quantity + CreateOptions.quantity))
     }
+
   }
 
   const handleSubmit = () => {
     if (CartDuplicate) {
       UpdateCartItem(UpdateOptions)
-      alert("Cart item updated")
       dispatch(clearCart())
-      navigate(0)
     } else {
       createCartItem({ ...CreateOptions })
-      alert("New item added to cart")
       dispatch(clearCart())
-      navigate(0)
     }
   }
 
   //if duplicate is set but quantity is not yet set
   const handleUpdate = (e) => {
-
     //set update quantity to the cart item's quantity plus selected quantity from UI
     dispatch(setCartQuantity(CartDuplicate.quantity + parseInt(e.target.value)))
-
     //set create options quantity also in case duplicate is de-selected
     dispatch(setQuantity(parseInt(e.target.value)))
   }
@@ -110,25 +112,13 @@ const Details = () => {
 
           <section className={styles.cart}>
             <p>Choose an Amount</p>
-        
-            <select onChange={(e) => {
-              CartDuplicate ? handleUpdate(e) : 
-                dispatch(setQuantity(parseInt(e.target.value)))
-              //just set create quantity if no duplicate item exists in cart
-            }}>
-              <option value="">...</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
+            <input type="number" value={CreateQuantity ? CreateQuantity : input} onChange={(e) => { CartDuplicate ? handleUpdate(e) : dispatch(setQuantity(parseInt(e.target.value))) }} />
 
             <button onClick={handleSubmit}>Add To Cart</button>
 
             {result.status === "rejected" && <p className={styles.error}>{result.error.data.message}</p>}
           </section>
-          
+
         </main>
       )}
     </>
