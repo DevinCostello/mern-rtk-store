@@ -9,30 +9,21 @@ const dispatch = useDispatch()
 const query = useSelector((state) => state.filter)
 
 
-
-    if (data.types.display === "button" && data.types.logic === "single") {
+    if (data.type === "single") {
         return (
             <section className={styles.filter_group}>
+
                 {data.filters.map((filter, index) =>
-                    <button onClick={() => dispatch(setCategory(filter))}key={index}>{filter}</button>
+                <div key={index}>
+                    <input type="checkbox" onClick={() => {data.name === "tshirt" ? alert("wahoo!") : alert("WRONG!")}} />
+                    <label>{filter}</label>
+                </div>
                 )}
+
             </section>
         )
 
-    } else if (data.types.display === "check" && data.types.logic === "single") {
-        return (
-            <section className={styles.filter_group}>
-                {data.filters.map((filter, index) =>
-                    <div key={index}>
-                        <label>{filter}</label>
-                        <input type="checkbox" 
-                        onClick={() => dispatch(setSize(filter))}
-                        />
-                    </div>
-                )}
-            </section>
-        )
-    } else if (data.types.display === "button" && data.types.logic === "range") {
+    }  else if (data.type === "range") {
         return (
             <section className={styles.filter_group}>
 
