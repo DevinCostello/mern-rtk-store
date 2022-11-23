@@ -1,59 +1,77 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "../styles/Cart.module.scss";
-import { useQuery } from "react-query";
+import CartItem from "../components/CartItem";
+import {FaShoppingCart} from 'react-icons/fa'
+
+import { useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation } from "../features/api/apiSlice";
+import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
-  const getCart = async () => {
-    const res = await fetch("http://localhost:5000/api/cart");
-    return res.json();
-  };
+  const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
+  const [updateCart, { status, isLoading: isUpdating, error: updateError  }] = useUpdateCartItemMutation();
+  const [DeleteItem] = useDeleteCartItemMutation();
+  const CartItems = useSelector((state) => state.cart.CartItems);
+  const SumData = useSelector((state) => state.cart.SummaryData)
+  const dispatch = useDispatch();
 
-  const { data, status } = useQuery("cart", getCart);
+
+
+  //combine
+useEffect(() =>{
+
+  if (isSuccess) {
+    dispatch(setCartItems(cart))
+  } 
+}, [isSuccess, cart])
+
+useEffect(() => {
+  dispatch(calculateTotals())
+},[isSuccess, CartItems])
+
 
   return (
-    <div className={styles.container}>
-      {status === "loading" ? (
+    <main className={styles.container}>
+      {isLoading ? (
         <p>Loading...</p>
       ) : (
         <>
           <div className={styles.cart}>
-            {data.map((item) => (
-              <div className={styles.item}>
-                <div>
-                  <h2>{item.name}</h2>
-                  <h3>{item.category}</h3>
-                  <h4>Color: {item.color}</h4>
-                  <h4>Size: {item.size}</h4>
-                </div>
-                <div className={styles.item_right}>
-                  <h3>Price: ${item.price * item.quantity}</h3>
-                  <input type="text" placeholder={item.quantity} />
-                  <button>Update</button>
-                  <button>Remove</button>
-                </div>
-              </div>
+            {cart.map((item, index) => (
+             <CartItem key={index} item={item} error={updateError} />
             ))}
           </div>
-          <div className={styles.summary_wrapper}>
+
+
+
+            {cart.length === 0 ? 
+            <span className={styles.empty_cart}> 
+            <FaShoppingCart size={144} />
+            <h1>Cart is Empty!</h1>
+            </span> :
+          <main className={styles.summary_wrapper}>
             <h1>Summary</h1>
-            <div className={styles.summary}>
-              <div className={styles.summary_right}>
+            <section className={styles.summary}>
+              <aside className={styles.summary_right}>
                 <h3>Item(s):</h3>
                 <h3>Tax:</h3>
                 <h3>Delivery:</h3>
                 <h2>Total:</h2>
-              </div>
-              <div className={styles.summary_left}>
-                <h3>$</h3>
-                <h3>$</h3>
-                <h3>$9.99</h3>
-                <h2>$</h2>
-              </div>
-            </div>
-          </div>
+              </aside>
+
+              <aside className={styles.summary_left}>
+                <h3>${SumData.ProductCost}</h3>
+                <h3>${SumData.Tax}</h3>
+                <h3>${SumData.Delivery}</h3>
+                <h2>${SumData.TotalCost}</h2>
+              </aside>
+
+            </section>
+          </main>
+          }
         </>
       )}
-    </div>
+    </main>
   );
 }
 

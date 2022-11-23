@@ -1,2 +1,5 @@
 node_modules
 .env
+todo.txt
+create&update.drawio
+frontend/src/filters.json

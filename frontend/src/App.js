@@ -1,8 +1,7 @@
-import { QueryClient, QueryClientProvider } from "react-query";
 import {
   BrowserRouter as Router,
   Route,
-  Routes,
+  Routes
 } from "react-router-dom";
 
 //Components
@@ -10,25 +9,41 @@ import Header from "./components/Header";
 
 //Pages
 import Home from "./pages/Home";
+import Login from './pages/Login'
 import Products from "./pages/Products";
+import Details from "./pages/Details";
 import Cart from "./pages/Cart";
+import Register from "./pages/Register";
 
-const queryClient = new QueryClient();
+import SharedProductLayout from "./pages/SharedProductLayout";
+
+import { useGetUserQuery } from './features/api/apiSlice'
+
 
 function App() {
+
+  const {data: user, isLoading, isSuccess, error} = useGetUserQuery()
+
+
   return (
-    <QueryClientProvider client={queryClient}>
       <Router>
-      <Header />
+      <Header user={user} />
         <Routes>
           <>
             <Route path="/" element={<Home />} />
-            <Route path="/products" element={<Products />} />
+            <Route path="/login" element={<Login />}/>
+            <Route path="/register" element={<Register />} />
+            <Route path="*" element={<div>Error: 404</div>}/>            
+
+            <Route path="/products" element={<SharedProductLayout />} >
+              <Route index element={<Products />} />
+              <Route path=":id" element={<Details />} />
+            </Route>
+
             <Route path="/cart" element={<Cart />} />
           </>
         </Routes>
       </Router>
-    </QueryClientProvider>
   );
 }
 

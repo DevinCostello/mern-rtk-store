@@ -1,0 +1,51 @@
+
+.wrapper {
+    width: 40vw;
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    // border: 1px solid red;
+
+}
+
+.colors {
+    display: flex;
+    align-items: center;
+}
+
+.box {
+    width: 25px;
+    height: 25px;
+    // border: 1px solid black;
+    margin: 0 3px;
+}
+
+.box_selected {
+    width: 25px;
+    height: 25px;
+    border: 2px solid black;
+    //increase brightness of color slightly?
+    margin: 0 3px;
+}
+
+.size {
+    background-color: default
+}
+
+.size_selected {
+    background-color: grey;
+}
+
+.cart {
+    display: flex;
+    flex-direction: column;
+    width: 100px;
+}
+
+.error {
+    color: red;
+}
