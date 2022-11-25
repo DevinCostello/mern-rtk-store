@@ -12,10 +12,10 @@ const query = useSelector((state) => state.filter)
     if (data.type === "single") {
         return (
             <section className={styles.filter_group}>
-
+                <h3>{data.name}</h3>
                 {data.filters.map((filter, index) =>
                 <div key={index}>
-                    <input type="checkbox" onClick={() => {data.name === "tshirt" ? alert("wahoo!") : alert("WRONG!")}} />
+                    <input type="checkbox" onClick={() =>""} />
                     <label>{filter}</label>
                 </div>
                 )}

@@ -1,5 +1,6 @@
 const asyncHandler = require('express-async-handler');
-const queryString = require('query-string');
+const queryString = require('query-string')
+const qs = require('qs')
 const Product = require('../models/productModel');
 
 
@@ -11,7 +12,7 @@ const getProducts = asyncHandler(async (req, res) => {
 
     const reqQuery = { ...req.query }
 
-    console.log(reqQuery);
+    // console.log(reqQuery);
 
     //convert query into json to add dollar sign
     let queryStr = JSON.stringify(reqQuery)
@@ -19,7 +20,8 @@ const getProducts = asyncHandler(async (req, res) => {
         /\b(gt|gte|lt|lte|in)\b/g,
         (match) => `$${match}`
     );
-
+    
+    // console.log(queryStr)
 
     //pagination, need parseInt?
     const page = parseInt(req.query.page)

@@ -1,3 +1,5 @@
+import qs from 'qs';
+import queryString from 'query-string';
 import styles from '../styles/Products.module.scss'
 import Pagination from '../components/Pagination'
 import Filters from '../components/Filters';
@@ -9,37 +11,8 @@ import { useGetProductsQuery } from '../features/api/apiSlice'
 export default function Products() {
 
   const queryObj = useSelector((state) => state.filter)
-
-
-  const mockFilters =  {
-    category: null,
-    size: {
-      small: false,
-      medium: false,
-      large: false
-    },
-    price: {
-      lte: null,
-      gte: null
-    },
-    limit: 12,
-    page: 1,
-    sort: null
-  }
-
-  let params = new URLSearchParams(queryObj);
-  let keysForDel = [];
-  params.forEach((value, key) => {
-    if (value === "null" || value === '' || value === "undefined") {
-      keysForDel.push(key);
-    }
-  });
-  
-  keysForDel.forEach(key => {
-    params.delete(key);
-  });
-
-  const { data, isLoading, isSuccess, error } = useGetProductsQuery( '?' + params.toString())
+  const queryStr = qs.stringify(queryObj, { skipNulls: true })
+  const { data, isLoading, isSuccess, error } = useGetProductsQuery('?' + queryStr)
 
 
   return (<>
@@ -62,7 +35,7 @@ export default function Products() {
                   <span className={styles.product_info}>
                     <h3>{product.category}</h3>
                     <h3>Price: ${product.price}.99</h3>
-                  <span className={styles.colors}>
+                    <span className={styles.colors}>
                       Colors: {product.color.map((color, index) =>
                         <div className={styles.box} key={index}
                           style={{ backgroundColor: `${color}` }}></div>
@@ -70,8 +43,8 @@ export default function Products() {
                     </span>
                   </span>
                 </section>
-                
-              </Link> 
+
+              </Link>
 
             )}
           </section>

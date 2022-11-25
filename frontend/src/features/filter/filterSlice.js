@@ -2,30 +2,18 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 
-category: null,
-
-// size: {
-//     small: false,
-//     medium: false,
-//     large: false
-// }
-
-// price: {
-//     gte: null,
-//     lte: null
-// }
-
-"size.small": null,
-"size.medium": null,
-"size.large": null,
-
-"price[lte]": null,
-"price[gte]": null,
+category: [],
+price: {
+    gte: null,
+    lte: null
+},
+size: [],
 
 //pagination
 limit: 12,
 page: 1,
 sort: null
+
 }
 
 const filterSlice = createSlice({
@@ -34,21 +22,23 @@ const filterSlice = createSlice({
     reducers: 
     {
         setCategory: (state, action) => {
-            if(state.category === action.payload) {
-                state.category = null
+           
+            if(state.category.includes(action.payload)) {
+                state.category = state.category.filter(val => val !== action.payload)            
             } else {
-            state.category = action.payload
+                state.category.push(action.payload)                
             }
+
             state.page = 1
         },
 
         setPrice: (state, { payload }) => {
-        if(state['price[gte]'] !== payload.filter.gte && state['price[lte]']  !== payload.filter.lte) {
-            state['price[gte]'] = payload.filter.gte
-            state['price[lte]'] = payload.filter.lte
+        if(state.price.gte !== payload.filter.gte && state.price.lte  !== payload.filter.lte) {
+            state.price.gte = payload.filter.gte
+            state.price.lte = payload.filter.lte
         } else {
-            state['price[gte]'] = null
-            state['price[lte]'] = null
+            state.price.gte = null
+            state.price.lte = null
         }
 
         state.page = 1
@@ -57,9 +47,11 @@ const filterSlice = createSlice({
         },
 
         setSize: (state, action) => {
-            const size = action.payload
-            if(state[`size.${size}`] === true) { state[`size.${size}`] = false  } 
-            else {  state[`size.${size}`] = true    }
+            if(state.size.includes(action.payload)) {
+                state.size = state.size.filter(val => val !== action.payload)            
+            } else {
+                state.size.push(action.payload)                
+            }
 
             state.page = 1
 

@@ -6,6 +6,8 @@ const productSchema = mongoose.Schema({
         type: String
     },
 
+    //convert to [String] ???
+
     category: {
         type: String
     },
@@ -17,15 +19,7 @@ const productSchema = mongoose.Schema({
     },
 
     size: {
-        small: {
-            type: Boolean
-        },
-        medium: {
-            type: Boolean
-        },
-        large: {
-            type: Boolean
-        }
+        type: String
     }
 
 }, {
