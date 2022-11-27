@@ -12,16 +12,18 @@
 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
     padding: 10px 15px;
     margin-bottom: 10px;
+    border-bottom: 1px solid lightgrey;
+}
 
-    border: 1px solid red;
-    
-    button {
-        margin-bottom: 0.5rem;
-        width: 75px;
+.group_item {
+padding-bottom: 8px 
+}
+
+.select_price {
+    input {
+        width: 50px;
     }
 }
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart, FaUser, FaTshirt } from 'react-icons/fa'
 import { useSelector } from "react-redux";
 import styles from "../styles/Header.module.scss";
 
@@ -13,23 +13,41 @@ function Header({ user }) {
   return (
     <>
       <main className={styles.wrapper}>
-        <ul className={styles.header}>
+        <ul className={styles.nav}>
+          <aside className={styles.navleft}>
           <Link className={styles.link} to="/">
             <li className={styles.item}>
-              <h3>Home</h3>
+              <FaTshirt size={32} />
+              <h3>OnlineStore</h3>
             </li>
           </Link>
+          </aside>
+
+          <section className={styles.navcenter}>
           <Link className={styles.link} to="/products">
             <li className={styles.item}>
               <h3>Products</h3>
             </li>
           </Link>
 
+          <Link className={styles.link} to="/products">
+            <li className={styles.item}>
+              <h3>Products</h3>
+            </li>
+          </Link>
+
+          <Link className={styles.link} to="/products">
+            <li className={styles.item}>
+              <h3>Products</h3>
+            </li>
+          </Link>
+          </section>
+
           {user ? 
-          <section className={styles.loggedin}>
-            <h3>Hello, {user.name}</h3>
+          <section className={styles.loggedin && styles.navright}>
           <Link className={styles.link} to="/cart">
             <li className={styles.item}>
+              <FaUser size={32} />
               <FaShoppingCart size={32} />
             </li>
           </Link>
@@ -43,7 +61,7 @@ function Header({ user }) {
 
           </section> :
 
-            <>
+            <aside className={styles.navright}>
               <Link className={styles.link} to="/login">
                 <li className={styles.item}>
                   <h3>Login</h3>
@@ -56,7 +74,7 @@ function Header({ user }) {
                 </li>
               </Link>
 
-            </>
+            </aside>
           }
 
         </ul>

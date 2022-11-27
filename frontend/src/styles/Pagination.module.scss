@@ -1,13 +1,24 @@
 .wrapper {
-margin-top: 25px;
+margin-top: 20px;
+margin-bottom: 20px;
 }
 
 .page_list {
 padding: 10px;
-border: 1px solid lightgrey;
 }
 
 .pagebtn {
-margin-right: 5px;
-padding: 5px 10px;
+margin-right: 6px;
+padding: 8px 12px;
+border-radius: none;
+border: 1px solid lightgrey;
+background-color: white;
 }
+
+.pagebtn_active {
+margin-right: 6px;
+padding: 8px 12px;
+border-radius: none;
+background-color: green;
+color: white;
+ }

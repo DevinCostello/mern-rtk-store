@@ -7,21 +7,26 @@
 // margin: 0 0 2rem;
 }
 
-.header {
+.nav {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     list-style: none;
     border-bottom: 1px solid lightgrey;
     margin: 0 auto;
     padding: 0.5rem 0 0.5rem;
     // border: 1px solid red;
 
+    .navcenter {
+        display: flex;
+        
+    }
+
     button {
         height: 40px;
         width: 100px;
         font-weight: 800;
-        background-color: aqua;
+        background-color: lightgreen;
         border-radius: 25px;
     }
 
@@ -32,11 +37,19 @@
 }
 
 .item{
+    display: flex;
+    align-items: center;
     color: black;
+    // border: 1px solid red;
 }
 
 .selected {
     background-color: lightgrey;
+}
+
+.navright {
+    display: flex;
+    border: 1px solid red;
 }
 
 .loggedin {
@@ -44,7 +57,8 @@
     align-items: center;
     justify-content: space-evenly;
     width: 200px;
-    // border: 1px solid red;
+
+    border: 1px solid red;
 }
 
 

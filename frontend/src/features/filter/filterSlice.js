@@ -10,7 +10,7 @@ price: {
 size: [],
 
 //pagination
-limit: 12,
+limit: 9,
 page: 1,
 sort: null
 

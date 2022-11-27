@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { AiOutlineDoubleLeft, AiOutlineDoubleRight, AiOutlineLeft, AiOutlineRight} from 'react-icons/ai'
 import { setPage } from '../features/filter/filterSlice'
 import styles from '../styles/Pagination.module.scss'
 
@@ -21,7 +22,10 @@ const Pagination = ({totalProducts}) => {
     {PageNumbers.length > 1 &&
         <main className={styles.wrapper}>
             <section className={styles.page_list}>
-                <button onClick={() => currentPage === 1 ? dispatch(setPage(1)) : dispatch(setPage(currentPage - 1))} className={styles.pagebtn}> Prev </button>
+                
+            <button className={styles.pagebtn} onClick={() => dispatch(setPage(1))}><AiOutlineDoubleLeft /></button>
+            
+            <button onClick={() => currentPage === 1 ? dispatch(setPage(1)) : dispatch(setPage(currentPage - 1))} className={styles.pagebtn}> <AiOutlineLeft /> </button>
             
             {PageNumbers.length >= 5 && pressed === false ? 
             <>
@@ -31,11 +35,12 @@ const Pagination = ({totalProducts}) => {
             </>
             :
             PageNumbers.map((number) =>
-                <button  onClick={() => dispatch(setPage(number))} key={number} className={styles.pagebtn}>{number}</button>
+                <button  onClick={() => dispatch(setPage(number))} key={number} className={currentPage === number ? styles.pagebtn_active : styles.pagebtn}>{number}</button>
             )}
                 
+            <button onClick={() => currentPage === totalPages ? dispatch(setPage(totalPages)) : dispatch(setPage(currentPage + 1))} className={styles.pagebtn}> <AiOutlineRight /> </button>
 
-                <button onClick={() => currentPage === totalPages ? dispatch(setPage(totalPages)) : dispatch(setPage(currentPage + 1))} className={styles.pagebtn}> Next </button>
+            <button className={styles.pagebtn} onClick={() => dispatch(setPage(totalPages))}><AiOutlineDoubleRight /></button>
             </section>
         </main>
     }
