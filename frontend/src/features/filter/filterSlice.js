@@ -10,9 +10,9 @@ price: {
 size: [],
 
 //pagination
-limit: 9,
+limit: 12,
 page: 1,
-sort: null
+
 
 }
 
@@ -57,6 +57,7 @@ const filterSlice = createSlice({
 
 
         },
+        
         //pagination
         setPage: (state, action) => {
             state.page = action.payload
@@ -68,5 +69,5 @@ const filterSlice = createSlice({
     }
 })
 
-export const { setCategory, setPrice, setSize, setPage } = filterSlice.actions
+export const { setCategory, setPrice, setSize, setPage, setLimit } = filterSlice.actions
 export default filterSlice.reducer

@@ -26,7 +26,6 @@ const getProducts = asyncHandler(async (req, res) => {
     //pagination, need parseInt?
     const page = parseInt(req.query.page)
     const limit = parseInt(req.query.limit)
-    const sort = parseInt(req.query.sort)
 
     //parse back from JSON to use in .find()
 
@@ -34,7 +33,7 @@ const getProducts = asyncHandler(async (req, res) => {
     const products = await Product.find(JSON.parse(queryStr))
         .limit(limit)
         .skip((page - 1) * limit)
-        .sort(sort)
+        .sort({price: 1})
     res.status(200).json({ products, totalProducts })
 })
 

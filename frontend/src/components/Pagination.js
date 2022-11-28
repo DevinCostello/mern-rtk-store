@@ -30,7 +30,7 @@ const Pagination = ({totalProducts}) => {
             {PageNumbers.length >= 5 && pressed === false ? 
             <>
             {[1,2,3,4,5].map((number) => 
-            <button key={number} className={styles.pagebtn} onClick={() => dispatch(setPage(number))}>{number}</button>) } 
+            <button key={number} className={ currentPage === number ? styles.pagebtn_active : styles.pagebtn} onClick={() => dispatch(setPage(number))}>{number}</button>) } 
             <button className={styles.pagebtn} onClick={() => setPressed(true)}>...</button>
             </>
             :

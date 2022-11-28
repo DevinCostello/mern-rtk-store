@@ -9,13 +9,34 @@ const FilterGroup = ({ data }) => {
     const query = useSelector((state) => state.filter)
 
 
+    let reducers = new Map()
+    const filters = [setCategory, setSize, setPrice].forEach((fn) => {
+        reducers.set("" + fn, fn)
+    })
+
+    const test = (reducers) => {
+        Object.keys(query).forEach(key => {
+            key = `set${key[0].toUpperCase() + key.substring(1)}`
+
+            let setter = reducers.get(`filter/${key}`)     
+            
+            console.log(key, setter)
+            }
+        )
+    }
+
+    console.log(test(reducers))
+
     if (data.type === "single") {
+
         return (
             <section className={styles.filter_group}>
                 <h3>{data.name}</h3>
                 {data.filters.map((filter, index) =>
                     <div className={styles.group_item} key={index}>
-                        <input type="checkbox" onClick={() => {}} />
+                        <input type="checkbox" onClick={() => { }
+
+                        } />
                         <label>{filter}</label>
                     </div>
                 )}
@@ -24,6 +45,7 @@ const FilterGroup = ({ data }) => {
         )
 
     } else if (data.type === "range") {
+
         return (
             <section className={styles.filter_group}>
                 <h3>{data.name}</h3>
@@ -41,6 +63,8 @@ const FilterGroup = ({ data }) => {
             </section>
         )
     }
+
+
 
 }
 
