@@ -21,12 +21,6 @@
 padding-bottom: 8px 
 }
 
-.select_price {
-    input {
-        width: 50px;
-    }
-}
-
 
 .size_container {
     display: flex;
@@ -34,9 +28,12 @@ padding-bottom: 8px
 }
 
 .filterbtn {
-background-color: lightgrey;
+padding-bottom: 8px 
+
 }
 
 .filterbtn_active {
-    background-color: grey;
+    color: grey;
+    padding-bottom: 8px 
+
 }

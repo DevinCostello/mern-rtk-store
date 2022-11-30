@@ -7,6 +7,7 @@ const FilterGroup = ({ data }) => {
 
     const dispatch = useDispatch()
     const query = useSelector((state) => state.filter)
+    const price = useSelector((state) => state.filter.price)
 
 
     let reducers = new Map()
@@ -14,29 +15,18 @@ const FilterGroup = ({ data }) => {
         reducers.set("" + fn, fn)
     })
 
-    const test = (reducers) => {
-        Object.keys(query).forEach(key => {
-            key = `set${key[0].toUpperCase() + key.substring(1)}`
-
-            let setter = reducers.get(`filter/${key}`)     
-            
-            console.log(key, setter)
-            }
-        )
-    }
-
-    console.log(test(reducers))
-
+   
     if (data.type === "single") {
+
+        let setter = reducers.get(`filter/set${data.name[0].toUpperCase() + data.name.substring(1)}`)
+
 
         return (
             <section className={styles.filter_group}>
                 <h3>{data.name}</h3>
                 {data.filters.map((filter, index) =>
                     <div className={styles.group_item} key={index}>
-                        <input type="checkbox" onClick={() => { }
-
-                        } />
+                        <input type="checkbox" onClick={() => dispatch(setter(filter))} />
                         <label>{filter}</label>
                     </div>
                 )}
@@ -46,20 +36,17 @@ const FilterGroup = ({ data }) => {
 
     } else if (data.type === "range") {
 
+        let setter = reducers.get(`filter/set${data.name[0].toUpperCase() + data.name.substring(1)}`)
+
         return (
             <section className={styles.filter_group}>
                 <h3>{data.name}</h3>
                 {data.filters.map((filter, index) =>
-                    <div key={index} className={styles.group_item}>
-                        <input type="checkbox" onClick={() => dispatch(setPrice({ filter }))} data-gte={filter.gte} data-lte={filter.lte} />
-                        <label>{filter.text}</label>
+                    <div key={index} className={ price.lte === filter.lte ? styles.filterbtn_active : styles.filterbtn}>
+                        <button type="checkbox" onClick={() => dispatch(setter({ filter }))} data-gte={filter.gte} data-lte={filter.lte}>{filter.text}</button> 
                     </div>
                 )}
-                {/* <div className={styles.select_price}>
-                    <input type="checkbox" />
-                    <input type="text" placeholder="$" /> to
-                    <input type="text" placeholder="$" />
-                </div> */}
+                
             </section>
         )
     }

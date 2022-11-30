@@ -9,6 +9,7 @@ price: {
 },
 size: [],
 
+
 //pagination
 limit: 12,
 page: 1,
@@ -33,13 +34,14 @@ const filterSlice = createSlice({
         },
 
         setPrice: (state, { payload }) => {
-        if(state.price.gte !== payload.filter.gte && state.price.lte  !== payload.filter.lte) {
-            state.price.gte = payload.filter.gte
-            state.price.lte = payload.filter.lte
-        } else {
-            state.price.gte = null
-            state.price.lte = null
-        }
+
+            if(state.price.gte !== payload.filter.gte && state.price.lte  !== payload.filter.lte) {
+                state.price.gte = payload.filter.gte
+                state.price.lte = payload.filter.lte
+            } else {
+                state.price.gte = null
+                state.price.lte = null
+            }
 
         state.page = 1
             
@@ -47,6 +49,7 @@ const filterSlice = createSlice({
         },
 
         setSize: (state, action) => {
+
             if(state.size.includes(action.payload)) {
                 state.size = state.size.filter(val => val !== action.payload)            
             } else {
