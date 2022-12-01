@@ -25,6 +25,9 @@ export default function Products() {
       {isLoading ? <p>Loading...</p> :
         <main className={styles.grid_container}>
           <section className={styles.grid}>
+          {/* for testing */}
+            {/* <h3>{data.totalProducts.length}</h3> */}
+
             {data.products.map((product) =>
 
               <Link key={product._id} to={`${product._id}`}>
