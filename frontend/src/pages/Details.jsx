@@ -34,22 +34,33 @@ const Details = () => {
   if (isCartSuccusss) {
 
     //filter cart array for items that match the current size + color selections 
-    const CheckDuplicate = cart.filter((item) => item.size === CreateOptions.size 
-    && item.color === CreateOptions.color 
-    && item.product_id === CreateOptions.product_id)
+    const CheckDuplicate = cart.filter((item) => item.size === CreateOptions.size
+      && item.color === CreateOptions.color
+      && item.product_id === CreateOptions.product_id)
+
+    const CheckD = (cart) => {
+      const Duplicate = cart.filter((item) => 
+        item.size === CreateOptions.size
+        && item.color === CreateOptions.color
+        && item.product_id === CreateOptions.product_id)
+
+      if (Duplicate.length > 0) { return Duplicate[0] } else { return null }
+    }
+
+    console.log(CheckD(cart));
 
     //set id for PUT request if duplicate item is found in cart
     if (CheckDuplicate.length > 0) {
       dispatch(setId(CheckDuplicate[0]._id));
       dispatch(setCartDuplicate(CheckDuplicate[0]))
     } else {
-      //reset variables to null if duplicate is de-selected             **CAN BE COMBINED INTO 1 REDUCER**
+      //reset variables to null if duplicate is de-selected           
       dispatch(setId(null));
       dispatch(setCartDuplicate(null))
       dispatch(setCartQuantity(null))
     }
 
-    //if quantity in UI was set BEFORE duplicate was set with matching selections of size + color, 
+    //if quantity in UI was set BEFORE duplicate 
     //set quantity for PUT request to duplicate quantity + current selection
     if (CheckDuplicate.length > 0 && CreateOptions.quantity !== null) {
       dispatch(setCartQuantity(CheckDuplicate[0].quantity + CreateOptions.quantity))
