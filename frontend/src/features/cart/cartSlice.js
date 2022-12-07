@@ -17,8 +17,6 @@ const initialState = {
   CartItems: '',
   CartDuplicate: null,
   
-
-
 };
 
 const cartSlice = createSlice({
@@ -41,14 +39,22 @@ const cartSlice = createSlice({
       state.CartItems = action.payload
     },
 
+    ClearUpdateOptions: (state, action) => {
+      //doesnt work, why?
+      state.UpdateOptions = { id: null, quantity: null }
+      state.CartDuplicate = null
+      state.UpdateOptions.quantity = null
+    },
+
     calculateTotals: (state) => {
 
       if (state.CartItems !== "") {
-        const prices = state.CartItems.map((item) => item.price * item.quantity)
         const SumData = state.SummaryData
-
-        SumData.ProductCost = parseInt(prices.reduce((a, b) => a + b, 0).toFixed(2))
-        SumData.Tax = parseInt((SumData.ProductCost * 0.15).toFixed(2))
+        const pricesInCents = state.CartItems.map((item) => (item.price * item.quantity) * 100)
+        console.log(pricesInCents);
+        
+        SumData.ProductCost = parseInt(pricesInCents.reduce((a, b) => a + b, 0))
+        SumData.Tax = parseInt((SumData.ProductCost * 0.15))
         SumData.Delivery = 9.99
         SumData.TotalCost = SumData.ProductCost + SumData.Tax + SumData.Delivery
 
@@ -61,5 +67,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { setId, setCartQuantity, setCartDuplicate, setCartItems, calculateTotals } = cartSlice.actions;
+export const { setId, setCartQuantity, setCartDuplicate, setCartItems, ClearUpdateOptions, calculateTotals } = cartSlice.actions;
 export default cartSlice.reducer;

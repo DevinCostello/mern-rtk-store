@@ -1,5 +1,4 @@
 import qs from 'qs';
-import queryString from 'query-string';
 import styles from '../styles/Products.module.scss'
 import Pagination from '../components/Pagination'
 import Filters from '../components/Filters';
@@ -24,10 +23,11 @@ export default function Products() {
 
       {isLoading ? <p>Loading...</p> :
         <main className={styles.grid_container}>
-          <section className={styles.grid}>
-          {/* for testing */}
-            {/* <h3>{data.totalProducts.length}</h3> */}
 
+        {/* for testing */}
+        <h3>{data.totalProducts.length}</h3>
+
+          <section className={styles.grid}>
             {data.products.map((product) =>
 
               <Link key={product._id} to={`${product._id}`}>
@@ -37,7 +37,7 @@ export default function Products() {
                   <h2>{product.name}</h2>
                   <span className={styles.product_info}>
                     <h3>{product.category}</h3>
-                    <h3>Price: ${product.price}.99</h3>
+                    <h3>Price: ${product.price}</h3>
                     <span className={styles.colors}>
                       Colors: {product.color.map((color, index) =>
                         <div className={styles.box} key={index}

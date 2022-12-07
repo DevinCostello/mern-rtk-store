@@ -5,9 +5,6 @@ const productSchema = mongoose.Schema({
     name: {
         type: String
     },
-
-    //convert to [String] ???
-
     category: {
         type: String
     },
@@ -18,10 +15,7 @@ const productSchema = mongoose.Schema({
         type: Number
     },
 
-    size: {
-        type: String
-    }
-
+    size: [String],
 }, {
     timestamps: true
 })

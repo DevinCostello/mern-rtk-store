@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { setFixedVariables, setColor, setQuantity, setSize, clearCart } from "../features/product/productSlice";
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
-import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
+import { setCartQuantity, setId, ClearUpdateOptions, setCartDuplicate } from "../features/cart/cartSlice";
 
 const Details = () => {
   const dispatch = useDispatch();
@@ -16,6 +16,8 @@ const Details = () => {
 
   const [createCartItem, result] = useCreateCartItemMutation();
   const [UpdateCartItem] = useUpdateCartItemMutation();
+
+  // ???
   const [input, setInput] = useState(0)
 
   //state object for creating a new item to cart
@@ -30,15 +32,10 @@ const Details = () => {
   }
 
 
-  //Duplicate item is selected logic
+  //Check for a duplicate item after cart data is fetched
   if (isCartSuccusss) {
 
-    //filter cart array for items that match the current size + color selections 
-    const CheckDuplicate = cart.filter((item) => item.size === CreateOptions.size
-      && item.color === CreateOptions.color
-      && item.product_id === CreateOptions.product_id)
-
-    const CheckD = (cart) => {
+    const DuplicateExists = (cart) => {
       const Duplicate = cart.filter((item) => 
         item.size === CreateOptions.size
         && item.color === CreateOptions.color
@@ -47,14 +44,12 @@ const Details = () => {
       if (Duplicate.length > 0) { return Duplicate[0] } else { return null }
     }
 
-    console.log(CheckD(cart));
-
-    //set id for PUT request if duplicate item is found in cart
-    if (CheckDuplicate.length > 0) {
-      dispatch(setId(CheckDuplicate[0]._id));
-      dispatch(setCartDuplicate(CheckDuplicate[0]))
+    if(DuplicateExists(cart)) {
+      //set id for PUT request if duplicate item is found in cart
+      dispatch(setCartDuplicate(DuplicateExists(cart)))
+      dispatch(setId(DuplicateExists(cart)._id))
     } else {
-      //reset variables to null if duplicate is de-selected           
+      //reset Cart.UpdateOptions if Duplicate is de-selected  
       dispatch(setId(null));
       dispatch(setCartDuplicate(null))
       dispatch(setCartQuantity(null))
@@ -62,8 +57,8 @@ const Details = () => {
 
     //if quantity in UI was set BEFORE duplicate 
     //set quantity for PUT request to duplicate quantity + current selection
-    if (CheckDuplicate.length > 0 && CreateOptions.quantity !== null) {
-      dispatch(setCartQuantity(CheckDuplicate[0].quantity + CreateOptions.quantity))
+    if (DuplicateExists(cart) !== null && CreateOptions.quantity !== null) {
+      dispatch(setCartQuantity(DuplicateExists(cart).quantity + CreateOptions.quantity))
     }
 
   }
@@ -97,7 +92,7 @@ const Details = () => {
           <section className={styles.details}>
             <h1>{product.name}</h1>
 
-            <h2>${product.price}.99</h2>
+            <h2>${product.price}</h2>
 
             <h3>{product.category}</h3>
           </section>
@@ -113,8 +108,8 @@ const Details = () => {
           </section>
 
           <section className={styles.sizes}>
-            Sizes:
-            {["Small", "Medium", "Large"].map((size) => (
+            Available Sizes:
+            {product.size.map((size) => (
               <button className={CreateOptions.size === size ? styles.size_selected : styles.size} key={size} onClick={() => dispatch(setSize(size))}>
                 {size}
               </button>

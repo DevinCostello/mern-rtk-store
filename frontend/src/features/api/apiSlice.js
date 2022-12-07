@@ -67,21 +67,7 @@ export const apiSlice = createApi({
 
     }),
 
-    // Logout: builder.mutation({
-    //   query: ({ ...user }) => {
-    //     return {
-    //       url: '/users/login',
-    //       method: "POST",
-    //       body: { ...user },
-    //     };
-    //   },
-    //   invalidatesTags: ["Cart","User"]
-
-    // }),
-
-   
-
-
+  
     //CRUD Mutations
 
     createCartItem: builder.mutation({
