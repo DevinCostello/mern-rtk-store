@@ -9,26 +9,20 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
   const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
-  const [updateCart, { status, isLoading: isUpdating, error: updateError  }] = useUpdateCartItemMutation();
-  const [DeleteItem] = useDeleteCartItemMutation();
   const CartItems = useSelector((state) => state.cart.CartItems);
   const SumData = useSelector((state) => state.cart.SummaryData)
   const dispatch = useDispatch();
 
-
-
-  //combine?
 useEffect(() =>{
 
   if (isSuccess) {
     dispatch(setCartItems(cart))
   } 
-}, [isSuccess, cart])
+}, [isSuccess, cart, dispatch])
 
 useEffect(() => {
   dispatch(calculateTotals())
-},[isSuccess, CartItems])
-
+},[isSuccess, CartItems, dispatch])
 
   return (
     <main className={styles.container}>
@@ -38,7 +32,7 @@ useEffect(() => {
         <>
           <div className={styles.cart}>
             {cart.map((item, index) => (
-             <CartItem key={index} item={item} error={updateError} />
+             <CartItem key={index} item={item} />
             ))}
           </div>
 

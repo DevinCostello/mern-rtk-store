@@ -1,4 +1,5 @@
 import React from 'react'
+import currency from 'currency.js'
 import { useGetCartQuery, useUpdateCartItemMutation, useDeleteCartItemMutation } from "../features/api/apiSlice";
 import styles from "../styles/Cart.module.scss";
 
@@ -18,7 +19,7 @@ const CartItem = ({ item }) => {
                 <h3>Size: {item.size}</h3>
             </section>
             <section className={styles.item_right}>
-                <h3>Price: ${item.price * item.quantity}</h3>
+                <h3>Price: ${currency(item.price).multiply(item.quantity).value}</h3>
                 <form onSubmit={e => e.preventDefault()}>
                     <input type="text" placeholder={item.quantity} />
                     <button type="submit" onClick={(e) => updateCart({ id: item._id, quantity: parseInt(e.target.form[0].value) })}>Update</button>

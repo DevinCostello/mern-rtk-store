@@ -9,6 +9,12 @@ price: {
 },
 size: [],
 
+// size: {
+//     Small: null,
+//     Medium: null,
+//     Large: null
+// },
+
 //pagination
 limit: 9,
 page: 1
@@ -54,7 +60,10 @@ const filterSlice = createSlice({
             state.page = 1
         },
 
-        
+        // setSize: (state, action) => {
+        //     size = action.payload
+        //     if()
+        // },
         
         //pagination
         setPage: (state, action) => {

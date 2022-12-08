@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import currency from 'currency.js'
 
 const initialState = {
 
@@ -50,14 +51,13 @@ const cartSlice = createSlice({
 
       if (state.CartItems !== "") {
         const SumData = state.SummaryData
-        const pricesInCents = state.CartItems.map((item) => (item.price * item.quantity) * 100)
-        console.log(pricesInCents);
-        
-        SumData.ProductCost = parseInt(pricesInCents.reduce((a, b) => a + b, 0))
-        SumData.Tax = parseInt((SumData.ProductCost * 0.15))
-        SumData.Delivery = 9.99
-        SumData.TotalCost = SumData.ProductCost + SumData.Tax + SumData.Delivery
 
+        const prices = state.CartItems.map((item) => (currency(item.price).multiply(item.quantity)).value)
+        SumData.ProductCost = prices.reduce((a, b) => currency(a).add(b).value, 0)
+        SumData.Tax = currency(SumData.ProductCost).multiply(0.15).value
+        SumData.Delivery = 9.99
+
+        SumData.TotalCost = currency(SumData.ProductCost).add(SumData.Tax).add(SumData.Delivery).value
       }
     }
 
