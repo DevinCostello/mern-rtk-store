@@ -19,7 +19,7 @@ const getProducts = asyncHandler(async (req, res) => {
         (match) => `$${match}`
     );
     
-    // console.log(queryStr)
+    console.log(queryStr)
 
     //pagination, need parseInt?
     const page = parseInt(req.query.page)

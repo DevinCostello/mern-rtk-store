@@ -1,6 +1,7 @@
 import styles from "../styles/Filters.module.scss"
 import FilterGroup from "./FilterGroup"
 import { useGetFiltersQuery } from "../features/api/apiSlice"
+
 const Filters = () => {
 
     const {data, isLoading, error} = useGetFiltersQuery()

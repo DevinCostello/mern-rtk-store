@@ -1,5 +1,5 @@
 * {
-// background-color: rgba($color: lightblue, $alpha: 0.2)
+    // background-color: rgba($color: lightblue, $alpha: 0.2)
 }
 
 .wrapper {
@@ -18,7 +18,7 @@
 }
 
 .group_item {
-padding-bottom: 8px 
+    padding-bottom: 8px
 }
 
 
@@ -28,12 +28,17 @@ padding-bottom: 8px
 }
 
 .filterbtn {
-padding-bottom: 8px 
-
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    margin-bottom: 5px;
 }
 
 .filterbtn_active {
-    color: grey;
-    padding-bottom: 8px 
+    background-color: rgb(153, 153, 153);
+    padding: 5px 10px;
 
+    border: none;
+    outline: none;
+    margin-bottom: 5px;
 }

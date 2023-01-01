@@ -2,35 +2,34 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
 
-category: [],
-price: {
-    gte: null,
-    lte: null
-},
-size: [],
+    category: [],
+    price: {
+        gte: null,
+        lte: null
+    },
 
-// size: {
-//     Small: null,
-//     Medium: null,
-//     Large: null
-// },
+    // size: [],
 
-//pagination
-limit: 9,
-page: 1
+    size: {
+        in: []
+    },
+
+    //pagination
+    limit: 9,
+    page: 1
 }
 
 const filterSlice = createSlice({
     name: 'filter',
     initialState,
-    reducers: 
+    reducers:
     {
         setCategory: (state, action) => {
-           
-            if(state.category.includes(action.payload)) {
-                state.category = state.category.filter(val => val !== action.payload)            
+
+            if (state.category.includes(action.payload)) {
+                state.category = state.category.filter(val => val !== action.payload)
             } else {
-                state.category.push(action.payload)                
+                state.category.push(action.payload)
             }
 
             state.page = 1
@@ -38,7 +37,7 @@ const filterSlice = createSlice({
 
         setPrice: (state, { payload }) => {
 
-            if(state.price.gte !== payload.filter.gte && state.price.lte  !== payload.filter.lte) {
+            if (state.price.gte !== payload.filter.gte && state.price.lte !== payload.filter.lte) {
                 state.price.gte = payload.filter.gte
                 state.price.lte = payload.filter.lte
             } else {
@@ -46,24 +45,20 @@ const filterSlice = createSlice({
                 state.price.lte = null
             }
 
-        state.page = 1
-            
+            state.page = 1
+
         },
 
         setSize: (state, action) => {
 
-            if(state.size.includes(action.payload)) {
-                state.size = state.size.filter(val => val !== action.payload)            
+            if (state.size.in.includes(action.payload)) {
+                state.size.in = state.size.in.filter(val => val !== action.payload)
             } else {
-                state.size.push(action.payload)                
+                state.size.in.push(action.payload)
             }
             state.page = 1
         },
 
-        // setSize: (state, action) => {
-        //     size = action.payload
-        //     if()
-        // },
         
         //pagination
         setPage: (state, action) => {
@@ -72,9 +67,13 @@ const filterSlice = createSlice({
         setLimit: (state, action) => {
             state.limit = action.payload
         },
-     
+        resetState: () => {
+            return initialState
+           
+        }
+
     }
 })
 
-export const { setCategory, setPrice, setSize, setPage, setLimit } = filterSlice.actions
+export const { setCategory, setPrice, setSize, setPage, setLimit, resetState } = filterSlice.actions
 export default filterSlice.reducer

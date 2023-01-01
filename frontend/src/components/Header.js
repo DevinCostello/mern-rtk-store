@@ -1,21 +1,23 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUser, FaTshirt } from 'react-icons/fa'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { resetState } from "../features/filter/filterSlice";
 import styles from "../styles/Header.module.scss";
 
 function Header({ user }) {
 
   const navigate = useNavigate()
-
-  // const user = useSelector((state) => state.user.user)
+  const dispatch = useDispatch()
 
   return (
     <>
       <main className={styles.wrapper}>
         <ul className={styles.nav}>
           <aside className={styles.navleft}>
-          <Link className={styles.link} to="/">
+          <Link className={styles.link} to="/"
+          onClick={() => dispatch(resetState())}
+          >
             <li className={styles.item}>
               <FaTshirt size={32} />
               <h3>OnlineStore</h3>
@@ -45,7 +47,9 @@ function Header({ user }) {
 
           {user ? 
           <section className={styles.loggedin && styles.navright}>
-          <Link className={styles.link} to="/cart">
+          <Link className={styles.link} to="/cart"
+          onClick={() => dispatch(resetState())}
+          >
             <li className={styles.item}>
               <FaUser size={32} />
               <FaShoppingCart size={32} />
@@ -56,19 +60,24 @@ function Header({ user }) {
           <button onClick={() => 
             {localStorage.removeItem('user')
             localStorage.removeItem('token')
+            dispatch(resetState())
             navigate('/')
             }}>LOG OUT</button>
 
           </section> :
 
             <aside className={styles.navright}>
-              <Link className={styles.link} to="/login">
+              <Link className={styles.link} to="/login"
+              onClick={() => dispatch(resetState())}
+              >
                 <li className={styles.item}>
                   <h3>Login</h3>
                 </li>
               </Link>
 
-              <Link className={styles.link} to="/register">
+              <Link className={styles.link} to="/register"
+              onClick={() => dispatch(resetState())}
+              >
                 <li className={styles.item}>
                   <h3>Register</h3>
                 </li>
