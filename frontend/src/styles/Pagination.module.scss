@@ -7,18 +7,39 @@ margin-bottom: 20px;
 padding: 10px;
 }
 
+.arrowbtn {
+margin-right: 6px;
+width: 40px;
+height: 40px;
+border-radius: 25px;
+border: 1px solid lightgrey;
+background-color: white;
+padding: 0;
+}
+
+.arrowbtn:hover {
+    cursor: pointer;
+}
+
 .pagebtn {
 margin-right: 6px;
-padding: 8px 12px;
-border-radius: none;
+width: 40px;
+height: 40px;
+border-radius: 25px;
 border: 1px solid lightgrey;
 background-color: white;
 }
 
+.pagebtn:hover {
+    cursor: pointer;
+}
+
 .pagebtn_active {
 margin-right: 6px;
-padding: 8px 12px;
-border-radius: none;
+width: 40px;
+height: 40px;
+border-radius: 25px;
 background-color: green;
+border: none;
 color: white;
  }

@@ -35,7 +35,7 @@ export default function Products() {
 
                 <section className={styles.grid_item} key={product._id}>
 
-                  <img src="https://via.placeholder.com/225" alt="" />
+                  <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.jpg`} alt={product.name} />
 
                   <section className={styles.product_info}>
 

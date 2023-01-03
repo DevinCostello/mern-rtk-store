@@ -23,9 +23,9 @@ const Pagination = ({totalProducts}) => {
         <main className={styles.wrapper}>
             <section className={styles.page_list}>
                 
-            <button className={styles.pagebtn} onClick={() => dispatch(setPage(1))}><AiOutlineDoubleLeft /></button>
+            <button className={styles.arrowbtn} onClick={() => dispatch(setPage(1))}><AiOutlineDoubleLeft /></button>
             
-            <button onClick={() => currentPage === 1 ? dispatch(setPage(1)) : dispatch(setPage(currentPage - 1))} className={styles.pagebtn}> <AiOutlineLeft /> </button>
+            <button onClick={() => currentPage === 1 ? dispatch(setPage(1)) : dispatch(setPage(currentPage - 1))} className={styles.arrowbtn}> <AiOutlineLeft /> </button>
             
             {PageNumbers.length >= 5 && pressed === false ? 
             <>
@@ -38,9 +38,9 @@ const Pagination = ({totalProducts}) => {
                 <button  onClick={() => dispatch(setPage(number))} key={number} className={currentPage === number ? styles.pagebtn_active : styles.pagebtn}>{number}</button>
             )}
                 
-            <button onClick={() => currentPage === totalPages ? dispatch(setPage(totalPages)) : dispatch(setPage(currentPage + 1))} className={styles.pagebtn}> <AiOutlineRight /> </button>
+            <button onClick={() => currentPage === totalPages ? dispatch(setPage(totalPages)) : dispatch(setPage(currentPage + 1))} className={styles.arrowbtn}> <AiOutlineRight /> </button>
 
-            <button className={styles.pagebtn} onClick={() => dispatch(setPage(totalPages))}><AiOutlineDoubleRight /></button>
+            <button className={styles.arrowbtn} onClick={() => dispatch(setPage(totalPages))}><AiOutlineDoubleRight /></button>
             </section>
         </main>
     }

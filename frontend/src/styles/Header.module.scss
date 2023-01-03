@@ -5,21 +5,28 @@
 
 .wrapper {
 // margin: 0 0 2rem;
+border-bottom: 1px solid lightgrey;
+
 }
 
 .nav {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
     list-style: none;
-    border-bottom: 1px solid lightgrey;
-    margin: 0 auto;
+    margin: 0 20px auto;
     padding: 0.5rem 0 0.5rem;
     // border: 1px solid red;
+    
 
     .navcenter {
         display: flex;
-        
+        justify-content: space-between;
+        width: 300px;
+
+        li {
+            // font-size: 24px;
+        }
     }
 
     button {
@@ -49,7 +56,9 @@
 
 .navright {
     display: flex;
-    border: 1px solid red;
+    justify-content: space-around;
+    width: 175px;
+    // border: 1px solid red;
 }
 
 .loggedin {
@@ -58,7 +67,17 @@
     justify-content: space-evenly;
     width: 200px;
 
-    border: 1px solid red;
+    // border: 1px solid red;
+}
+
+.logoutbtn {
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.logoutbtn:hover {
+    cursor: pointer;
 }
 
 

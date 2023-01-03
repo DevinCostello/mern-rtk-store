@@ -34,13 +34,13 @@ function Header({ user }) {
 
           <Link className={styles.link} to="/products">
             <li className={styles.item}>
-              <h3>Products</h3>
+              <h3>Deals</h3>
             </li>
           </Link>
 
           <Link className={styles.link} to="/products">
             <li className={styles.item}>
-              <h3>Products</h3>
+              <h3>New</h3>
             </li>
           </Link>
           </section>
@@ -57,9 +57,9 @@ function Header({ user }) {
           </Link>
           
 
-          <button onClick={() => 
+          <button className={styles.logoutbtn} onClick={() => 
             {localStorage.removeItem('user')
-            localStorage.removeItem('token')
+             localStorage.removeItem('token')
             dispatch(resetState())
             navigate('/')
             }}>LOG OUT</button>

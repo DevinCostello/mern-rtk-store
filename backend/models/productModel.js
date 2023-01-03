@@ -8,6 +8,9 @@ const productSchema = mongoose.Schema({
     category: {
         type: String
     },
+    img_url: {
+        type: String
+    },
 
     color: [String],
 
