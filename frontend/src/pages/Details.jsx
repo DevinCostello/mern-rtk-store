@@ -96,7 +96,7 @@ const Details = () => {
 
             <section className={styles.details}>
               <h1>{product.name}</h1>
-              <h4>{product.category}</h4>
+              <h3>{product.category}</h3>
               <h1>${product.price}</h1>
 
             </section>
@@ -107,7 +107,7 @@ const Details = () => {
                 Sizes:
                 {product.size.map((size) => (
                   <button className={CreateOptions.size === size ? styles.size_selected : styles.size} key={size} onClick={() => dispatch(setSize(size))}>
-                    {size}
+                    {size.charAt(0)}
                   </button>
                 ))}
               </section>
