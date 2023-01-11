@@ -8,8 +8,6 @@ const initialState = {
         lte: null
     },
 
-    // size: [],
-
     size: {
         in: []
     },

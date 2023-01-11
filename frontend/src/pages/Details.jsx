@@ -6,7 +6,6 @@ import { setFixedVariables, setColor, setQuantity, setSize, clearCart } from "..
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
 import { setCartQuantity, setId, ClearUpdateOptions, setCartDuplicate } from "../features/cart/cartSlice";
 
-import ProductOptions from '../components/ProductOptions';
 
 
 const Details = () => {
@@ -20,7 +19,6 @@ const Details = () => {
   const [createCartItem, result] = useCreateCartItemMutation();
   const [UpdateCartItem] = useUpdateCartItemMutation();
 
-  // ???
   const [input, setInput] = useState(0)
 
   //state object for creating a new item to cart

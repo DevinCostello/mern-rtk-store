@@ -1,10 +1,12 @@
+import { useEffect } from 'react';
 import qs from 'qs';
 import styles from '../styles/Products.module.scss'
 import Pagination from '../components/Pagination'
 import Filters from '../components/Filters';
+import GridSkeleton from '../components/GridSkeleton';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { resetState } from '../features/filter/filterSlice';
 import { useGetProductsQuery } from '../features/api/apiSlice'
 
@@ -22,13 +24,24 @@ export default function Products() {
 
       <Filters />
 
-      {isLoading ? <p>Loading...</p> :
+      {isLoading ? <section className={styles.grid}>
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+        <GridSkeleton />
+      </section> :
         <main className={styles.grid_container}>
 
         {/* for testing */}
         {/* <h3>{data.totalProducts.length}</h3> */}
 
           <section className={styles.grid}>
+
             {data.products.map((product) =>
 
               <Link key={product._id} to={`${product._id}`} onClick={() => dispatch(resetState())}>
