@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import { setFixedVariables, setColor, setQuantity, setSize, clearCart } from "../features/product/productSlice";
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
-import { setCartQuantity, setId, ClearUpdateOptions, setCartDuplicate } from "../features/cart/cartSlice";
+import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
 
 
 
@@ -16,8 +16,8 @@ const Details = () => {
   const { data: product, isLoading, isSuccess, error } = useGetSingleProductQuery(id);
   const { data: cart, isSuccess: isCartSuccusss } = useGetCartQuery();
 
-  const [createCartItem, result] = useCreateCartItemMutation();
-  const [UpdateCartItem] = useUpdateCartItemMutation();
+  const [createCartItem, createResult] = useCreateCartItemMutation();
+  const [UpdateCartItem, updateResult] = useUpdateCartItemMutation();
 
   const [input, setInput] = useState(0)
 
@@ -103,8 +103,8 @@ const Details = () => {
 
             <section className={styles.selections}>
 
-              <section className={styles.sizes}>
-                Sizes:
+              {/* <section className={styles.sizes}>
+                <h4>Size</h4>
                 {product.size.map((size) => (
                   <button className={CreateOptions.size === size ? styles.size_selected : styles.size} key={size} onClick={() => dispatch(setSize(size))}>
                     {size.charAt(0)}
@@ -113,7 +113,7 @@ const Details = () => {
               </section>
 
               <section className={styles.colors}>
-                Colors:
+                <h4>Color</h4>
                 {product.color.map((color, index) => (
                   <button onClick={() => dispatch(setColor(color))}
                     className={CreateOptions.color === color ? styles.box_selected : styles.box}
@@ -122,19 +122,65 @@ const Details = () => {
                 ))}
               </section>
 
-              <section className={styles.quantity}>
-                <p>Quantity:</p>
+              <section className={styles.quantity_wrapper}>
+                <h4>Quantity</h4>
+
+                <div className={styles.quantity}>
+                  <button className={styles.quantitybtn} onClick={() => dispatch(setQuantity(CreateQuantity - 1))}>-</button>
+                  <input className={styles.quantity_input} type="number" value={CreateQuantity ? CreateQuantity : input}
+                    onChange={(e) => { CartDuplicate ? handleUpdate(e) : dispatch(setQuantity(parseInt(e.target.value))) }} />
+                  <button className={styles.quantitybtn} onClick={() => dispatch(setQuantity(CreateQuantity + 1))}>+</button>
+                </div>
+
+
+
+              </section> */}
+
+              <aside className={styles.left}>
+                <h4>{"Size".toUpperCase(1)}</h4>
+                <h4>{"Color".toUpperCase(1)}</h4>
+                <h4>{"Quantity".toUpperCase(1)}</h4>
+              </aside>
+
+              <aside className={styles.right}>
 
                 <div>
-                  <input type="number" value={CreateQuantity ? CreateQuantity : input} onChange={(e) => { CartDuplicate ? handleUpdate(e) : dispatch(setQuantity(parseInt(e.target.value))) }} />
-                  <button onClick={handleSubmit}>Add To Cart</button>
-                  {result.status === "rejected" && <p className={styles.error}>{result.error.data.message}</p>}
+                  {product.size.map((size) => (
+                    <button className={CreateOptions.size === size ? styles.size_selected : styles.size} key={size} onClick={() => dispatch(setSize(size))}>
+                      {size.charAt(0)}
+                    </button>
+                  ))}
                 </div>
-              </section>
+
+                <div>
+                  {product.color.map((color, index) => (
+                    <button onClick={() => dispatch(setColor(color))}
+                      className={CreateOptions.color === color ? styles.box_selected : styles.box}
+                      key={index}
+                      style={{ backgroundColor: `${color}` }}></button>
+                  ))}
+                </div>
+
+                <div className={styles.quantity}>
+                  <button className={styles.quantitybtn} onClick={() => dispatch(setQuantity(CreateQuantity - 1))}>-</button>
+
+                  <input className={styles.quantity_input} type="number" value={CreateQuantity ? CreateQuantity : input}
+                    onChange={(e) => { CartDuplicate ? handleUpdate(e) : dispatch(setQuantity(parseInt(e.target.value))) 
+                    
+                    }} />
+
+                  <button className={styles.quantitybtn} onClick={() => dispatch(setQuantity(CreateQuantity + 1))}>+</button>
+                </div>
+
+
+
+              </aside>
 
             </section>
-
-            {/* <ProductOptions product={product} /> */}
+            
+            <button className={styles.cartbtn} onClick={handleSubmit}>Add To Cart</button>
+            {createResult.status === "rejected" && <p className={styles.error}>{createResult.error.data.message}</p>}        
+            {updateResult.status === "rejected" && <p className={styles.error}>{updateResult.error.data.message}</p>}
 
           </div>
 

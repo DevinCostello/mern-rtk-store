@@ -56,7 +56,7 @@ const productSlice = createSlice({
         },
 
         setQuantity: (state, action) => {
-            state.CreateOptions.quantity = action.payload
+            state.CreateOptions.quantity = action.payload  
         },
 
         clearCart: (state) => {

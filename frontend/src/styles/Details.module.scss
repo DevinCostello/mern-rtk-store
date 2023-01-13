@@ -48,33 +48,42 @@ h3 {
 }
 
 .selections {
-    // border: 1px solid red;
+    display: flex;
+    width: 300px;
+    justify-content: space-between;
 }
 
 .sizes {
-    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    height: 50px;
+
 }
 
 .colors {
     display: flex;
     align-items: center;
+
+    height: 50px;
+
+
 }
 
 .box {
     width: 25px;
     height: 25px;
     border: none;
-    // border: 1px solid black;
-    margin: 0 3px;
-    padding: 5px;
+    border: 2px solid white;
+    margin-right: 10px;
+
 }
 
 .box_selected {
     width: 25px;
     height: 25px;
     border: 2px solid black;
-    //increase brightness of color slightly?
-    margin: 0 3px;
+    margin-right: 10px;
+
 }
 
 .size {
@@ -87,7 +96,7 @@ h3 {
     border: none;
     border-radius: 50px;
     font-weight: 600;
-    margin: 0 4px;
+    // margin-right: 4px;
 
     
 }
@@ -103,21 +112,94 @@ h3 {
     border: none;
     border-radius: 50px;
     font-weight: 600;
-    margin: 0 4px;background-color: grey;
-    margin: 0 4px;
+    // margin: 0 4px;
     background-color: green;
 }
 
 
 .quantity {
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
+    height: 30px;
+    width: 100px;
+
+    background-color: lightgrey;
 
     input {
-        width: 100px;
-    }
+        width: 15px;
+        margin: 0 10px;
+        border: none;
+        background-color: lightgrey;
+        }
+
 }
+
+.quantitybtn {
+    border: none;
+    background-color: lightgrey
+}
+
+.quantitybtn:hover  {
+    cursor: pointer;
+}
+
+//remove number input arrows
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+  }
 
 .error {
     color: red;
+}
+
+.left {
+
+    // border: 1px solid red;
+
+
+h4 {
+font-size: 1rem;
+margin-top: 0;
+margin-bottom: 20px;
+letter-spacing: 3px;
+}
+
+}
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    // border: 1px solid red;
+
+    div {
+        margin-bottom: 11px;
+
+    }
+    
+}
+
+.cartbtn {
+    width: 150px;
+    height: 35px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: px;
+    border-radius: 5px;
+    border: none;
+    background-color: green;
+    color: white;
+
+}
+
+.cartbtn:hover {
+    cursor: pointer;
 }

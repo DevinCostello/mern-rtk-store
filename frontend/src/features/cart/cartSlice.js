@@ -31,6 +31,8 @@ const cartSlice = createSlice({
     setCartQuantity: (state, action) => {
       const quantity = action.payload;
       state.UpdateOptions.quantity = quantity;
+
+      
     },
     setCartDuplicate: (state, action) => {
       state.CartDuplicate = action.payload
@@ -40,13 +42,7 @@ const cartSlice = createSlice({
       state.CartItems = action.payload
     },
 
-    ClearUpdateOptions: (state, action) => {
-      //doesnt work, why?
-      state.UpdateOptions = { id: null, quantity: null }
-      state.CartDuplicate = null
-      state.UpdateOptions.quantity = null
-    },
-
+  
     calculateTotals: (state) => {
 
       if (state.CartItems !== "") {
@@ -67,5 +63,5 @@ const cartSlice = createSlice({
   },
 });
 
-export const { setId, setCartQuantity, setCartDuplicate, setCartItems, ClearUpdateOptions, calculateTotals } = cartSlice.actions;
+export const { setId, setCartQuantity, setCartDuplicate, setCartItems, calculateTotals } = cartSlice.actions;
 export default cartSlice.reducer;
