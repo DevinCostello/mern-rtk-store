@@ -31,6 +31,7 @@ useEffect(() => {
       ) : (
         <>
           <div className={styles.cart}>
+            <h2>Your Cart</h2>
             {cart.map((item, index) => (
              <CartItem key={index} item={item} />
             ))}
