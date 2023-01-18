@@ -7,10 +7,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 height: 100vh;
-
-// background: lightblue;
-background: rgb(199,21,135);
-background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 100%); 
+background-color: whitesmoke;
 }
 
 
@@ -70,9 +67,8 @@ background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 10
     align-self: center;
 
     color: white;
-
-    background: rgb(199,21,135);
-    background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 100%); 
+    background-color: green;
+    
 }
 
 .error {

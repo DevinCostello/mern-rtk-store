@@ -15,7 +15,8 @@ const CartItem = ({ item }) => {
     return (
         <main key={item._id} className={styles.item}>
 
-            <img src="https://via.placeholder.com/125x175/" alt="" />
+            <img src="https://via.placeholder.com/125x175/c2ff9e/000000?text=Product+Image" alt="" />
+
 
             <section className={styles.iteminfo}>
 

@@ -5,9 +5,7 @@ justify-content: center;
 align-items: center;
 height: 100vh;
 
-// background: lightblue;
-background: rgb(199,21,135);
-background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 100%); 
+background-color: whitesmoke;
 }
 
 .content {
@@ -62,8 +60,7 @@ background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 10
     color: white;
     align-self: center;
 
-    background: rgb(199,21,135);
-    background: linear-gradient(225deg, rgba(199,21,135,1) 42%, rgba(0,212,255,1) 100%); 
+    background-color: green;
 }
 
 .error {

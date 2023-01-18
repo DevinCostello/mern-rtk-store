@@ -9,6 +9,7 @@ const Filters = () => {
 const {data, isLoading, error} = useGetFiltersQuery()
 const dispatch = useDispatch()
 const category = useSelector((state) => state.filter.category)
+const price = useSelector((state) => state.filter.price.gte)
 const size = useSelector((state) => state.filter.size.in)
 
 
@@ -32,7 +33,7 @@ return (<>
      <h3>Price</h3>
      {data[1].filters.map((filter, index)=>
      <div key={index}>
-     <input type="checkbox" onClick={() => dispatch(setPrice({ filter }))} />
+     <input type="checkbox" checked={price === filter.gte ? true : false} onClick={() => dispatch(setPrice({ filter }))} />
      <label>{filter.text}</label>
      </div>
      )}

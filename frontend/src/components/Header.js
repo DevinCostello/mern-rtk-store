@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUser, FaTshirt } from 'react-icons/fa'
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { resetState } from "../features/filter/filterSlice";
 import styles from "../styles/Header.module.scss";
 
@@ -16,7 +16,6 @@ function Header({ user }) {
         <ul className={styles.nav}>
           <aside className={styles.navleft}>
             <Link className={styles.link} to="/"
-              onClick={() => dispatch(resetState())}
             >
               <li className={styles.item}>
                 <FaTshirt size={32} />
@@ -27,7 +26,6 @@ function Header({ user }) {
 
           <section className={styles.navcenter}>
             <Link className={styles.link} to="/products"
-              onClick={() => dispatch(resetState())}
             >
               <li className={styles.item}>
                 <h3>Products</h3>
@@ -35,7 +33,6 @@ function Header({ user }) {
             </Link>
 
             <Link className={styles.link} to="/products"
-              onClick={() => dispatch(resetState())}
             >
               <li className={styles.item}>
                 <h3>Deals</h3>
@@ -43,7 +40,6 @@ function Header({ user }) {
             </Link>
 
             <Link className={styles.link} to="/products"
-              onClick={() => dispatch(resetState())}
             >
               <li className={styles.item}>
                 <h3>New</h3>
@@ -53,12 +49,11 @@ function Header({ user }) {
 
           {user ?
             <section className={styles.loggedin && styles.navright}>
+              <FaUser className={styles.icon} size={32} />
               <Link className={styles.link} to="/cart"
-                onClick={() => dispatch(resetState())}
               >
                 <li className={styles.item}>
-                  <FaUser size={32} />
-                  <FaShoppingCart size={32} />
+                  <FaShoppingCart className={styles.icon} size={32} />
                 </li>
               </Link>
 
@@ -74,7 +69,6 @@ function Header({ user }) {
 
             <aside className={styles.navright}>
               <Link className={styles.link} to="/login"
-                onClick={() => dispatch(resetState())}
               >
                 <li className={styles.item}>
                   <h3>Login</h3>
@@ -82,7 +76,6 @@ function Header({ user }) {
               </Link>
 
               <Link className={styles.link} to="/register"
-                onClick={() => dispatch(resetState())}
               >
                 <li className={styles.item}>
                   <h3>Register</h3>

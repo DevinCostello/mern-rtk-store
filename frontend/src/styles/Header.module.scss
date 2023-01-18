@@ -28,15 +28,6 @@ border-bottom: 1px solid lightgrey;
             // font-size: 24px;
         }
     }
-
-    button {
-        height: 40px;
-        width: 100px;
-        font-weight: 800;
-        background-color: lightgreen;
-        border-radius: 25px;
-    }
-
 }
 
 .link {
@@ -57,8 +48,13 @@ border-bottom: 1px solid lightgrey;
 .navright {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     width: 175px;
     // border: 1px solid red;
+}
+
+.icon {
+margin-right: 0.5rem;
 }
 
 .loggedin {
@@ -67,13 +63,17 @@ border-bottom: 1px solid lightgrey;
     justify-content: space-evenly;
     width: 200px;
 
-    // border: 1px solid red;
+    border: 1px solid red;
 }
 
 .logoutbtn {
-    background-color: green;
+    height: 40px;
+    width: 100px;
+    font-weight: 800;
     color: white;
+    background-color: green;
     border: none;
+    border-radius: 25px;
 }
 
 .logoutbtn:hover {
