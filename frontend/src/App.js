@@ -18,7 +18,6 @@ import Register from "./pages/Register";
 
 import SharedProductLayout from "./pages/SharedProductLayout";
 import { useGetUserQuery } from './features/api/apiSlice'
-import { resetState } from "./features/filter/filterSlice";
 
 
 function App() {
@@ -38,10 +37,12 @@ function App() {
             <Route path="*" element={<div>Error: 404</div>}/>            
 
             <Route path="/products" element={<SharedProductLayout />}  >
-              <Route index element={<Products />} onLeave={() => dispatch(resetState())}  />
+              <Route index element={<Products />}   />
               <Route path=":id" element={<Details />} />
             </Route>
 
+
+              {/* redirect to home page if no token */}
             <Route path="/cart" element={<Cart />} />
           </>
         </Routes>

@@ -68,9 +68,11 @@ const Details = () => {
     if (CartDuplicate) {
       UpdateCartItem(UpdateOptions)
       dispatch(clearCart())
+      alert("Cart Item Updated")
     } else {
       createCartItem({ ...CreateOptions })
       dispatch(clearCart())
+      alert("Cart Item Added")
     }
   }
 
@@ -102,39 +104,6 @@ const Details = () => {
             </section>
 
             <section className={styles.selections}>
-
-              {/* <section className={styles.sizes}>
-                <h4>Size</h4>
-                {product.size.map((size) => (
-                  <button className={CreateOptions.size === size ? styles.size_selected : styles.size} key={size} onClick={() => dispatch(setSize(size))}>
-                    {size.charAt(0)}
-                  </button>
-                ))}
-              </section>
-
-              <section className={styles.colors}>
-                <h4>Color</h4>
-                {product.color.map((color, index) => (
-                  <button onClick={() => dispatch(setColor(color))}
-                    className={CreateOptions.color === color ? styles.box_selected : styles.box}
-                    key={index}
-                    style={{ backgroundColor: `${color}` }}></button>
-                ))}
-              </section>
-
-              <section className={styles.quantity_wrapper}>
-                <h4>Quantity</h4>
-
-                <div className={styles.quantity}>
-                  <button className={styles.quantitybtn} onClick={() => dispatch(setQuantity(CreateQuantity - 1))}>-</button>
-                  <input className={styles.quantity_input} type="number" value={CreateQuantity ? CreateQuantity : input}
-                    onChange={(e) => { CartDuplicate ? handleUpdate(e) : dispatch(setQuantity(parseInt(e.target.value))) }} />
-                  <button className={styles.quantitybtn} onClick={() => dispatch(setQuantity(CreateQuantity + 1))}>+</button>
-                </div>
-
-
-
-              </section> */}
 
               <aside className={styles.left}>
                 <h4>{"Size".toUpperCase(1)}</h4>
