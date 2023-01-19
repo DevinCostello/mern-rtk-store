@@ -29,42 +29,44 @@ function Cart() {
       {isLoading ? (
         <p>Loading...</p>
       ) : (
-        <>
-          <div className={styles.cart}>
-            <h2>Your Cart</h2>
-            {cart.map((item, index) => (
-              <CartItem key={index} item={item} />
-            ))}
-          </div>
-
-
-
+        <>         
           {cart.length === 0 ?
             <span className={styles.empty_cart}>
               <FaShoppingCart size={144} />
               <h1>Cart is Empty!</h1>
             </span> :
-            <main className={styles.summary_wrapper}>
-              <section className={styles.summary_inner}>
-                <h1>Summary</h1>
-                <section className={styles.summary}>
-                  <aside className={styles.summary_right}>
-                    <h3>Item(s):</h3>
-                    <h3>Tax:</h3>
-                    <h3>Delivery:</h3>
-                    <h2>Total:</h2>
-                  </aside>
 
-                  <aside className={styles.summary_left}>
-                    <h3>${SumData.ProductCost}</h3>
-                    <h3>${SumData.Tax}</h3>
-                    <h3>${SumData.Delivery}</h3>
-                    <h2>${SumData.TotalCost}</h2>
-                  </aside>
+            <>
+              <div className={styles.cart}>
+                <h2>Your Cart</h2>
+                {cart.map((item, index) => (
+                  <CartItem key={index} item={item} />
+                ))}
+              </div>
+
+              <main className={styles.summary_wrapper}>
+                <section className={styles.summary_inner}>
+                  <h1>Summary</h1>
+                  <section className={styles.summary}>
+                    <aside className={styles.summary_right}>
+                      <h3>Item(s):</h3>
+                      <h3>Tax:</h3>
+                      <h3>Delivery:</h3>
+                      <h2>Total:</h2>
+                    </aside>
+
+                    <aside className={styles.summary_left}>
+                      <h3>${SumData.ProductCost}</h3>
+                      <h3>${SumData.Tax}</h3>
+                      <h3>${SumData.Delivery}</h3>
+                      <h2>${SumData.TotalCost}</h2>
+                    </aside>
+                  </section>
                 </section>
-              </section>
-              <button className={styles.checkoutbtn} onClick={() => alert("Order Submitted!")}>CHECKOUT</button>
-            </main>
+                <button className={styles.checkoutbtn} onClick={() => alert("Order Submitted!")}>CHECKOUT</button>
+              </main>
+            </>
+
           }
         </>
       )}

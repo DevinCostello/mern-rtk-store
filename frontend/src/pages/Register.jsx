@@ -31,6 +31,7 @@ const Register = () => {
         localStorage.setItem('token', result.data.token)
         localStorage.setItem('user', JSON.stringify(result.data))
         navigate('/')
+        navigate(0)
       }
     } catch (err) {
       console.log(err)

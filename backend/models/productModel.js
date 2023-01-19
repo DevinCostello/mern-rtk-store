@@ -19,6 +19,15 @@ const productSchema = mongoose.Schema({
     },
 
     size: [String],
+
+    discount: {
+        type: Boolean
+    },
+
+    new: {
+        type: Boolean
+    },
+
 }, {
     timestamps: true
 })

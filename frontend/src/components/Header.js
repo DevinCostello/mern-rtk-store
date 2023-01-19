@@ -2,7 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUser, FaTshirt } from 'react-icons/fa'
 import { useDispatch } from "react-redux";
-import { resetState } from "../features/filter/filterSlice";
+import { resetState, setDiscount, setNew } from "../features/filter/filterSlice";
 import styles from "../styles/Header.module.scss";
 
 function Header({ user }) {
@@ -26,6 +26,7 @@ function Header({ user }) {
 
           <section className={styles.navcenter}>
             <Link className={styles.link} to="/products"
+            onClick={() => dispatch(resetState())}
             >
               <li className={styles.item}>
                 <h3>Products</h3>
@@ -33,6 +34,10 @@ function Header({ user }) {
             </Link>
 
             <Link className={styles.link} to="/products"
+              onClick={() => {
+                dispatch(resetState())
+                dispatch(setDiscount())
+              }}
             >
               <li className={styles.item}>
                 <h3>Deals</h3>
@@ -40,6 +45,10 @@ function Header({ user }) {
             </Link>
 
             <Link className={styles.link} to="/products"
+              onClick={() => {
+                dispatch(resetState())
+                dispatch(setNew())
+              }}
             >
               <li className={styles.item}>
                 <h3>New</h3>
@@ -63,6 +72,7 @@ function Header({ user }) {
                 localStorage.removeItem('token')
                 dispatch(resetState())
                 navigate('/')
+                navigate(0)
               }}>LOG OUT</button>
 
             </section> :

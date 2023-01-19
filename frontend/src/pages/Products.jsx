@@ -6,7 +6,7 @@ import Filters from '../components/Filters';
 import GridSkeleton from '../components/GridSkeleton';
 
 import { useSelector, useDispatch } from 'react-redux'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { resetState } from '../features/filter/filterSlice';
 import { useGetProductsQuery } from '../features/api/apiSlice'
 

@@ -12,6 +12,9 @@ const initialState = {
         in: []
     },
 
+    discount: null,
+    new: null,
+
     //pagination
     limit: 9,
     page: 1
@@ -57,6 +60,16 @@ const filterSlice = createSlice({
             state.page = 1
         },
 
+        setDiscount: (state) => {
+
+            if(state.discount === null) { state.discount = true} else {state.discount = null}
+        },
+
+        setNew: (state) => {
+            if(state.new === null) { state.new = true} else {state.new = null}
+
+        },
+
         
         //pagination
         setPage: (state, action) => {
@@ -65,13 +78,15 @@ const filterSlice = createSlice({
         setLimit: (state, action) => {
             state.limit = action.payload
         },
+
+
+
         resetState: () => {
             return initialState
-           
         }
 
     }
 })
 
-export const { setCategory, setPrice, setSize, setPage, setLimit, resetState } = filterSlice.actions
+export const { setCategory, setPrice, setSize, setDiscount, setNew, setPage, setLimit, resetState } = filterSlice.actions
 export default filterSlice.reducer
