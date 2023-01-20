@@ -37,8 +37,8 @@ export default function Products() {
       </section> :
         <main className={styles.grid_container}>
 
-        {/* for testing */}
-        {/* <h3>{data.totalProducts.length}</h3> */}
+          {/* for testing */}
+          {/* <h3>{data.totalProducts.length}</h3> */}
 
           <section className={styles.grid}>
 
@@ -52,9 +52,9 @@ export default function Products() {
 
                   <section className={styles.product_info}>
 
-                  <h3 className={styles.product_name}>{product.name}</h3>
-                    
-                  <h3>${product.price}</h3>
+                    <h3 className={styles.product_name}>{product.name}</h3>
+
+                    <h3>${product.price}</h3>
 
                     <span className={styles.colors}>
                       Colors: {product.color.map((color, index) =>

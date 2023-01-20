@@ -5,15 +5,34 @@ border: 1px solid lightgrey;
 }
 
 .hero {
-    border: 1px solid lightgrey;
+    // border: 1px solid lightgrey;
+    background-color: white;
+    height: 700px;
 
-    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h1 {
+        font-size: 4rem;
+    }
 
 }
 
+.hero_content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1200px;
+
+    border: 1px solid red;
+}
+
 .slider {
+    background-color: whitesmoke;
     border: 1px solid lightgrey;
-    height: 300px;
+    height: 1000px;
 
 }
 
@@ -26,6 +45,7 @@ border: 1px solid lightgrey;
     display: flex;
     justify-content: center;
     align-items: center;
+
     // border: 1px solid red;
 }
 
