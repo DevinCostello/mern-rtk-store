@@ -1,7 +1,7 @@
-import React from "react";
-import {Link, Navigate, useParams} from 'react-router-dom'
+import { useState } from "react";
+import { Link } from 'react-router-dom'
 import { useDispatch } from "react-redux";
-import { setCategory } from "../features/filter/filterSlice";
+import { resetState, setCategory } from "../features/filter/filterSlice";
 import { useGetProductsQuery } from "../features/api/apiSlice";
 import Slider from "../components/Slider";
 import styles from "../styles/Home.module.scss";
@@ -10,10 +10,13 @@ function Home() {
   const categories = ["tshirt", "hat", "hoodie"];
   const dispatch = useDispatch()
 
-  const { data: DiscountData, isLoading: DiscountIsLoading, isSuccess: DiscountIsSuccess, error: DiscountError } 
-  = useGetProductsQuery('?page=1&limit=5&discount=true')
-  const { data: NewData, isLoading: NewIsLoading, isSuccess: NewIsSuccess, error: NewError } 
-  = useGetProductsQuery('?page=1&limit=5&new=true')
+  const [discountPage, setDiscountPage] = useState(1)
+  const [newPage, setNewPage] = useState(1)
+
+  const { data: DiscountData, isLoading: DiscountIsLoading, isSuccess: DiscountIsSuccess, error: DiscountError }
+    = useGetProductsQuery(`?page=${discountPage}&limit=5&discount=true`)
+  const { data: NewData, isLoading: NewIsLoading, isSuccess: NewIsSuccess, error: NewError }
+    = useGetProductsQuery(`?page=${newPage}&limit=5&new=true`)
 
   return (
     <>
@@ -21,23 +24,30 @@ function Home() {
 
         <section className={styles.hero}>
           <span className={styles.hero_content}>
-            <img src="https://via.placeholder.com/600x400/" alt="" />
-            <h1>Slogan Slogan Slogan</h1>
+            <img src="https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/tshirt_feywtm.png" alt="" />
+            <h1 className={styles.slogan}>For Those Who Understand Style.</h1>
           </span>
 
         </section>
 
         <section className={styles.slider}>
-          <Slider name={"Discounted Products"} data={DiscountData} isLoading={DiscountIsLoading} />
-          <Slider name={"New Arrivals"} data={NewData} isLoading={NewIsLoading} />
+          <Slider name={"Discounted Products"} page={discountPage} setPage={setDiscountPage} data={DiscountData} isLoading={DiscountIsLoading} />
+          <Slider name={"New Arrivals"} page={newPage} setPage={setNewPage} data={NewData} isLoading={NewIsLoading} />
         </section>
 
         <section className={styles.category_wrapper}>
           <h2>Shop by Category</h2>
           <span className={styles.categories}>
             {categories.map((category) => (
-              <Link to="/products" onClick={() => dispatch(setCategory(category))} key={category} className={styles.category}>
-                <h2>{category}</h2>
+              <Link to="/products"
+                onClick={() => {
+                  dispatch(resetState())
+                  dispatch(setCategory(category))
+                }} key={category} className={styles.category}>
+                <img src="https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/tshirt_feywtm.png" alt="" />
+                <span className={styles.name_wrapper}>
+                  <h2>{(category).toUpperCase()}</h2>
+                </span>
               </Link>
             ))}
           </span>

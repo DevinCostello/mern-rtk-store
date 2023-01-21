@@ -33,13 +33,43 @@
     background-color: white;
     border-radius: 5px;
     border: 1px solid lightgrey;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+
+    h3, h4 {
+        margin: 0;
+    }
+
+    h3 {
+        letter-spacing: 1px;
+    }
 
     h4 {
-        margin: 0;
+        font-weight: 400;
     }
 
 }
 
+.slider_item:hover {
+    border: 1px solid grey;
+}
+
 .info {
-    border: 1px solid red;
+    // border: 1px solid red;
+    align-self: flex-start;
+    margin-left: 20px;
+    margin-top: 8px;
+}
+
+.icon {
+    color: grey;
+    height: 40px;
+    width: 40px;
+
+
+}
+
+.icon:hover {
+    cursor: pointer;
+    color: rgb(82, 82, 82)
 }
