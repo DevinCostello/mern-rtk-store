@@ -1,6 +1,6 @@
 .container {
-width: 100vw;
-border: 1px solid lightgrey;
+    width: 100vw;
+    border: 1px solid lightgrey;
 
 }
 
@@ -23,10 +23,6 @@ border: 1px solid lightgrey;
 }
 
 .hero_content {
-
-    * {
-        // border: 1px solid red;        
-    }
 
     display: flex;
     justify-content: space-between;
@@ -97,4 +93,119 @@ border: 1px solid lightgrey;
     border: 1px solid lightgrey;
     display: flex;
     justify-content: center;
+}
+
+/* smaller desktops, laptops, landscape tablets 992px - 1200px*/
+@media only screen and (max-width: 1200px) {
+
+    .hero_content {
+
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 1000px;
+
+
+        img {
+            object-fit: cover;
+            height: 400px;
+        }
+
+    }
+
+}
+
+
+/* portrait tablets, landscape phones 768px - 992px */
+@media only screen and (max-width: 992px) {
+
+    .hero_content {
+
+        width: 800px;
+
+        .slogan {
+            font-size: 3rem;
+        }
+
+        img {
+            height: 350px;
+        }
+    }
+
+    .category {
+
+        width: 200px;
+        height: 350px;
+        margin-right: 25px;
+        img {
+            width: 175px;
+        }
+    }
+
+    .categories {}
+
+}
+
+/*landscape phones 600px - 768px */
+@media only screen and (max-width: 768px) {
+
+    .hero_content {
+
+        width: 650px;
+
+        .slogan {
+            font-size: 2.5rem;
+        }
+
+        img {
+            height: 300px;
+        }
+    }
+
+    .category {
+        margin-right: 16px;
+    }
+}
+
+
+
+/* larger portrait phones, 500px - 600px */
+@media only screen and (max-width: 600px) {
+    .hero_content {
+
+        width: 525px;
+
+        .slogan {
+            font-size: 2rem;
+        }
+
+        img {
+            height: 250px;
+        }
+    }
+
+    .categories {
+        flex-direction: column;
+    }
+
+    .category {
+        margin-bottom: 25px;
+    }
+}
+
+/* portrait phones, 500px and down */
+@media only screen and (max-width: 500px) {
+
+    .hero_content {
+        // flex-direction: column;
+        width: 100%;
+
+        .slogan {
+            font-size: 1.5rem;
+        }
+
+        img {
+            height: 200px;
+        }
+    }
 }

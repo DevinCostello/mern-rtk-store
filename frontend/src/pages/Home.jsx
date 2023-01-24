@@ -14,9 +14,9 @@ function Home() {
   const [newPage, setNewPage] = useState(1)
 
   const { data: DiscountData, isLoading: DiscountIsLoading, isSuccess: DiscountIsSuccess, error: DiscountError }
-    = useGetProductsQuery(`?page=${discountPage}&limit=5&discount=true`)
+    = useGetProductsQuery(`?page=${discountPage}&limit=4&discount=true`)
   const { data: NewData, isLoading: NewIsLoading, isSuccess: NewIsSuccess, error: NewError }
-    = useGetProductsQuery(`?page=${newPage}&limit=5&new=true`)
+    = useGetProductsQuery(`?page=${newPage}&limit=4&new=true`)
 
   return (
     <>

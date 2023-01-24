@@ -1,6 +1,7 @@
-import React from 'react'
+import { useState } from 'react'
 import { useGetFiltersQuery } from "../features/api/apiSlice"
 import { useDispatch, useSelector } from 'react-redux'
+import {FaFilter} from 'react-icons/fa'
 import { setCategory, setSize, setPrice, setDiscount, setNew } from '../features/filter/filterSlice'
 import styles from "../styles/Filters.module.scss"
 
@@ -14,12 +15,22 @@ const Filters = () => {
   const discount = useSelector((state) => state.filter.discount)
   const newProduct = useSelector((state) => state.filter.new)
 
+  const [modal, setModal] = useState(false)
+
 
 
   return (<>
 
 
     {data &&
+     
+     <>
+
+      <FaFilter onClick={() => setModal(true)} size={32} className={styles.filterexpandbtn} />
+
+      <section className={modal === true ? styles.filtermodal_active : styles.filtermodal}>
+
+      </section>
 
       <main className={styles.wrapper}>
         <section className={styles.filter_group}>
@@ -57,7 +68,7 @@ const Filters = () => {
           <div>
             <input type="checkbox" 
             checked={discount === true ? true : false}
-             onClick={() => dispatch(setDiscount())} />
+            onClick={() => dispatch(setDiscount())} />
             <label>Discounted</label>
           </div>
           <div>
@@ -67,7 +78,9 @@ const Filters = () => {
         </section>
 
 
-      </main>}
+      </main>
+      </>}
+      
 
   </>)
 
