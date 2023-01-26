@@ -192,7 +192,7 @@ letter-spacing: 3px;
     height: 35px;
     font-size: 1rem;
     font-weight: 600;
-    letter-spacing: px;
+    letter-spacing: 1px;
     border-radius: 5px;
     border: none;
     background-color: green;
@@ -203,3 +203,55 @@ letter-spacing: 3px;
 .cartbtn:hover {
     cursor: pointer;
 }
+
+ /* smaller desktops, laptops, landscape tablets 992px - 1200px*/
+ @media only screen and (max-width: 1200px) {}
+
+/* portrait tablets, landscape phones 768px - 992px */
+ @media only screen and (max-width: 992px) {
+
+    .wrapper {
+
+        img {
+            height: 400px;
+            margin-right: 25px;
+        }
+    }
+   
+    .content {
+        height: 400px;
+        width: 350px;
+    }
+    
+    
+ }
+
+/*landscape phones 600px - 768px */
+ @media only screen and (max-width: 768px) {
+
+    .wrapper {
+        flex-direction: column;
+        align-items: center;
+
+        img {
+            margin: 25px 0;
+            margin-top: 100px;
+        }
+    }
+
+    .content {
+        margin-bottom: 25px;
+    }
+
+ }
+
+/* larger portrait phones, 500px - 600px */
+ @media only screen and (max-width: 600px) {
+
+   
+ }
+
+
+ /* portrait phones, 500px and down */
+ @media only screen and (max-width: 500px) {}
+

@@ -13,20 +13,7 @@ border-bottom: 1px solid lightgrey;
     display: none;
 }
 
-.dropdown {
-    display: none
 
-
-}
-
-.dropdown_open {
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
-    
-    position: relative;
-    top: 100px
-}
 
 .nav {
     display: flex;
@@ -99,8 +86,12 @@ margin-right: 0.5rem;
     cursor: pointer;
 }
 
-.hamburgermenu {
+.dropdownbtn {
     display: none;
+}
+
+.dropdownbtn:hover {
+    cursor: pointer;
 }
 
  /* smaller desktops, laptops, landscape tablets 992px - 1200px*/
@@ -122,22 +113,58 @@ margin-right: 0.5rem;
  @media only screen and (max-width: 768px) {
 
     .navcenter {
-        justify-content: space-around;
+        justify-content: space-evenly;
+        width: 250px;
+
+        h3 {
+            font-size: 1rem;
+        }
     }
+
+ }
+
+/* larger portrait phones, 500px - 600px */
+ @media only screen and (max-width: 600px) {
+
+    .logosmall {
+        display: none;
+    }
+    
+    .icon {
+        width: 24px;
+    }
+    
+    .logoutbtn {
+    height: 35px;
+    width: 80px;
+    border-radius: 25px;
+    }
+
+    .navright {
+        justify-content: space-evenly;
+    }
+
+    .navcenter {
+        margin: 0 10px;
+    }
+    
+// icons and btn smaller
+// also register/login btns
+
+ }
+
+ /* portrait phones, 500px and down */
+ @media only screen and (max-width: 500px) {
 
     .navright {
         display: none;
     }
 
-    .hamburgermenu {
+    .dropdownbtn {
         display: block;
-    }
+        }
+
+
  }
-
-/* larger portrait phones, 500px - 600px */
- @media only screen and (max-width: 600px) {}
-
- /* portrait phones, 500px and down */
- @media only screen and (max-width: 500px) {}
 
 

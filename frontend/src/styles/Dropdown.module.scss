@@ -1,0 +1,44 @@
+
+
+.wrapper {
+    display: none;
+}
+
+.active {
+    display: block;
+
+    position: relative;
+    // top: 100px;
+    // right: 50px;
+    z-index: 1;
+
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid grey;
+    
+}
+
+
+
+
+
+ /* smaller desktops, laptops, landscape tablets 992px - 1200px*/
+ @media only screen and (max-width: 1200px) {}
+
+/* portrait tablets, landscape phones 768px - 992px */
+ @media only screen and (max-width: 992px) {}
+
+/*landscape phones 600px - 768px */
+ @media only screen and (max-width: 768px) {
+
+    // .wrapper {
+    //     display: block;
+    // }
+ }
+
+/* larger portrait phones, 500px - 600px */
+ @media only screen and (max-width: 600px) {}
+
+ /* portrait phones, 500px and down */
+ @media only screen and (max-width: 500px) {}
+
