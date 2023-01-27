@@ -64,7 +64,6 @@ export default function Products() {
                     </span>
                   </section>
                 </section>
-
               </Link>
 
             )}

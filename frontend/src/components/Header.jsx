@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Dropdown from "./Dropdown";
 import { Link, useNavigate } from "react-router-dom";
-import { FaShoppingCart, FaUser, FaTshirt, FaChevronDown } from 'react-icons/fa'
+import { FaShoppingCart, FaUser, FaTshirt } from 'react-icons/fa'
 import { GiHamburgerMenu } from 'react-icons/gi'
 import { useDispatch } from "react-redux";
 import { resetState, setDiscount, setNew } from "../features/filter/filterSlice";
@@ -12,6 +12,14 @@ function Header({ user }) {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [modal, setModal] = useState(false)
+
+  const handleLogOut = () => {
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
+    dispatch(resetState())
+    navigate('/')
+    navigate(0)
+  }
 
   return (
     <>
@@ -70,25 +78,15 @@ function Header({ user }) {
                   </li>
                 </Link>
 
-                <button className={styles.logoutbtn} onClick={() => {
-                  localStorage.removeItem('user')
-                  localStorage.removeItem('token')
-                  dispatch(resetState())
-                  navigate('/')
-                  navigate(0)
-                }}>LOG OUT</button>
+                <button className={styles.logoutbtn} onClick={() => handleLogOut()}>LOG OUT</button>
 
               </section>
 
               <GiHamburgerMenu className={styles.dropdownbtn} size={28} onClick={() => setModal(current => !current)} />
-              <Dropdown isOpen={modal} />
-
             </>
             :
             <>
               <GiHamburgerMenu className={styles.dropdownbtn} size={28} onClick={() => setModal(current => !current)} />
-              <Dropdown isOpen={modal} />
-
               <aside className={styles.navright}>
                 <Link className={styles.link} to="/login">
                   <li className={styles.item}>
@@ -108,6 +106,7 @@ function Header({ user }) {
 
         </ul>
       </main>
+      <Dropdown user={user} isOpen={modal} handleLogOut={handleLogOut} />
     </>
   );
 }

@@ -6,19 +6,33 @@
 
 .active {
     display: block;
-
-    position: relative;
-    // top: 100px;
-    // right: 50px;
     z-index: 1;
 
     background-color: white;
-    border-radius: 5px;
-    border: 1px solid grey;
+    border: 1px solid lightgrey;
     
+    margin: 0;
+
+    li {
+        list-style: none;
+    }
+
+    h3 {
+        margin: 15px 0;
+    }
 }
 
+.group {
+    display: flex;
+    align-items: center;
+    border: 1px solid lightgrey;
+}
 
+.group:hover {
+    background-color: lightgreen;
+    border: 1px solid grey;
+    cursor: pointer;
+}
 
 
 
