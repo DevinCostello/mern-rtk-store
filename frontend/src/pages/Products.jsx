@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState } from 'react';
 import qs from 'qs';
 import styles from '../styles/Products.module.scss'
 import Pagination from '../components/Pagination'
@@ -15,7 +15,7 @@ export default function Products() {
   const queryObj = useSelector((state) => state.filter)
   const queryStr = qs.stringify(queryObj, { skipNulls: true })
   const { data, isLoading, isSuccess, error } = useGetProductsQuery('?' + queryStr)
-
+  const [modal, setModal] = useState(false)
 
   return (<>
 
@@ -23,6 +23,14 @@ export default function Products() {
     <div className={styles.wrapper}>
 
       <Filters />
+
+      <button onClick={() => setModal(current => !current)}>toggle</button>
+      
+      {modal === true && 
+      <main className={modal === false ? styles.filtermodal : styles.filtermodal_active}>
+        <Filters />
+      </main>
+      }
 
       {isLoading ? <section className={styles.grid}>
         <GridSkeleton />

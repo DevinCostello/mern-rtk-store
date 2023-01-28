@@ -132,6 +132,11 @@
         }
     }
 
+    .slider {
+        height: 800px;
+
+    }
+
     .category {
 
         width: 200px;
@@ -142,7 +147,6 @@
         }
     }
 
-    .categories {}
 
 }
 
@@ -165,6 +169,10 @@
     .category {
         margin-right: 16px;
     }
+
+    .slider {
+        height: 1150px;
+    }
 }
 
 
@@ -182,6 +190,10 @@
         img {
             height: 250px;
         }
+    }
+
+    .category_wrapper {
+        height: 1250px;
     }
 
     .categories {
@@ -207,5 +219,11 @@
         img {
             height: 200px;
         }
+    }
+
+   
+    .slider {
+        height: 1150px;
+
     }
 }

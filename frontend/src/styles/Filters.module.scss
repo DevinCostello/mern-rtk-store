@@ -15,12 +15,12 @@ display: none;
 
 .filtermodal_active {
     display: block;
-    position: relative;
-    left: 150px;
-    width: 100px;
+    min-width: 100px;
     height: 600px;
     border: 1px solid red;
     background-color: white;
+
+    
 }
 
 .filter_group {

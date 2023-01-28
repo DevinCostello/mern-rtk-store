@@ -26,11 +26,8 @@ const Filters = () => {
      
      <>
 
-      <FaFilter onClick={() => setModal(true)} size={32} className={styles.filterexpandbtn} />
+      <FaFilter onClick={() => setModal(current => !current)} size={32} className={styles.filterexpandbtn} />
 
-      <section className={modal === true ? styles.filtermodal_active : styles.filtermodal}>
-
-      </section>
 
       <main className={styles.wrapper}>
         <section className={styles.filter_group}>
