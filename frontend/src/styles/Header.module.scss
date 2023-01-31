@@ -63,6 +63,10 @@ border-bottom: 1px solid lightgrey;
 margin-right: 0.5rem;
 }
 
+.icon:hover {
+    cursor: pointer;
+}
+
 .loggedin {
     display: flex;
     align-items: center;

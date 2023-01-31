@@ -32,7 +32,8 @@ const CartItem = ({ item }) => {
 
                 <form className={styles.form} onSubmit={e => e.preventDefault()}>
                     <input type="text" placeholder={item.quantity} />
-                    <button type="submit" onClick={(e) => updateCart({ id: item._id, quantity: parseInt(e.target.form[0].value) })}>
+                    <button type="submit" onClick={
+                        (e) => updateCart({ id: item._id, quantity: parseInt(e.target.parentElement.form[0].value) })}>
                         <h4>Update</h4>
                         <GrUpdate />
                     </button>

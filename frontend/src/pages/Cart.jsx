@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "../styles/Cart.module.scss";
 import CartItem from "../components/CartItem";
 import { FaShoppingCart } from 'react-icons/fa'
@@ -9,9 +10,15 @@ import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
   const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
+  const user = useSelector((state) => state.user.user)
   const CartItems = useSelector((state) => state.cart.CartItems);
   const SumData = useSelector((state) => state.cart.SummaryData)
+  const navigate = useNavigate()
   const dispatch = useDispatch();
+
+  if(!user) {
+    navigate('/login')
+}
 
   useEffect(() => {
 

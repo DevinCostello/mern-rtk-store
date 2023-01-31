@@ -139,7 +139,26 @@ a {
 @media only screen and (max-width: 768px) {}
 
 /* larger portrait phones, 500px - 600px */
-@media only screen and (max-width: 600px) {}
+@media only screen and (max-width: 600px) {
+
+}
 
 /* portrait phones, 500px and down */
-@media only screen and (max-width: 500px) {}
+@media only screen and (max-width: 500px) {
+
+    .grid_item {
+
+        width: 150px;
+        height: 250px;
+
+        h3 {
+            font-size: 1rem
+        }
+
+        img {
+            width: 100px;
+            height: 100px;
+        }
+
+    }
+}

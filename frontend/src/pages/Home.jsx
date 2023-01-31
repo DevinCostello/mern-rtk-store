@@ -18,6 +18,10 @@ function Home() {
   const { data: NewData, isLoading: NewIsLoading, isSuccess: NewIsSuccess, error: NewError }
     = useGetProductsQuery(`?page=${newPage}&limit=4&new=true`)
 
+  const tshirt = "https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/tshirt_feywtm.png"
+  const hoodie = "https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/hoodie_cutuzb.png"
+  const hat = "https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/hat_f1cfhi.png"
+
   return (
     <>
       <main className={styles.container}>
@@ -44,7 +48,7 @@ function Home() {
                   dispatch(resetState())
                   dispatch(setCategory(category))
                 }} key={category} className={styles.category}>
-                <img src="https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/tshirt_feywtm.png" alt="" />
+                <img src={category === "tshirt" ? tshirt : category === "hoodie" ? hoodie : hat} alt="" />
                 <span className={styles.name_wrapper}>
                   <h2>{(category).toUpperCase()}</h2>
                 </span>

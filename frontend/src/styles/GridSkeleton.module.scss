@@ -6,3 +6,32 @@
     border: 1px solid lightgrey;
     border-radius: 3px;
 }
+
+ /* smaller desktops, laptops, landscape tablets 992px - 1200px*/
+ @media only screen and (max-width: 1200px) {
+
+    .skeleton {
+        width: 200px;
+        height: 300px;
+    }
+ }
+
+/* portrait tablets, landscape phones 768px - 992px */
+ @media only screen and (max-width: 992px) {}
+
+/*landscape phones 600px - 768px */
+ @media only screen and (max-width: 768px) {}
+
+/* larger portrait phones, 500px - 600px */
+ @media only screen and (max-width: 600px) {}
+
+ /* portrait phones, 500px and down */
+ @media only screen and (max-width: 500px) {
+
+    .skeleton {
+        width: 150px;
+        height: 250px;
+    }
+ }
+
+

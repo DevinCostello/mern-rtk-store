@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useGetFiltersQuery } from "../features/api/apiSlice"
 import { useDispatch, useSelector } from 'react-redux'
 import {FaFilter} from 'react-icons/fa'
+import{AiFillCloseCircle} from 'react-icons/ai'
 import { setCategory, setSize, setPrice, setDiscount, setNew } from '../features/filter/filterSlice'
 import styles from "../styles/Filters.module.scss"
 
@@ -18,7 +19,6 @@ const Filters = () => {
   const [modal, setModal] = useState(false)
 
 
-
   return (<>
 
 
@@ -26,10 +26,12 @@ const Filters = () => {
      
      <>
 
-      <FaFilter onClick={() => setModal(current => !current)} size={32} className={styles.filterexpandbtn} />
+      <FaFilter onClick={() => setModal(current => !current)} size={32} className={modal === false ? styles.expandbtn : styles.expandbtn_modalopen} />
 
+      <main className={modal === true ?  styles.wrapper_mobile : styles.mobile_closed}>
 
-      <main className={styles.wrapper}>
+        <AiFillCloseCircle onClick={() => setModal(current => !current)} className={styles.closeicon} size={24} />
+
         <section className={styles.filter_group}>
           <h3>Category</h3>
           {data[0].filters.map((filter, index) =>
@@ -76,6 +78,58 @@ const Filters = () => {
 
 
       </main>
+
+      <main className={styles.wrapper}>
+
+        <AiFillCloseCircle onClick={() => setModal(current => !current)} className={styles.closeicon} size={24} />
+
+        <section className={styles.filter_group}>
+          <h3>Category</h3>
+          {data[0].filters.map((filter, index) =>
+            <div key={index}>
+              <input type="checkbox" checked={category.includes(filter) ? true : false} onClick={() => dispatch(setCategory(filter))} />
+              <label>{filter}</label>
+            </div>
+          )}
+        </section>
+
+        <section className={styles.filter_group}>
+          <h3>Price</h3>
+          {data[1].filters.map((filter, index) =>
+            <div key={index}>
+              <input type="checkbox" checked={price === filter.gte ? true : false} onClick={() => dispatch(setPrice({ filter }))} />
+              <label>{filter.text}</label>
+            </div>
+          )}
+        </section>
+
+        <section className={styles.filter_group}>
+          <h3>Size</h3>
+          {data[2].filters.map((filter, index) =>
+            <div key={index}>
+              <input type="checkbox" checked={size.includes(filter) ? true : false} onClick={() => dispatch(setSize(filter))} />
+              <label>{filter}</label>
+            </div>
+          )}
+        </section>
+
+        <section className={styles.filter_group}>
+          <h3>Other</h3>
+          <div>
+            <input type="checkbox" 
+            checked={discount === true ? true : false}
+            onClick={() => dispatch(setDiscount())} />
+            <label>Discounted</label>
+          </div>
+          <div>
+            <input type="checkbox" checked={newProduct === true ? true : false} onClick={() => dispatch(setNew())} />
+            <label>New</label>
+          </div>
+        </section>
+
+
+      </main>
+
       </>}
       
 

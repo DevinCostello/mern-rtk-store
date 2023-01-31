@@ -9,8 +9,12 @@
     flex-direction: column;
 }
 
+.mobile_closed {
+    display: none;
+}
+
 .filtermodal {
-display: none;
+    display: none;
 }
 
 .filtermodal_active {
@@ -20,7 +24,7 @@ display: none;
     border: 1px solid red;
     background-color: white;
 
-    
+
 }
 
 .filter_group {
@@ -42,7 +46,7 @@ display: none;
     flex-direction: column;
 }
 
-.filterexpandbtn {
+.expandbtn {
     display: none;
 }
 
@@ -62,27 +66,73 @@ display: none;
     margin-bottom: 5px;
 }
 
- /* smaller desktops, laptops, landscape tablets 992px - 1200px*/
- @media only screen and (max-width: 1200px) {}
+
+.wrapper_mobile {
+    display: none;
+    z-index: 2;
+    border: 1px solid grey;
+    background-color: white;
+    padding: 0 8px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 175px;
+}
+
+.closeicon {
+    display: none;
+    position: relative;
+    left: 135px;
+    top: 5px;
+}
+
+.expandbtn {
+    display: none;
+    min-width: 24px;
+    margin: 0 5px;
+}
+
+.expandbtn_modalopen {
+    display: none;
+}
+
+/* smaller desktops, laptops, landscape tablets 992px - 1200px*/
+@media only screen and (max-width: 1200px) {}
 
 /* portrait tablets, landscape phones 768px - 992px */
- @media only screen and (max-width: 992px) {}
+@media only screen and (max-width: 992px) {}
 
 /*landscape phones 600px - 768px */
- @media only screen and (max-width: 768px) {
+@media only screen and (max-width: 768px) {}
+
+/* larger portrait phones, 500px - 600px */
+@media only screen and (max-width: 600px) {
+
+    .expandbtn {
+        display: block;
+    }
+
+   
 
     .wrapper {
         display: none;
     }
 
-    .filterexpandbtn {
+    .wrapper_mobile {
         display: block;
     }
- }
 
-/* larger portrait phones, 500px - 600px */
- @media only screen and (max-width: 600px) {}
+    
 
- /* portrait phones, 500px and down */
- @media only screen and (max-width: 500px) {}
+    .closeicon {
+        display: block;
+    }
+}
 
+/* portrait phones, 500px and down */
+@media only screen and (max-width: 500px) {
+
+
+}

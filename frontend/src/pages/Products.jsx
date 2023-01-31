@@ -24,14 +24,6 @@ export default function Products() {
 
       <Filters />
 
-      <button onClick={() => setModal(current => !current)}>toggle</button>
-      
-      {modal === true && 
-      <main className={modal === false ? styles.filtermodal : styles.filtermodal_active}>
-        <Filters />
-      </main>
-      }
-
       {isLoading ? <section className={styles.grid}>
         <GridSkeleton />
         <GridSkeleton />
@@ -56,7 +48,7 @@ export default function Products() {
 
                 <section className={styles.grid_item} key={product._id}>
 
-                  <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.jpg`} alt={product.name} />
+                  <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.png`} alt={product.name} />
 
                   <section className={styles.product_info}>
 
@@ -65,7 +57,8 @@ export default function Products() {
                     <h3>${product.price}</h3>
 
                     <span className={styles.colors}>
-                      Colors: {product.color.map((color, index) =>
+                      Colors:
+                       {product.color.map((color, index) =>
                         <div className={styles.box} key={index}
                           style={{ backgroundColor: `${color}` }}></div>
                       )}

@@ -92,7 +92,7 @@ const Details = () => {
       ) : (
         <main className={styles.wrapper}>
 
-          <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.jpg`} alt={product.name} />
+          <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.png`} alt={product.name} />
 
           <div className={styles.content}>
 

@@ -70,9 +70,9 @@ function Header({ user }) {
             <>
               <section className={styles.loggedin && styles.navright}>
 
-                <FaUser className={styles.icon} size={32} />
-                <Link className={styles.link} to="/cart"
-                >
+
+                <FaUser onClick={() => navigate('/me')} className={styles.icon} size={32} />              
+                <Link className={styles.link} to="/cart">
                   <li className={styles.item}>
                     <FaShoppingCart className={styles.icon} size={32} />
                   </li>
