@@ -1,21 +1,22 @@
 import styles from "../styles/Modal.module.scss";
 import { useSelector, useDispatch } from "react-redux";
+import { closeModal } from "../features/modal/modalSlice";
 
-const dispatch = useDispatch()
 
 const Modal = () => {
+const dispatch = useDispatch()
 const modalContent = useSelector((state) => state.modal.content)
+const isOpen = useSelector((state) => state.modal.isOpen)
 
   return (<>
-    <div className={styles.modal_container}>
-        <div className={styles.modal}>
-          
+    <main className={ isOpen ? styles.container : styles.closed}>
+        <section className={styles.modal}>
+          <h3>
             {modalContent}
-
-        <button onClick ={() => dispatch(closeModal())}></button>
-            
-        </div>
-    </div>
+          </h3>
+        <button onClick ={() => dispatch(closeModal())}>Close</button>
+        </section>
+    </main>
     
   </>)
 }

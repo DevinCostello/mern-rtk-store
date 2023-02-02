@@ -35,8 +35,8 @@ function Home() {
         </section>
 
         <section className={styles.slider}>
-          <Slider name={"Discounted Products"} page={discountPage} setPage={setDiscountPage} data={DiscountData} isLoading={DiscountIsLoading} />
-          <Slider name={"New Arrivals"} page={newPage} setPage={setNewPage} data={NewData} isLoading={NewIsLoading} />
+          <Slider name={"Discounted Products"} page={discountPage} setPage={setDiscountPage} data={DiscountData} isLoading={DiscountIsLoading}  error={DiscountError} />
+          <Slider name={"New Arrivals"} page={newPage} setPage={setNewPage} data={NewData} isLoading={NewIsLoading} error={NewError} />
         </section>
 
         <section className={styles.category_wrapper}>

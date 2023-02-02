@@ -2,7 +2,7 @@ import styles from '../styles/Slider.module.scss'
 import { Link } from 'react-router-dom'
 import { FaChevronCircleLeft, FaChevronCircleRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 
-const Slider = ({ name, page, setPage, data, isLoading }) => {
+const Slider = ({ name, page, setPage, data, isLoading, error }) => {
 
     const handlePrev = (page) => {
         if (page === 1) {
@@ -12,11 +12,17 @@ const Slider = ({ name, page, setPage, data, isLoading }) => {
         }
     }
 
-
     return (
         <>
 
-            {isLoading ? <p>Loading...</p> :
+            {isLoading ? <p>Loading...</p> : error ?
+
+                <main className={styles.wrapper}>
+                    <h2>{name}</h2>
+                    <div className={styles.error}>{error.error} Try refreshing the page.</div>
+                </main>
+
+                :
 
                 <main className={styles.wrapper}>
                     <h2>{name}</h2>

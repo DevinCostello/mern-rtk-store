@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import styles from "../styles/Details.module.scss";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { setFixedVariables, setColor, setQuantity, setSize, clearCart } from "../features/product/productSlice";
+import { setContent, openModal, closeModal } from "../features/modal/modalSlice"
+import Modal from '../components/Modal';
 import { useGetSingleProductQuery, useCreateCartItemMutation, useUpdateCartItemMutation, useGetCartQuery } from "../features/api/apiSlice";
 import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartSlice";
 
@@ -10,7 +12,6 @@ import { setCartQuantity, setId, setCartDuplicate } from "../features/cart/cartS
 
 const Details = () => {
   const dispatch = useDispatch()
-  const navigate = useNavigate();
 
   const { id } = useParams();
   const { data: product, isLoading, isSuccess, error } = useGetSingleProductQuery(id);
@@ -68,11 +69,13 @@ const Details = () => {
     if (CartDuplicate) {
       UpdateCartItem(UpdateOptions)
       dispatch(clearCart())
-      alert("Cart Item Updated")
+      dispatch(setContent("Cart Item Updated"))
+      dispatch(openModal())
     } else {
       createCartItem({ ...CreateOptions })
       dispatch(clearCart())
-      alert("Cart Item Added")
+      dispatch(setContent("Cart Item Added"))
+      dispatch(openModal())
     }
   }
 
@@ -84,12 +87,16 @@ const Details = () => {
     dispatch(setQuantity(parseInt(e.target.value)))
   }
 
+  if(createResult.status === "rejected" || updateResult.status === "rejected") {
+    dispatch(closeModal())
+  }
+
   return (
     <>
 
       {isLoading ? (
         "Loading..."
-      ) : (
+      ) : error ? <h4>{error.error} Try refreshing the page.</h4> : (
         <main className={styles.wrapper}>
 
           <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.png`} alt={product.name} />
@@ -154,6 +161,7 @@ const Details = () => {
           </div>
 
 
+          <Modal />
         </main>
       )}
     </>

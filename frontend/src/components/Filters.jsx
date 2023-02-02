@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useGetFiltersQuery } from "../features/api/apiSlice"
 import { useDispatch, useSelector } from 'react-redux'
-import {FaFilter} from 'react-icons/fa'
-import{AiFillCloseCircle} from 'react-icons/ai'
+import { FaFilter } from 'react-icons/fa'
+import { AiFillCloseCircle } from 'react-icons/ai'
 import { setCategory, setSize, setPrice, setDiscount, setNew } from '../features/filter/filterSlice'
 import styles from "../styles/Filters.module.scss"
 
@@ -22,7 +22,14 @@ const Filters = () => {
   return (<>
 
 
-    {data &&
+    {isLoading ? <p>Loading Filters...</p> : 
+    
+    error ? 
+    
+    <main>
+      <h3>Filters</h3>
+      <p>{error.error} Try rfreshing the page.</p>
+    </main> :
      
      <>
 

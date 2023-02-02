@@ -35,44 +35,54 @@ export default function Products() {
         <GridSkeleton />
         <GridSkeleton />
       </section> :
-        <main className={styles.grid_container}>
 
-          {/* for testing */}
-          {/* <h3>{data.totalProducts.length}</h3> */}
-
-          <section className={styles.grid}>
-
-            {data.products.map((product) =>
-
-              <Link key={product._id} to={`${product._id}`} onClick={() => dispatch(resetState())}>
-
-                <section className={styles.grid_item} key={product._id}>
-
-                  <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.png`} alt={product.name} />
-
-                  <section className={styles.product_info}>
-
-                    <h3 className={styles.product_name}>{product.name}</h3>
-
-                    <h3>${product.price}</h3>
-
-                    <span className={styles.colors}>
-                      Colors:
-                       {product.color.map((color, index) =>
-                        <div className={styles.box} key={index}
-                          style={{ backgroundColor: `${color}` }}></div>
-                      )}
-                    </span>
-                  </section>
-                </section>
-              </Link>
-
-            )}
+        error ?
+        <main className={styles.wrapper}>
+          <section className={styles.producterror}>
+            <h4>
+              {error.error}
+              Try refreshing the page.
+            </h4>
           </section>
-
-          <Pagination totalProducts={data.totalProducts.length} />
-
         </main>
+
+          :
+
+          <main className={styles.grid_container}>
+
+            <section className={styles.grid}>
+
+              {data.products.map((product) =>
+
+                <Link key={product._id} to={`${product._id}`} onClick={() => dispatch(resetState())}>
+
+                  <section className={styles.grid_item} key={product._id}>
+
+                    <img src={`https://res.cloudinary.com/ddqpa1a5n/image/upload/v1672768347/${product.img_url}.png`} alt={product.name} />
+
+                    <section className={styles.product_info}>
+
+                      <h3 className={styles.product_name}>{product.name}</h3>
+
+                      <h3>${product.price}</h3>
+
+                      <span className={styles.colors}>
+                        Colors:
+                        {product.color.map((color, index) =>
+                          <div className={styles.box} key={index}
+                            style={{ backgroundColor: `${color}` }}></div>
+                        )}
+                      </span>
+                    </section>
+                  </section>
+                </Link>
+
+              )}
+            </section>
+
+            <Pagination totalProducts={data.totalProducts.length} />
+
+          </main>
       }
 
 

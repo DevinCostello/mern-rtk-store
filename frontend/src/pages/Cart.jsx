@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/Cart.module.scss";
 import CartItem from "../components/CartItem";
+import Modal from "../components/Modal"
 import { FaShoppingCart } from 'react-icons/fa'
 
+import { setContent, openModal } from "../features/modal/modalSlice"
 import { useGetCartQuery } from "../features/api/apiSlice";
 import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -31,6 +33,11 @@ function Cart() {
     dispatch(calculateTotals())
   }, [isSuccess, CartItems, dispatch])
 
+  const handleOrder = () => {
+    dispatch(setContent("Order Submitted!"))
+    dispatch(openModal())
+  }
+
   return (
     <main className={styles.container}>
       {isLoading ? (
@@ -47,7 +54,7 @@ function Cart() {
               <div className={styles.cart}>
                 <h2>Your Cart</h2>
                 {cart.map((item, index) => (
-                  <CartItem key={index} item={item} />
+                  <CartItem error={error} key={index} item={item} />
                 ))}
               </div>
 
@@ -70,14 +77,16 @@ function Cart() {
                     </aside>
                   </section>
                 </section>
-                <button className={styles.checkoutbtn} onClick={() => alert("Order Submitted!")}>CHECKOUT</button>
+                <button className={styles.checkoutbtn} onClick={() => handleOrder()}>CHECKOUT</button>
               </main>
             </>
 
           }
         </>
       )}
+      <Modal />
     </main>
+
   );
 }
 
