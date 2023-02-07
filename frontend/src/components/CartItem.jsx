@@ -8,7 +8,7 @@ import styles from "../styles/Cart.module.scss";
 
 const CartItem = ({ item, error }) => {
 
-    const [updateCart, { status, isLoading: isUpdating, error: updateError }] = useUpdateCartItemMutation();
+    const [updateCart, { status, error: updateError }] = useUpdateCartItemMutation();
     const [DeleteItem] = useDeleteCartItemMutation();
 
 

@@ -3,7 +3,6 @@ import {
   Route,
   Routes
 } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 //Components
 import Header from "./components/Header";
@@ -23,8 +22,7 @@ import { useGetUserQuery } from './features/api/apiSlice'
 
 function App() {
 
-  const {data: user, isLoading, isSuccess, error} = useGetUserQuery()
-  const dispatch = useDispatch()
+  const {data: user} = useGetUserQuery()
 
 
   return (

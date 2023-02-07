@@ -11,7 +11,7 @@ import { setCartItems, calculateTotals } from "../features/cart/cartSlice";
 import { useSelector, useDispatch } from "react-redux";
 
 function Cart() {
-  const { data: cart, isLoading, isSuccess, isError, error } = useGetCartQuery();
+  const { data: cart, isLoading, isSuccess, error } = useGetCartQuery();
   const user = useSelector((state) => state.user.user)
   const CartItems = useSelector((state) => state.cart.CartItems);
   const SumData = useSelector((state) => state.cart.SummaryData)

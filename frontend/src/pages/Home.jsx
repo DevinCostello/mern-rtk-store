@@ -13,9 +13,9 @@ function Home() {
   const [discountPage, setDiscountPage] = useState(1)
   const [newPage, setNewPage] = useState(1)
 
-  const { data: DiscountData, isLoading: DiscountIsLoading, isSuccess: DiscountIsSuccess, error: DiscountError }
+  const { data: DiscountData, isLoading: DiscountIsLoading,  error: DiscountError }
     = useGetProductsQuery(`?page=${discountPage}&limit=4&discount=true`)
-  const { data: NewData, isLoading: NewIsLoading, isSuccess: NewIsSuccess, error: NewError }
+  const { data: NewData, isLoading: NewIsLoading,  error: NewError }
     = useGetProductsQuery(`?page=${newPage}&limit=4&new=true`)
 
   const tshirt = "https://res.cloudinary.com/ddqpa1a5n/image/upload/v1673463693/tshirt_feywtm.png"

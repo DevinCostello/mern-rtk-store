@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import qs from 'qs';
 import styles from '../styles/Products.module.scss'
 import Pagination from '../components/Pagination'
@@ -14,8 +13,7 @@ export default function Products() {
   const dispatch = useDispatch()
   const queryObj = useSelector((state) => state.filter)
   const queryStr = qs.stringify(queryObj, { skipNulls: true })
-  const { data, isLoading, isSuccess, error } = useGetProductsQuery('?' + queryStr)
-  const [modal, setModal] = useState(false)
+  const { data, isLoading, error } = useGetProductsQuery('?' + queryStr)
 
   return (<>
 

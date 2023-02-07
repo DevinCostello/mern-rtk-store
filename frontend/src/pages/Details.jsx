@@ -20,7 +20,7 @@ const Details = () => {
   const [createCartItem, createResult] = useCreateCartItemMutation();
   const [UpdateCartItem, updateResult] = useUpdateCartItemMutation();
 
-  const [input, setInput] = useState(0)
+  const [input] = useState(0)
 
   //state object for creating a new item to cart
   const CreateOptions = useSelector((state) => state.product.CreateOptions);
