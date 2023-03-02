@@ -28,7 +28,7 @@ const Filters = () => {
     
     <main>
       <h3>Filters</h3>
-      <p>{error.error} Try rfreshing the page.</p>
+      <p>{error.error} Try refreshing the page.</p>
     </main> :
      
      <>
