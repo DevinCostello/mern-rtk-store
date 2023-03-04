@@ -8,3 +8,4 @@ Technologies used:
 - Node
 - Redux w/ Redux Toolkit
 - Redux Toolkit Query
+- JSON Web Token
