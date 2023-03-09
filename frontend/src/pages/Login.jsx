@@ -45,22 +45,18 @@ const Login = () => {
                 <form className={styles.form}>
                     <label for="email">Email</label>
                     <div className={styles.input_container}>
-                        <FaUser className={styles.icons} />
                         <input
                             type="email"
                             onChange={onChange}
-                            placeholder='Type your email'
                             name="email"
                         />
                     </div>
 
                     <label for="password">Password</label>
                     <div className={styles.input_container}>
-                        <FaLock className={styles.icons} />
                         <input
                             type="password"
                             onChange={onChange}
-                            placeholder='Type your password'
                             name="password"
                         />
                     </div>

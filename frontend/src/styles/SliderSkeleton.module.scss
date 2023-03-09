@@ -1,0 +1,95 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+}
+
+.sliderskeleton {
+    width: 920px;
+    height: 300px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+    margin:  0 5px;
+}
+
+.icon {
+    color: grey;
+    height: 40px;
+    width: 40px;
+    min-width: 40px;
+}
+
+.mobileicon {
+    display: none;
+}
+
+ /* smaller desktops, laptops, landscape tablets 992px - 1200px*/
+ @media only screen and (max-width: 1200px) {
+
+.sliderskeleton {
+    width: 720px;
+    height: 225px;
+}
+
+ }
+
+/* portrait tablets, landscape phones 768px - 992px */
+ @media only screen and (max-width: 992px) {
+
+    .sliderskeleton {
+        width: 620px;
+        height: 200px;
+    }
+
+ }
+
+/*landscape phones 600px - 768px */
+ @media only screen and (max-width: 768px) {
+
+    .sliderskeleton {
+        width: 310px;
+        height: 400px;
+    }
+
+ }
+
+/* larger portrait phones, 500px - 600px */
+ @media only screen and (max-width: 600px) {
+
+ }
+
+ /* portrait phones, 500px and down */
+ @media only screen and (max-width: 500px) {
+
+    .icon {
+        display: none;
+    }
+
+    .mobileicon {
+        display: block;
+
+        color: grey;
+        background-color: lightgrey;
+        border-radius: 5px;
+        height: 400px;
+        width: 30px;
+    }
+   
+ }

@@ -1,4 +1,5 @@
 import styles from '../styles/Slider.module.scss'
+import SliderSkeleton from './SliderSkeleton'
 import { Link } from 'react-router-dom'
 import { FaChevronCircleLeft, FaChevronCircleRight, FaChevronRight, FaChevronLeft } from 'react-icons/fa'
 
@@ -15,7 +16,16 @@ const Slider = ({ name, page, setPage, data, isLoading, error }) => {
     return (
         <>
 
-            {isLoading ? <p>Loading...</p> : error ?
+            {isLoading ? 
+
+            // <p>Loading...</p> 
+            <section className={styles.slider_container}>
+
+            <SliderSkeleton />
+            
+            </section>
+            
+            : error ?
 
                 <main className={styles.wrapper}>
                     <h2>{name}</h2>
@@ -27,8 +37,10 @@ const Slider = ({ name, page, setPage, data, isLoading, error }) => {
                 <main className={styles.wrapper}>
                     <h2>{name}</h2>
                     <section className={styles.content}>
+
                         <FaChevronLeft className={styles.mobileicon} onClick={() => handlePrev(page)} />
                         <FaChevronCircleLeft className={styles.icon} onClick={() => handlePrev(page)} />
+
                         <section className={styles.slider_container}>
                             {data.products.map((product) =>
                                 <Link to={`/products/${product._id}`} key={product._id}>
@@ -43,8 +55,10 @@ const Slider = ({ name, page, setPage, data, isLoading, error }) => {
                                 </Link>
                             )}
                         </section>
+
                         <FaChevronCircleRight className={styles.icon} onClick={() => setPage(page + 1)} />
                         <FaChevronRight className={styles.mobileicon} onClick={() => setPage(page + 1)} />
+                        
                     </section>
                 </main>
             }

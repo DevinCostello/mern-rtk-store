@@ -39,20 +39,20 @@ background-color: whitesmoke;
     
     input {
         width: 100%;
-        border: none;
+        height: 35px;
     }
 }
 
 .input_container {
     display: flex;
-    padding: 5px;
-    border-bottom: 2px solid rgb(202, 198, 198);
+    padding: 5px 5px 5px 0;
     width: 100%;
     margin-bottom: 10px;
+
+   
 }
 
 .registerbtn {
-    margin-top: 10px;
     width: 75%;
     border-radius: 25px;
     padding: 10px 5px;

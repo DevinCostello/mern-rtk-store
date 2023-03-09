@@ -49,7 +49,6 @@ const Register = () => {
               name='name'
               type="text"
               onChange={onChange}
-              placeholder="Type your full name..."
             />
           </div>
           <label for="email">Email</label>
@@ -57,7 +56,6 @@ const Register = () => {
             <input
               name='email'
               onChange={onChange}
-              placeholder="Type your email address..."
               type="email"
             />
           </div>
@@ -67,7 +65,6 @@ const Register = () => {
             <input
               name="password"
               onChange={onChange}
-              placeholder="Choose a password..."
               type="password"
             />
           </div>
@@ -77,7 +74,6 @@ const Register = () => {
             <input
               name="password2"
               onChange={onChange}
-              placeholder="Confirm password..."
               type="password"
             />
           </div>
