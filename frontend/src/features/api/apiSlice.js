@@ -5,7 +5,7 @@ export const apiSlice = createApi({
 
   baseQuery: fetchBaseQuery({ 
     baseUrl: 
-    'https://mern-store-api.onrender.com/api', 
+    'https://mern-store-api.onrender.com/api',
     prepareHeaders: (headers) => {
       const token = localStorage.getItem('token')  
       if (token) {

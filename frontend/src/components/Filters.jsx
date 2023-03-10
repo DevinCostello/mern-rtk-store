@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { FaFilter } from 'react-icons/fa'
 import { AiFillCloseCircle } from 'react-icons/ai'
 import { setCategory, setSize, setPrice, setDiscount, setNew } from '../features/filter/filterSlice'
+import FilterSkeleton from './FilterSkeleton'
 import styles from "../styles/Filters.module.scss"
 
 const Filters = () => {
@@ -22,7 +23,10 @@ const Filters = () => {
   return (<>
 
 
-    {isLoading ? <p>Loading Filters...</p> : 
+    {isLoading ? 
+    
+    <FilterSkeleton />
+    : 
     
     error ? 
     
@@ -136,6 +140,8 @@ const Filters = () => {
 
 
       </main>
+
+
 
       </>}
       

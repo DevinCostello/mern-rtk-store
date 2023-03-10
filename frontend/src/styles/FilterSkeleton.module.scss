@@ -1,0 +1,40 @@
+.wrapper {
+    display: flex;
+    margin-right: 50px;
+    flex-direction: column;
+    // border: 1px solid red;
+}
+
+.filtergroup {
+width: 145px;
+height: 165px;
+border-bottom: 1px solid lightgrey;
+
+
+display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+
+
+// border: 1px solid red;
+
+}
+
+.header {
+height: 20px;
+width: 70%;
+
+background-color: grey;
+border-radius: 10px;
+
+}
+
+.filter {
+height: 12px;
+width: 60%;
+
+background-color: lightgrey;
+border-radius: 10px;
+
+
+}
